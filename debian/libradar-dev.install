@@ -1,0 +1,4 @@
+usr/include/radarlib
+usr/lib/libradar.a
+usr/lib/libradar.so
+usr/lib/pkgconfig/radarlib-1.0.pc

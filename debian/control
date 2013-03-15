@@ -1,0 +1,20 @@
+Source: radarlib
+Section: libdevel
+Priority: optional
+Maintainer: Enrico Zini <enrico@debian.org>
+Build-Depends: debhelper (>= 7), dh-buildinfo, zlib1g-dev, libhdf5-serial-dev
+Standards-Version: 3.8.4.0
+
+Package: libradar-dev
+Architecture: any
+Depends: libradar1 (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Recommends: pkg-config
+Description: libradar development
+ Description to be written.
+
+Package: libradar1
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: libradar shared library
+ Description to be written.

@@ -1,0 +1,19 @@
+
+-------------------------------------------------------------------------------
+ REGOLE DA SEQUIRE DURANTE LO SVILLUPPO/MODIFCA DEI CONVERTITORI
+-------------------------------------------------------------------------------
+
+Uno sviluppatore che si appresta a modificare/aggiornare i convertitore
+deve seguire i seguenti passi al fine di mantenere il progetto in uno stato
+coerente:
+
+1) scaricare progetto dal repository
+2) fare le modifiche
+     - incrementare il numero di versione della libreria       
+3) aggiornare se serve la documentazione doxygen
+4) aggiornare se serve il file readme.txt
+5) aggionare changelog.txt mettendo in testa una nuova sezione indicando
+    - data
+    - autore modifiche
+    - descrizione di ogni singola modifica
+6) aggionare il repository con i file aggiornati

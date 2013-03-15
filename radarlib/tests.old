@@ -1,0 +1,575 @@
+
+#include "radar_strings.hpp"
+
+#include "radar_base64.hpp"
+#include "radar_io.hpp"
+#include "radar_math.hpp"
+#include "radar_time.hpp"
+#include "radar_formula.hpp"
+#include "radar_zlib.hpp"
+
+#include "radar_tests.hpp"
+
+/*===========================================================================*/
+/* BASE64 */
+/*===========================================================================*/
+
+static void base64utils_test1()
+{
+	TEST_TITLE
+
+	unsigned char buff[256];
+	
+	for (unsigned int i=0; i<256; i++)
+		buff[i] = (unsigned char)i;
+
+	std::string b64str;
+	Base64::encode(b64str, buff, 256);
+
+	size_t		decodeSize = Base64::decodeSize(b64str);
+	unsigned char*	decoded    = Base64::decode(b64str);
+	
+	TEST_ASSERT( memcmp(buff, decoded, decodeSize) == 0, "Decoded base64 buffer does not match");
+
+	delete[] decoded;
+}
+
+static void base64utils_test2()
+{
+	TEST_TITLE
+
+	unsigned char buff[256];
+	
+	for (unsigned int i=0; i<256; i++)
+		buff[i] = (unsigned char)i;
+
+	std::string b64str;
+	Base64::encode(b64str, buff, 256);
+
+	std::vector<unsigned char> decoded;
+	
+	Base64::decode(decoded, b64str);
+	
+	TEST_ASSERT( memcmp(buff, &(decoded[0]), decoded.size()) == 0, "Decoded base64 buffer does not match");
+
+}
+
+static void base64utils_test()
+{
+	base64utils_test1();
+	base64utils_test2();
+}
+
+/*===========================================================================*/
+/* FILE UTILS */
+/*===========================================================================*/
+
+static void fileutils_test(const std::string& basepath)
+{
+	TEST_TITLE
+
+	TEST_ASSERT(fileutils::dirExists(basepath) == true, basepath << " does not exists!")
+
+	fileutils::changeDir(basepath);
+
+	std::cout << "Current dir: " << fileutils::getCurrentDir() << std::endl;
+
+	fileutils::mkDirTree(basepath + "/a/b/c");
+
+	fileutils::rmDirTree(basepath + "/a");
+
+	std::vector<std::string> files;
+	fileutils::filelist(files, basepath);
+	for (size_t i=0; i<files.size(); i++)
+	{
+		TEST_ASSERT(
+			(files[i] == "file1.txt") || (files[i] == "file2.txt")
+			, 
+			"Found unexpected file: " << files[i]
+			);	
+	}
+
+	std::vector<std::string> dirs;
+	fileutils::dirlist(dirs, basepath);
+	for (size_t i=0; i<dirs.size(); i++)
+	{
+		TEST_ASSERT(
+			(dirs[i] == "dir1") || (dirs[i] == "dir2") 
+			,
+			"Found unexpected dir: " << dirs[i]
+			);	
+	}
+}
+
+/*===========================================================================*/
+/* MATH UTILS */
+/*===========================================================================*/
+
+void mathutils_test()
+{
+	TEST_TITLE
+
+	float	fnan = FLOAT_NAN;
+	double	dnan = DOUBLE_NAN;
+
+	TEST_ASSERT(isnan(fnan), "isnan(fnan) failed");
+	TEST_ASSERT(isnan(dnan), "isnan(dnan) failed");
+}
+
+/*===========================================================================*/
+/* RADAR UTILS */
+/*===========================================================================*/
+
+void radarutils_test()
+{
+	TEST_TITLE
+
+	double cm	= radarutils::WaveLength::freqMHzToCM(1.);
+	double m	= radarutils::WaveLength::freqMHzToMeters(1.);
+
+	TEST_ASSERT(cm == m * 100, "cm != m")
+}
+
+/*===========================================================================*/
+/* STRING UTILS */
+/*===========================================================================*/
+
+void stringutils_test()
+{
+	TEST_TITLE
+
+	TEST_ASSERT( stringutils::trimleft(" 1")	== "1", "");
+	TEST_ASSERT( stringutils::trimright("1 ")	== "1", "");
+	TEST_ASSERT( stringutils::trim("1")		== "1", "");
+	TEST_ASSERT( stringutils::trim("1 ")		== "1", "");
+	TEST_ASSERT( stringutils::trim(" 1")		== "1", "");
+	TEST_ASSERT( stringutils::trim(" 1 ")		== "1", "");
+
+	std::cout << stringutils::toString((float)1.2) << std::endl;
+
+	TEST_ASSERT( stringutils::toString(true)	== "1",		"");
+	TEST_ASSERT( stringutils::toString(false)	== "0",		"");
+	TEST_ASSERT( stringutils::toString((int)1)	== "1",		"");
+	TEST_ASSERT( stringutils::toString((long)1)	== "1",		"");
+	TEST_ASSERT( stringutils::toString((float)1.2)  == "1.2",	"");
+	TEST_ASSERT( stringutils::toString((double)1.2) == "1.2",	"");
+	TEST_ASSERT( stringutils::toString((size_t)1)   == "1",		"");
+
+}
+
+/*===========================================================================*/
+/* TIME UTILS */
+/*===========================================================================*/
+
+//void testtimes()
+//{
+//	time_t TIME;
+//	double TIMED;
+//	int year,  month,  day,  hour,  min,  sec,  msec;
+//	int year1, month1, day1, hour1, min1, sec1, msec1;
+//	int year2, month2, day2, hour2, min2, sec2, msec2;
+//	int year3, month3, day3, hour3, min3, sec3, msec3;
+//
+//
+//
+//
+//	/* testo le funzioni di split */
+//
+//	TIME	= timeutils::getUTC();
+//	TIMED	= (double)TIME;
+//
+//	for (time_t t=0; t<(60*60*24*635*20); t+=(60*60*24*11))
+//	{
+//		time_t t2 = timeutils::mktime(year, month, day, hour, min, sec);
+//		DEBUG_ASSERT(t == t2);
+//
+//		/* testo lo split */
+//		
+//		timeutils::splitYMDHMS(t, year, month, day, hour, min, sec);	
+//
+//		timeutils::splitYMD(t, year1, month1, day1);	
+//	
+//		DEBUG_ASSERT(year == year1 && month == month1 && day == day1);
+//
+//		timeutils::splitHMS(t, hour1, min1, sec1);	
+//	
+//		DEBUG_ASSERT(hour == hour1 && min == min1 && day == day1);
+//
+//		timeutils::splitHMS((double)t, hour2, min2, sec2, msec2);	
+//	
+//		DEBUG_ASSERT(hour == hour2 && min == min2 && day == day2);
+//
+//		//DEBUG(t << " " << t2 << " - " << timeutils::absoluteToString(t) << " " << timeutils::absoluteToString(t2));
+//		//if (t != t2)
+//		//{
+//		//	t2 = timeutils::mktime(year, month, day, hour, min, sec);
+//		//	//DEBUG(t << " != " << t2);
+//		//	DEBUG(timeutils::absoluteToString(t) << " != " << timeutils::absoluteToString(t2));
+//		//	DEBUG_BEEP;
+//		//	DEBUG_WAIT
+//		//}
+//	}
+//	
+//
+//	//time_t value = timeutils::getUTC();
+//	//DEBUG(timeutils::absoluteToString(value));
+//	
+//	//DEBUG(timeutils::dayTimeToStr(	timeutils::parseYYYYMMDDHHMMSS("1970-01-01 00:00:00")	));
+//
+//	TIME	= timeutils::mktime(2009, 10, 30, 0, 0, 0);
+//	TIMED	= timeutils::mktime(1970, 1, 1, 0, 0, 0, 456);
+//	time_t DAY	= timeutils::extractDay(TIME);
+//	double DAYD	= timeutils::extractDay(TIMED);
+//	time_t DAYTIME	= timeutils::extractDayTime(TIME);
+//	double DAYTIMED	= timeutils::extractDayTime(TIMED);
+//
+//	DEBUG("TIME:	" << TIME);
+//	DEBUG("TIMED:	" << TIMED);
+//	DEBUG("DAY:	" << DAY);
+//	DEBUG("DAYD:	" << DAYD);
+//	DEBUG("DAYTIME:	" << DAYTIME);
+//	DEBUG("DAYTIMED:" << DAYTIMED);
+//	DEBUG("STR:     " << timeutils::absoluteToString(TIME));
+//	DEBUG("STRD:    " << timeutils::absoluteToString(TIMED));
+//
+//	DEBUG("-----------------------------------------------------------");
+//
+//	TIME  = timeutils::getUTC();
+//	TIMED = TIME + 0.456;
+//
+//	DEBUG("TIME:	" << TIME);
+//	DEBUG("TIMED:	" << TIMED);
+//
+//	DEBUG("-----------------------------------------------------------");
+//
+//	
+//	int yeard, monthd, dayd, hourd, mind, secd, msecd;
+//
+//	timeutils::splitYMD	(TIME, year, month, day);
+//	timeutils::splitYMD	(TIMED, yeard, monthd, dayd);
+//
+//	DEBUG(year<<"/"<<month<<"/"<<day);
+//	DEBUG(yeard<<"/"<<monthd<<"/"<<dayd);
+//
+//	timeutils::splitHMS	(TIME, hour, min, sec);
+//	timeutils::splitHMS	(TIMED, hourd, mind, secd, msecd);
+//
+//	DEBUG(hour<<":"<<min<<":"<<sec);
+//	DEBUG(hourd<<":"<<min<<":"<<sec<<"."<<msecd);
+//
+//	DEBUG("-----------------------------------------------------------");
+//
+//	DEBUG(timeutils::absoluteToString(TIME));
+//	DEBUG(timeutils::absoluteToString(TIMED));
+//
+//	DEBUG("-----------------------------------------------------------");
+//
+//	DEBUG(timeutils::dayTimeToStr(TIME));
+//	DEBUG(timeutils::dayTimeToStr(TIMED));
+//
+//	DEBUG("-----------------------------------------------------------");
+//
+//	month = 0;
+//	day = 0;
+//	timeutils::convertYday(2009, 303, month, day);
+//
+//	DEBUG("month: " << month);
+//	DEBUG("day:   " << day);
+//
+//	DEBUG("-----------------------------------------------------------");
+//
+//	for (time_t s=0; s<1000000; s++)
+//	{	
+//		//if (s == 86400)		
+//		//	DEBUG_WAIT;
+//		timeutils::splitYMDHMS(s, year, month, day, hour, min, sec);
+//		time_t s2 = timeutils::mktime(year, month, day, hour, min, sec);
+//		if (s != s2)
+//		{
+//			DEBUG(s << " - " << s2);			
+//			DEBUG_WAIT
+//		}
+//		//DEBUG_ASSERT(s == s2);
+//	}
+//	
+//
+//	//for (year=1970; year<1971; year++)
+//	//for (month=1970; year<1971; year++)
+//	//for (day=1970; year<1971; year++)
+//	//for (hour=1970; year<1971; year++)
+//	//for (min=1970; year<1971; year++)
+//	//for (year=1970; year<1971; year++)
+//
+//	for (int g=1; g<=365; g++)
+//	{
+//		timeutils::convertYday(2010, g, month, day);
+//		DEBUG(g << ": " << month <<"-"<< day);
+//	} 
+//
+//	DEBUG("-----------------------------------------------------------");
+//}
+
+time_t TIME;
+double TIMED;
+int year,  month,  day,  hour,  min,  sec,  msec;
+int year1, month1, day1, hour1, min1, sec1, msec1;
+int year2, month2, day2, hour2, min2, sec2, msec2;
+int year3, month3, day3, hour3, min3, sec3, msec3;
+
+
+void timeutils_testsplit()
+{
+	TEST_TITLE
+
+	for (time_t t=0; t<(60*60*24*635*20); t+=(60*60*24*11))
+	{
+		timeutils::splitYMDHMS(t, year, month, day, hour, min, sec);	
+
+		timeutils::splitYMD(t, year1, month1, day1);	
+		TEST_ASSERT(year == year1 && month == month1 && day == day1, "splitYMD failed");
+
+		timeutils::splitHMS(t, hour1, min1, sec1);	
+		TEST_ASSERT(hour == hour1 && min == min1 && sec == sec1, "splitHMS failed");
+
+		timeutils::splitHMS((double)t, hour2, min2, sec2, msec2);	
+		TEST_ASSERT(hour == hour2 && min == min2 && sec == sec2, "splitHMS failed");
+	}
+}
+
+void timeutils_testmk()
+{
+	TEST_TITLE
+	for (time_t t=0; t<(60*60*24*635*20); t+=(60*60*24*11))
+	{
+		timeutils::splitYMDHMS(t, year, month, day, hour, min, sec);	
+
+		time_t t2 = timeutils::mktime(year, month, day, hour, min, sec);
+		TEST_ASSERT(t == t2, "splitYHDHMS and mktime don't match");
+	}
+}
+
+void timeutils_testconvert()
+{
+	TEST_TITLE
+	for (time_t t=0; t<(60*60*24*635*20); t+=(60*60*24*11))
+	{
+		std::string tstr = timeutils::absoluteToString(t);		
+		time_t t2 = timeutils::parseYYYYMMDDHHMMSS(tstr); 
+		TEST_ASSERT(t == t2, "absoluteToString and parseYYYYMMDDHHMMSS don't match");
+	}
+}
+
+void timeutils_test()
+{
+	TEST_TITLE
+
+	timeutils_testsplit();
+	timeutils_testmk();
+	timeutils_testconvert();
+}
+
+/*===========================================================================*/
+/* ZLIB UTILS */
+/*===========================================================================*/
+
+void zlibutils_test()
+{
+	TEST_TITLE
+	
+	int buffer[1024];
+	for (int i=0; i<1024; i++)
+		buffer[i] = i;
+
+	char compressed[1024*10];
+
+	int buffer2[1024];
+
+	size_t compressedsize   = zlib::compress(compressed, sizeof(compressed), buffer, sizeof(buffer));
+
+	size_t decompressedsize = zlib::uncompress(buffer2, sizeof(buffer2), compressed, compressedsize);
+
+	TEST_ASSERT(decompressedsize == sizeof(buffer), "zlib compress and uncompress don't match"); 
+}
+
+/*===========================================================================*/
+
+int utils_tests(const std::string& testdir)
+{	
+	base64utils_test();
+	fileutils_test(testdir);
+	mathutils_test();
+	radarutils_test();
+	stringutils_test();
+	timeutils_test();	
+	zlibutils_test();
+	return 0;
+}
+
+/*===========================================================================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////template <class T> static void test(const char** values)
+//////{
+//////	DEBUG("------------------");
+//////	for (int i=0; values[i]; i++)
+//////	{		
+//////		T a;
+//////		if (stringutils::parse(a, values[i]))	DEBUG(values[i] << "\t= FAIL");
+//////		else					DEBUG(values[i] << "\t= " << a);
+//////	}
+//////}
+//////
+//////static void test_conversions()
+//////{
+//////	TEST_TITLE
+//////
+//////	const char* values[] = {
+//////		""
+//////		,"1"
+//////		," 1"
+//////		," 1 "
+//////		,"1 "
+//////		,"1.2"
+//////		," 1.2"
+//////		," 1.2 "
+//////		," 1.2"
+//////		,"0x01"
+//////		," 0x01"
+//////		," 0x01 "
+//////		,"0x01 "
+//////		,"a"
+//////		," a"
+//////		," a "
+//////		,"a "		
+//////		,NULL
+//////	};
+//////	test<int>(values);
+//////	test<double>(values);
+//////	test<bool>(values);
+//////}
+////
+////static void listfiles(const std::string& path)
+////{
+////	try
+////	{
+////		TEST_TITLE
+////
+////		std::vector<std::string> files;
+////
+////		fileutils::filelist(files, path, true);
+////
+////		for (std::vector<std::string>::iterator i = files.begin(); i<files.end(); i++)
+////		{
+////			std::string path = *i;
+////			std::string basepath = fileutils::getBasePath(path);
+////			std::string filename = fileutils::getFileName(path);
+////
+////			DEBUG("[" << basepath << "] [" << filename << "]");
+////		}
+////	}
+////	catch (std::exception& e)
+////	{
+////		std::cout << e.what() << std::endl;
+////	}
+////}
+////
+////static void test_listfiles()
+////{
+////#if defined(WIN32)
+////	listfiles("C:\\");
+////	listfiles(".");
+////	listfiles("xyz");
+////	DEBUG(".     " << (fileutils::dirExists(".")     ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("c:\\   " << (fileutils::dirExists("c:\\")  ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("/tmp  " << (fileutils::dirExists("/tmp")  ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("/tmp/ " << (fileutils::dirExists("/tmp/") ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("xyz   " << (fileutils::dirExists("xyz")   ? "ESISTE" : "NON ESISTE"));
+////#else
+////	listfiles("/");
+////	listfiles(".");
+////	listfiles("xyz");
+////	DEBUG(".     " << (fileutils::dirExists(".")     ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("/     " << (fileutils::dirExists("/")     ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("/tmp  " << (fileutils::dirExists("/tmp")  ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("/tmp/ " << (fileutils::dirExists("/tmp/") ? "ESISTE" : "NON ESISTE"));
+////	DEBUG("xyz   " << (fileutils::dirExists("xyz")   ? "ESISTE" : "NON ESISTE"));
+////
+////#endif
+////}
+////
+////void testisint()
+////{
+////		#define ISINT(value)		DEBUG(std::string(value) + (stringutils::isInt(value)?" is int":" is not int"))
+////
+////		ISINT("");
+////		ISINT("0x01");
+////		ISINT("1");
+////		ISINT("1");
+////		ISINT("1");
+////		ISINT(" 1");
+////		ISINT("1 ");
+////		ISINT(" 1 ");
+////		ISINT("a");
+////		ISINT(" a");
+////		ISINT("a ");
+////		ISINT(" a ");	
+////}
