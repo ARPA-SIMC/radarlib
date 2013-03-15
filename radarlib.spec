@@ -9,7 +9,7 @@ Source0: 	%{name}-%{version}.tar.gz
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root
 Vendor: 	Guido Billi <guidobilli@gmail.com>
 Packager: 	Daniele Branchini <dbranchini@arpa.emr.it>
-BuildRequires:	gcc-c++, hdf5-devel, zlib-devel
+BuildRequires:	gcc-c++, hdf5-devel
 Requires:       hdf5
 
 
