@@ -1,4 +1,6 @@
-dist_doc_DATA =  \
+examplesdir = $(docdir)/examples
+
+dist_examples_DATA =  \
 		 copy_polar_volume_attributes.cpp \
 		 create_delete.cpp \
 		 create_odim_object.cpp \

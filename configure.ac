@@ -31,12 +31,6 @@ AC_CHECK_HEADER(H5Cpp.h,,AC_MSG_ERROR([required HDF5 C++ header file missing]))
 #look for HDF5 C++ library
 AC_CHECK_LIB(hdf5_cpp, H5open)
 
-#look for zip library header 
-AC_CHECK_HEADER(zlib.h)
-
-#look for zip library
-AC_CHECK_LIB(z, zlibVersion)
-
 AC_SUBST([PACKAGE_SO_VERSION])
 AC_SUBST([PACKAGE_LT_VERSION])
 
