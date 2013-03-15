@@ -1,3 +1,9 @@
+radarlib (1.2.0-1) UNRELEASED; urgency=low
+
+  * Reflecting upstream changes
+
+ -- Emanuele Di Giacomo <edigiacomo@arpa.emr.it>  Fri, 15 Mar 2013 12:11:08 +0100
+
 radarlib (1.0-1) UNRELEASED; urgency=low
 
   * Initial release
