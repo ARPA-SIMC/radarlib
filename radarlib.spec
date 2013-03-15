@@ -1,7 +1,7 @@
 Summary:	libradar shared library
 Name: 		radarlib
 Version: 	1.2.0
-Release: 	2%{dist}
+Release: 	4%{dist}
 License: 	GPL
 Group: 		Applications/Meteo
 URL: 		http://arpa.emr.it/sim/
@@ -56,7 +56,7 @@ rm -rf %{buildroot}
 %{_includedir}/%{name}/*
 %{_libdir}/libradar.a
 %{_libdir}/libradar.la
-%{_libdir}/pkgconfig/%{name}-%{version}.pc
+%{_libdir}/pkgconfig/%{name}.pc
 
 %files doc
 %defattr(-,root,root,-)
