@@ -16,6 +16,7 @@ nobase_libradar_include_HEADERS = \
 				  radarlib/odimh5v20.hpp \
 				  radarlib/odimh5v20_metadata.hpp \
 				  radarlib/odimh5v20_support.hpp \
+				  radarlib/odimh5v20_utils.hpp \
 				  radarlib/base64.hpp \
 				  radarlib/byteorder.h \
 				  radarlib/debug.hpp \
