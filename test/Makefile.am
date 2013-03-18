@@ -4,7 +4,8 @@ TESTS = \
 	test-create-IMAGE \
 	test-create-PROD  \
 	test-polar-volume  \
-	test-prod-splitter
+	test-prod-splitter \
+	test-visitor
 
 check_PROGRAMS = \
 		 test-support \
@@ -12,7 +13,8 @@ check_PROGRAMS = \
 		 test-create-PVOL  \
 		 test-create-IMAGE \
 		 test-create-PROD \
-		 test-prod-splitter
+		 test-prod-splitter \
+		 test-visitor
 
 
 test_support_SOURCES = test-support.cc
@@ -38,6 +40,10 @@ test_create_PROD_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir) -DTESTDIR='"$(abs_
 test_prod_splitter_SOURCES = test-prod-splitter.cc
 test_prod_splitter_LDADD = $(top_builddir)/radarlib/libradar_static.la
 test_prod_splitter_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir) -DTESTDIR='"$(abs_srcdir)"'
+
+test_visitor_SOURCES = test-visitor.cc
+test_visitor_LDADD = $(top_builddir)/radarlib/libradar_static.la
+test_visitor_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir) -DTESTDIR='"$(abs_srcdir)"'
 
 CLEANFILES = \
 	     ETOP-10_HGHT_200001020304.h5 \

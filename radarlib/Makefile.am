@@ -14,6 +14,7 @@ libradar_la_SOURCES = \
 		      odimh5v20_hdf5.cpp \
 		      odimh5v20_metadata.cpp \
 		      odimh5v20_support.cpp \
+		      odimh5v20_utils.cpp \
 		      base64.cpp \
 		      io.cpp \
 		      lib.cpp \
@@ -36,6 +37,7 @@ libradar_static_la_SOURCES = \
 			     odimh5v20_hdf5.cpp \
 			     odimh5v20_metadata.cpp \
 			     odimh5v20_support.cpp \
+			     odimh5v20_utils.cpp \
 			     base64.cpp \
 			     io.cpp \
 			     lib.cpp \
