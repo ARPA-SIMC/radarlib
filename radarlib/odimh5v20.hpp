@@ -35,6 +35,7 @@
 #include <radarlib/odimh5v20_support.hpp>	/* helpful classes  */
 #include <radarlib/odimh5v20_dump.hpp>		/* odim h5 v20 dumper */
 #include <radarlib/odimh5v20_factory.hpp>	/* odim h5 v20 factory class */
+#include <radarlib/odimh5v20_utils.hpp>		/* odim h5 v20 utilities */
 
 /*===========================================================================*/
 
