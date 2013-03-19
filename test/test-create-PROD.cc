@@ -1,6 +1,6 @@
 /*===========================================================================*/
 /*
-/* Questo programma crea un prodotto ti tipo ETOP utilizzando le classi specifiche di OdimH5
+/* Questo programma crea un prodotto utilizzando le classi specifiche di OdimH5  e verifica rileggendo i campi scritti.
 /*
 /*===========================================================================*/
 
@@ -35,7 +35,9 @@ void setUp()
 	/* what */
 
 	image->setDateTime( Radar::timeutils::mktime(2000,1,2,3,4,5));
-	SourceInfo source;
+	assert (image->getDateTime() == Radar::timeutils::mktime(2000,1,2,3,4,5));
+
+	SourceInfo source, source_read;
 	source.setWMO("wmo");
 	source.setOperaRadarSite("rad");
 	source.setOriginatingCenter(1);
@@ -44,6 +46,14 @@ void setUp()
 	source.setComment("cmt");
 	image->setSource(source);
 
+	source_read=image->getSource();
+	assert(source_read.WMO=="wmo");
+	assert(source_read.OperaRadarSite=="rad");
+	assert(source_read.OriginatingCenter==1);
+	assert(source_read.Place=="plc");
+	assert(source_read.Country==2);
+	assert(source_read.Comment=="cmt");
+	
 		/* how */
 
 	image->setTaskOrProdGen("prova");
@@ -51,6 +61,10 @@ void setUp()
 	image->setEndEpochs(Radar::timeutils::mktime(2000,1,2,3,4,5));
 	image->setSystem("ARPA-SIMC");
 
+	assert(image->getTaskOrProdGen()=="prova");
+	assert(image->getStartEpochs()==Radar::timeutils::mktime(2000,1,2,3,4,5));
+	assert(image->getEndEpochs() == Radar::timeutils::mktime(2000,1,2,3,4,5));
+	assert(image->getSystem() == "ARPA-SIMC");
 
 	/* A questo punto creiamo il prodotto ETOP all'interno dell'oggetto IMAGE */
 	unsigned short missing;
@@ -58,11 +72,20 @@ void setUp()
 
 	Product_ETOP * dataset =  image->createProductETOP();
 	dataset->setProdPar(10.);
+	assert (dataset->getProduct()==PRODUCT_ETOP);
+	assert(dataset->getProdPar() ==10.);
+
 	Product_2D_Data* data = dataset->createQuantityData(PRODUCT_QUANTITY_HGHT);
 	data->setNodata(missing);
 	data->setUndetect(0.);
 	data->setOffset(0);
 	data->setGain(1./1000.);
+
+	assert(data->getNodata()==missing);
+	assert(data->getUndetect()==0.);
+	assert(data->getOffset()==0);
+	assert(data->getGain()==1./1000.);
+
 /* where */
 	dataset->setLL_Latitude(40.0);
 	dataset->setLL_Longitude(10.0);
@@ -79,6 +102,21 @@ void setUp()
 	dataset->setYScale(1000.);
 	dataset->setProjectionArguments("+proj=gnom +lat_0=44.7914N +lon_0=10.4992E +units=m +ellps=sphere");
 
+	assert(dataset->getLL_Latitude()==40.0);
+	assert(dataset->getLL_Longitude()==10.0);
+	assert(dataset->getLR_Latitude()==40.0); 
+	assert(dataset->getLR_Longitude()==15.0);
+	assert(dataset->getUL_Latitude()==45.0); 
+	assert(dataset->getUL_Longitude()==10.0);
+	assert(dataset->getUR_Latitude()==45.0);
+	assert(dataset->getUR_Longitude()==15.0);
+
+	assert(dataset->getXSize()==256);
+	assert(dataset->getYSize()==256);
+	assert(dataset->getXScale()==1000.);
+	assert(dataset->getYScale()==1000.);
+	assert(dataset->getProjectionArguments()=="+proj=gnom +lat_0=44.7914N +lon_0=10.4992E +units=m +ellps=sphere");
+
 	std::vector<Angles> angles;
 	std::vector<Arotation> arotations;
 	std::vector<Nodes> nodes;
@@ -91,14 +129,28 @@ void setUp()
 	dataset->setAngles(angles, 2);
 	dataset->setArotation(arotations);
 	dataset->setNodes(nodes);
-	
+
+	angles.clear();
+	angles=dataset->getAngles();
+	arotations=dataset->getArotation();
+	nodes=dataset->getNodes();
+
+	assert(angles[0].value == 0.);
+	assert(arotations[0].value == 10.);
+	assert(nodes[0].get() == "'aaa'");
+
 	DataMatrix<unsigned short> matrix(256,256,missing);
+	DataMatrix<unsigned short> matrix_read(256,256,missing);
 
 	for (int i=10; i<246; i++)
 		for (int j=10; j<246; j++)
 			matrix.elem(i,j) = (65 + ((i * j) % 65)*1000.);
 
 	data->writeData(matrix);
+	data->readData(&(matrix_read.elem(0,0)));
+	for (int i=0; i<255; i++)
+		for (int j=0; j<255; j++)
+			assert(matrix.elem(i,j) == matrix_read.elem(i,j));
 
 	delete data;
 	delete dataset;
@@ -156,11 +208,21 @@ void setUp()
 //  add a quality data group
 //
 	OdimQuality * QualityPPI= dataPPI->createQualityData();
+	assert (dataPPI->getQualityDataCount() == 1);
+
 	QualityPPI->getWhat()->set		(ATTRIBUTE_WHAT_GAIN, 1.);
 	QualityPPI->getWhat()->set		(ATTRIBUTE_WHAT_OFFSET, 0.);
 	QualityPPI->getHow()->set		(ATTRIBUTE_HOW_TASK,"Quality field");
 
+	assert(QualityPPI->getWhat()->getDouble(ATTRIBUTE_WHAT_GAIN) == 1.);
+	assert(QualityPPI->getWhat()->getDouble(ATTRIBUTE_WHAT_OFFSET) == 0.);
+	assert(QualityPPI->getHow()->getStr(ATTRIBUTE_HOW_TASK) =="Quality field");
+	
 	QualityPPI->writeQuality(matrix);
+	QualityPPI->readQuality(&(matrix_read.elem(0,0)));
+	for (int i=0; i<255; i++)
+		for (int j=0; j<255; j++)
+			assert(matrix.elem(i,j) == matrix_read.elem(i,j));
 
 	delete QualityPPI;
 	delete dataPPI;
@@ -190,12 +252,6 @@ void test_ETOP()
 	image		= factory->openImageObject(TESTFILE);
 
 	assert(image != NULL);
-/*  	assert(image->getLL_Longitude() == 10.0);
-	assert(image->getLR_Longitude() == 15.0);
-	assert(image->getUL_Longitude() == 10.0);
-	assert(image->getUR_Longitude() == 15.0);
-	assert(image->getTaskOrProdGen() == "prova");
-*/
 	assert(image->getProductCount() == 2);
 	Product_2D* product = image->getProduct(0);
 	product->getWhat();
@@ -203,14 +259,6 @@ void test_ETOP()
 	Product_ETOP* etop = dynamic_cast<Product_ETOP*>(product);
 	assert(etop != NULL);	
 	etop->getHow();
-	//assert(etop->getNodes().size() == 10);
-	//std::cout << Nodes::toString(etop->getNodes()) << std::endl;
-	//assert(etop->getNodes().at(0).get() == "'aaa'");
-
-	//delete data;
-	//delete dataset;
-	//delete image;
-	//delete factory;
 }
 
 
