@@ -20,4 +20,9 @@ uninstall-local:
 clean-local:
 	rm -rf html
 
-EXTRA_DIST = Doxyfile
+dist_doc_DATA = \
+		OPERA_2008_03_WP2.1a_InformationModel_UML_2.0.pdf
+
+EXTRA_DIST = \
+	     mainpage.dox \
+	     FAQ.dox

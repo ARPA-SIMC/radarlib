@@ -1,4 +1,3 @@
-
 /*===========================================================================*/
 /* 
 /* Questo programma apre un volume e ne crea una copia copiando solo

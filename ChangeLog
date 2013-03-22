@@ -1,3 +1,11 @@
+2013-03-18 Emanuele Di Giacomo <edigiacomo@arpa.emr.it>
+	* radarlib/odimh5v20_utils.hpp: declaration of
+	  Odimh5v20::utils::OdimObjectVisitor and
+	  Odimh5v20::utils::Product2DVisitor.
+	* radarlib/odimh5v20_utils.cpp: definition of
+	  Odimh5v20::utils::OdimObjectVisitor and
+	  Odimh5v20::utils::Product2DVisitor.
+
 2013-03-14  Pier Paolo Alberoni <palberoni@arpa.emr.it>
 
 	Added objects to create and manipulate 2D cartesiam object and procuts

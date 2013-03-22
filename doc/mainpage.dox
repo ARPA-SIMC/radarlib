@@ -1,0 +1,26 @@
+/**
+ * \mainpage
+ * Radarlib is a library to read/write ODIMH5 files.
+ *
+ *
+ * \section SupportedODIMH5VersionsSection Supported versions
+ *
+ * - 2.0: namespace OdimH5v20
+ *
+ *
+ * @example copy_polar_volume_attributes.cpp
+ * @example create_delete.cpp
+ * @example create_odim_object.cpp
+ * @example create_polar_volume.cpp
+ * @example dump_object.cpp
+ * @example image-visitor.cpp
+ * @example odimh5scanner.cpp
+ * @example prove_hdf5.cpp
+ * @example pvolsplitter.cpp
+ * @example read_attributes.cpp
+ * @example read_polar_volume2.cpp
+ * @example read_polar_volume.cpp
+ * @example read_polar_volume_scans.cpp
+ * @example visitor.cpp
+ * @example write_attributes.cpp
+ */

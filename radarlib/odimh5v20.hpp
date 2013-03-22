@@ -39,6 +39,12 @@
 
 /*===========================================================================*/
 
+
+/**
+ * @brief Namespace related to ODIMH5 version 2.0
+ */
+namespace OdimH5v20 {}
+
 #endif
 
 

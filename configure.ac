@@ -1,5 +1,5 @@
 AC_INIT([RadarLib], [1.2.0], [guidobilli@gmail.com], [radarlib],
-        [http://www.openismus.com/documents/linux/building_libraries/building_libraries])
+        [http://www.smr.arpa.emr.it/software/radarlib])
 
 PACKAGE_SO_VERSION="$PACKAGE_VERSION"
 PACKAGE_LT_VERSION="3:0:2"

@@ -1,0 +1,31 @@
+/**
+ * \page FAQ Frequently Asked Questions
+ *
+ * \tableofcontents
+ *
+ * \section FAQ_1 "Unable to read odim data from HDF5 dataset: H5Dread failed"
+ *
+ * It's possible that the file contains some data compressed with szlib, but the
+ * hdf5 library wasn't compiled with szlib support.
+ *
+ * In this case, reinstall the hdf5 library with szlib support.
+ *
+ * An example of stack trace caused by this error:
+ *
+ *	#000: H5Dio.c line 174 in H5Dread(): can't read data
+ *	  major: Dataset
+ *	  minor: Read failed
+ *	#001: H5Dio.c line 404 in H5D_read(): can't read data
+ *	  major: Dataset
+ *	  minor: Read failed
+ *	#002: H5Dchunk.c line 1724 in H5D_chunk_read(): unable to read raw data chunk
+ *	  major: Low-level I/O
+ *	  minor: Read failed
+ *	#003: H5Dchunk.c line 2737 in H5D_chunk_lock(): data pipeline read failed
+ *	  major: Data filters
+ *	  minor: Filter operation failed
+ *	#004: H5Z.c line 1095 in H5Z_pipeline(): required filter is not registered
+ *	  major: Data filters
+ *	  minor: Read failed
+ *	Unable to read odim data from HDF5 dataset: H5Dread failed
+ */

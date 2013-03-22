@@ -32,11 +32,6 @@ pkgconfigdir = $(libdir)/pkgconfig
 
 pkgconfig_DATA = radarlib.pc
 
-EXTRA_DIST = \
-	     OPERA_2008_03_WP2.1a_InformationModel_UML_2.0.pdf \
-	     readme.txt \
-	     regole.txt 
-
 SUBDIRS = radarlib test doc examples
 
 
