@@ -26,3 +26,6 @@ dist_doc_DATA = \
 EXTRA_DIST = \
 	     mainpage.dox \
 	     FAQ.dox
+
+CLEANFILES = \
+	     Doxygen.log
