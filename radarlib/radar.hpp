@@ -40,8 +40,10 @@
 #include <radarlib/time.hpp>			/* time utilities */
 
 #include <radarlib/odimh5v20.hpp>		/* odimh5 v2.0 */
+#include <radarlib/odimh5v21.hpp>		/* odimh5 v2.1 */
 
 #include <radarlib/odimh5v20_arpav10.hpp>	/* Arpa ER v1.0 extensions for OdimH5 */
+#include <radarlib/odimh5v21_arpav10.hpp>	/* Arpa ER v1.0 extensions for OdimH5 */
 
 
 /*===========================================================================*/

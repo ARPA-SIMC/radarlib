@@ -111,7 +111,7 @@ public:
 	 * \param msg		a text to write into nthe file
 	 */
 	static void createFile(const std::string& path, const std::string& msg);
-	/*!	 * \brief Get the size in bytes of the given file
+	/*!	 * \brief Get the size in bytes of the given file
 	 * \param path		the path of the file
 	 */
 	static size_t getFileSize(const std::string& path);

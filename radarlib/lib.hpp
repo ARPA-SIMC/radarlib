@@ -72,7 +72,7 @@ public:
 	 * \brief Check the library version
 	 * 
 	 * Throw an exception if the linked library is older than the
-	 * version used to compile the program.	 */
+	 * version used to compile the program.	 */
 	static void checkVersion()
 	{
 		checkVersion(RADARLIB_CURRENT_VERSION);
