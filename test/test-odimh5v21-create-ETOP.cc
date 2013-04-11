@@ -9,10 +9,10 @@
 #include <assert.h>
 
 #include <radarlib/radar.hpp>
-using namespace OdimH5v20;
+using namespace OdimH5v21;
 
 
-#define TESTFILE TESTDIR"/ETOP.h5"
+#define TESTFILE TESTDIR"/ETOP-ODIMh5V21.h5"
 
 void setUp()
 {
@@ -24,7 +24,7 @@ void setUp()
 
 	std::set<std::string>	quantities;
 
-	OdimH5v20::Specification::getStandardQuantities(quantities);
+	OdimH5v21::Specification::getStandardQuantities(quantities);
 
 	/* creazione di una factory */
 	factory		= new OdimFactory();
@@ -90,7 +90,7 @@ void setUp()
 	  arotations.push_back(Arotation(10+i));
 	  nodes.push_back(Nodes("'aaa'"));
         }
-	dataset->setAngles(angles, 2);
+//	dataset->setAngles(angles, 2);  questo attributo non esiste in odimh5v21
 	dataset->setArotation(arotations);
 	dataset->setNodes(nodes);
 	
@@ -114,7 +114,7 @@ void setUp()
 	dataPPI->setOffset(0);
 	dataPPI->setGain(1./1000.);
 
-	datasetPPI->setAngles(angles, 2);
+//	dataset->setAngles(angles, 2);  questo attributo non esiste in odimh5v21
 	datasetPPI->setArotation(arotations);
 	datasetPPI->setNodes(nodes);
 	
@@ -172,7 +172,7 @@ void test_ETOP()
 
 	std::set<std::string>	quantities;
 
-	OdimH5v20::Specification::getStandardQuantities(quantities);
+	OdimH5v21::Specification::getStandardQuantities(quantities);
 
 	/* creazione di una factory */
 	factory		= new OdimFactory();

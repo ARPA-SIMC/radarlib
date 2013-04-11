@@ -20,7 +20,7 @@
  * Author: Guido Billi <guidobilli@gmail.com>
  */
 
-#include <radarlib/odimh5v20_hdf5.hpp>
+#include <radarlib/odimh5v21_hdf5.hpp>
 
 #include <cstdlib>
 #include <cstring>
@@ -31,10 +31,10 @@
 
 #include <radarlib/debug.hpp>
 #include <radarlib/string.hpp>
-#include <radarlib/odimh5v20_const.hpp>
-#include <radarlib/odimh5v20_exceptions.hpp>
+#include <radarlib/odimh5v21_const.hpp>
+#include <radarlib/odimh5v21_exceptions.hpp>
 
-namespace OdimH5v20 {
+namespace OdimH5v21 {
 
 /*===========================================================================*/
 /* FUNZIONI INTERNE DI COMODO */
@@ -517,7 +517,7 @@ H5::Group* HDF5Group::ensureGetChild(H5::Group* parent, const char* name)	// thr
 
 /*===========================================================================*/
 
-// extern "C" herr_t count_group(hid_t loc_id, const char *name, const H5L_info_t *linfo, void *opdata)
+//extern "C" herr_t count_group(hid_t loc_id, const char *name, const H5L_info_t *linfo, void *opdata)
 static herr_t count_group(hid_t loc_id, const char *name, const H5L_info_t *linfo, void *opdata)
 {		
 	iterate_group_data* data = (iterate_group_data*)opdata;
@@ -593,7 +593,8 @@ struct iterate_dataset_data
 	}
 };
 
-static herr_t find_dataset(hid_t loc_id, const char *name, const H5L_info_t *linfo, void *opdata)
+//extern "C" herr_t find_dataset(hid_t loc_id, const char *name, const H5L_info_t *linfo, void *opdata)
+static  herr_t find_dataset(hid_t loc_id, const char *name, const H5L_info_t *linfo, void *opdata)
 {		
 	iterate_dataset_data* data = (iterate_dataset_data*)opdata;
 	if (strcmp(name, data->searchName) == 0)

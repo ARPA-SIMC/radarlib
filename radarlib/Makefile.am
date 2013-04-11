@@ -15,6 +15,16 @@ libradar_la_SOURCES = \
 		      odimh5v20_metadata.cpp \
 		      odimh5v20_support.cpp \
 		      odimh5v20_utils.cpp \
+		      odimh5v21_arpav10_classes.cpp \
+		      odimh5v21_classes.cpp \
+		      odimh5v21_const.cpp \
+		      odimh5v21_dump.cpp \
+		      odimh5v21_exceptions.cpp \
+		      odimh5v21_factory.cpp \
+		      odimh5v21_hdf5.cpp \
+		      odimh5v21_metadata.cpp \
+		      odimh5v21_support.cpp \
+		      odimh5v21_utils.cpp \
 		      base64.cpp \
 		      io.cpp \
 		      lib.cpp \
@@ -38,6 +48,16 @@ libradar_static_la_SOURCES = \
 			     odimh5v20_metadata.cpp \
 			     odimh5v20_support.cpp \
 			     odimh5v20_utils.cpp \
+			     odimh5v21_arpav10_classes.cpp \
+			     odimh5v21_classes.cpp \
+			     odimh5v21_const.cpp \
+			     odimh5v21_dump.cpp \
+			     odimh5v21_exceptions.cpp \
+			     odimh5v21_factory.cpp \
+			     odimh5v21_hdf5.cpp \
+			     odimh5v21_metadata.cpp \
+			     odimh5v21_support.cpp \
+			     odimh5v21_utils.cpp \
 			     base64.cpp \
 			     io.cpp \
 			     lib.cpp \
