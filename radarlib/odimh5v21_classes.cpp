@@ -1548,20 +1548,8 @@ std::vector<double>	PolarScan::getElevationAngles	()
 }
 void			PolarScan::setElevationAngles	(const std::vector<double>& val)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, 5);	}
 std::vector<double>	PolarScan::getStartAzimuthAngles	()				 
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
+{
+	return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);
 }
 void			PolarScan::setStartAzimuthAngles	(const std::vector<double>& val) {} 
 std::vector<double>	PolarScan::getStopAzimuthAngles	()				 

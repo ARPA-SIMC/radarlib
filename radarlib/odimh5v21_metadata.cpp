@@ -88,6 +88,18 @@ template <class T> static std::vector<T>& getSeq_(H5::Group* group, const char* 
 	return result;
 }
 
+template<class T> static std::vector<T> getSimpleArray(H5::Group* group, const char* name, bool mandatory, std::vector<T>& result)
+{
+	H5::DataSet* dataset = HDF5Group::getDataset(group, name);
+	// TODO: mandatory
+	// TODO: dataset->getSpace().getSimpleExtentDims(sizes) == 1
+	hssize_t size = dataset->getSpace().getSimpleExtentNpoints();
+	result.resize(size);
+	dataset->read(&(result[0]), dataset->getDataType(), dataset->getSpace());
+
+	return result;;
+}
+
 /*===========================================================================*/
 /* METADATA GROUP */
 /*===========================================================================*/
@@ -239,6 +251,15 @@ std::vector<time_t>		MetadataGroup::getTimes		(const char* name, bool mandatory)
 std::vector<float>		MetadataGroup::getFloats	(const char* name, bool mandatory) { std::vector<float>		result;	return getSeq_<float>		(group, name, mandatory, result, "float");	}		
 std::vector<double>		MetadataGroup::getDoubles	(const char* name, bool mandatory) { std::vector<double>	result;	return getSeq_<double>		(group, name, mandatory, result, "double");	}		
 std::vector<std::string>	MetadataGroup::getStrings	(const char* name, bool mandatory) { std::vector<std::string> result; return getStrSeq_			(group, name, mandatory, result);	}
+
+std::vector<int64_t>	MetadataGroup::getSimpleArrayLong	(const char* name, bool mandatory) {
+	std::vector<int64_t>	result;
+	return getSimpleArray<int64_t>(group, name, mandatory, result);
+}
+std::vector<double>	MetadataGroup::getSimpleArrayDouble	(const char* name, bool mandatory) {
+	std::vector<double>	result;
+	return getSimpleArray<double>(group, name, mandatory, result);
+}
 	
 /*===========================================================================*/
 /* set sequenze di coppie */

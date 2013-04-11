@@ -793,6 +793,15 @@ public:
 	 */
 	std::vector<std::string>	getStrings	(const char* name, bool mandatory = false);		
 
+	/*!
+	 * \brief Get the value of the long simple array
+	 */
+	std::vector<int64_t> getSimpleArrayLong (const char* name, bool mandatory = false);
+	/*!
+	 * \brief Get the value of the float simple array
+	 */
+	std::vector<double> getSimpleArrayDouble (const char* name, bool mandatory = false);
+
 	/* --- get sequenze di coppie --- */
 
 	/*! 
