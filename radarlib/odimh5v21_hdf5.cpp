@@ -717,7 +717,7 @@ void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst, const std::set<st
 			srcAttr	= new H5::Attribute(src->openAttribute(i));
 
 			std::string name = HDF5Attribute::getName(srcAttr);
-			
+
 			if (names.size())				// se sono specificati degli attributi
 				if (names.find(name) == names.end())	//se non l'attribut non e' tra questi
 				{
@@ -743,6 +743,13 @@ void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst, const std::set<st
 			delete srcAttr; srcAttr	= NULL;
 			delete dstAttr; dstAttr = NULL;
 		}
+		// numero degli object: src->getNumObjs()
+		// verificare se l'i-esimo oggetto è un dataset: src->getObjTypeByIdx(i) == H5G_DATASET
+		// estraggo il dataset: srcDs = src->openDataset(src->getObjNameByIdx(i))
+		// creo un nuovo dataset a partire dal dataset in maniera analoga
+		// all'attribute:
+		// dstDs = new H5::Dataset(dst->createDataset(name.c_str(), srcDs->getDataType(), srcDs->getSpace()))
+		// e poi la write
 	}
 	catch (H5::Exception& h5e)
 	{
