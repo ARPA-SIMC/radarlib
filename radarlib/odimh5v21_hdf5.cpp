@@ -28,6 +28,7 @@
 #include <iostream>
 #include <sstream>
 #include <assert.h>
+#include <memory>
 
 #include <radarlib/debug.hpp>
 #include <radarlib/string.hpp>
@@ -715,16 +716,17 @@ void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst, const std::set<st
 	}
 }
 
-void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst)
+//void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst)
+/*  void HDF5Group::copyDatasets(MetadataGroup* src, MetadataGroup* dst)
 {	
 	std::set<std::string> names;
 	copyDatasets(src, dst, names);
 }
+*/
 
-void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std::string>& names)
+//void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std::string>& names)
+/*   void HDF5Group::copyDatasets(MetadataGroup* src, MetadataGroup* dst, const std::set<std::string>& names)
 {	
-	H5::DataSet*	srcDS	= NULL;
-	H5::DataSet*	dstDS	= NULL;
 
 	try
 	{
@@ -735,49 +737,67 @@ void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std:
 		// all'attribute:
 		// dstDs = new H5::Dataset(dst->createDataset(name.c_str(), srcDs->getDataType(), srcDs->getSpace()))
 		// e poi la write
-		std::vector<char> buff;
 
 		int count = src->getNumObjs();
-		for (int i=0; i<count; i++)
+		for (int i=0; i<count; i++){
+std::cerr<<" Oggetto "<<i<<" tipo "<<src->getObjTypeByIdx(i)<<std::endl;		
+
 		  if (src->getObjTypeByIdx(i) == H5G_DATASET )
 		  {
-			srcDS = new H5::DataSet(src->openDataSet(src->getObjnameByIdx(i)));
+			H5::DataSet*	srcDS	= NULL;
+			H5::DataSet	dstDS;//	= NULL;
+
 			std::string name = src->getObjnameByIdx(i);
-std::cerr<<name<<"size buffer disponibile "<<buff.size()<<" devo metterci "<<srcDS->getStorageSize()<<std::endl;
+std::cerr << name << std::endl;
+			if(name == ATTRIBUTE_HOW_STARTAZA){}
+			if(name == ATTRIBUTE_HOW_STOPAZA){}
+			if(name == ATTRIBUTE_HOW_STARTAZT){}
+			if(name == ATTRIBUTE_HOW_STOPAZT){}
+			if(name == ATTRIBUTE_HOW_AROTATION)
+			{ dst->set( ATTRIBUTE_HOW_AROTATION,src->getArotation(ATTRIBUTE_HOW_AROTATION),1);} 
+			if(name == ATTRIBUTE_HOW_ANGLES){}
+			if(name == ATTRIBUTE_HOW_ELANGLES){}
+
+			if(name == ATTRIBUTE_WHERE_ANGLES){}
+			if(name == ATTRIBUTE_WHAT_PRODPAR){}
+------
+  			srcDS = new H5::DataSet(src->openDataSet(src->getObjnameByIdx(i)));
+
 			hsize_t storagesize = srcDS->getStorageSize();
 
-			if (storagesize > buff.size())
-				buff.resize((size_t)storagesize);
+//			std::vector<char> buff((size_t)storagesize);
+		        char buff[(size_t) storagesize];
+	//		srcDS->read(&(buff[0]),srcDS->getDataType(), srcDS->getSpace());
+			srcDS->read(buff,srcDS->getDataType(), srcDS->getSpace());
 
-			srcDS->read(&(buff[0]),srcDS->getDataType());
-			
+			//HDF5DataSet::remove(dst, name.c_str());
 
-//			HDF5DataSet::remove(dst, name.c_str());
+			//dstDS	= new H5::DataSet(dst->createDataSet(name.c_str(), srcDS->getDataType(), srcDS->getSpace()));
+			dstDS	= dst->createDataSet(name.c_str(), srcDS->getDataType(), srcDS->getSpace());
 
-			dstDS	= new H5::DataSet(dst->createDataSet(name.c_str(), srcDS->getDataType(), srcDS->getSpace()));
-
-			dstDS->write(&(buff[0]), dstDS->getDataType());
+			//dstDS->write(&(buff[0]), dstDS->getDataType(), dstDS->getSpace());
+			dstDS.write(buff, dstDS.getDataType(), dstDS.getSpace());
 
 			delete srcDS; srcDS	= NULL;
-			delete dstDS; dstDS = NULL;
-			buff.clear();
-std::cerr<<" finita copia dataset "<<name<<std::endl;
+//			delete dstDS; dstDS = NULL;
+----------------------
 		}
+	   }
 	}
 	catch (H5::Exception& h5e)
 	{
-		delete srcDS;
-		delete dstDS;
+		//delete srcDS;
+		//delete dstDS;
 		throw OdimH5HDF5LibException("Error coping attributes", h5e);
 	}
 	catch (...)
 	{
-		delete srcDS;
-		delete dstDS;
+		//delete srcDS;
+		//delete dstDS;
 		throw;
 	}
 }
-
+*/
 
 /*===========================================================================*/
 /* HDF5 ATOM TYPE */

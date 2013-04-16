@@ -460,6 +460,14 @@ void	MetadataGroup::set	(const char* name, const std::vector<Arotation>& value, 
 	setSimpleArray	(name, result)  ;
 }
 
+void	MetadataGroup::set	(const char* name, const std::vector<TXpower>& value, int precision)		
+{ 
+	std::vector<double> result;
+	for (size_t i=0; i<value.size(); i++)
+		result.push_back(value[i].value);
+	setSimpleArray	(name, result)  ;
+}
+
 void	MetadataGroup::set	(const char* name, const std::vector<Nodes>& value)		
 { 
 	set(name, Nodes::toString(value));	
@@ -508,7 +516,35 @@ void MetadataGroup::import(MetadataGroup* value)
 	H5::Group* dst = this->group;
 	H5::Group* src = value->getH5Object();
 	HDF5Group::copyAttributes(src, dst);
-	HDF5Group::copyDatasets(src, dst);
+
+	int count = src->getNumObjs();
+	for (int i=0; i<count; i++){
+	  if (src->getObjTypeByIdx(i) == H5G_DATASET )
+	  {
+	      std::string name = src->getObjnameByIdx(i);
+		if(name == ATTRIBUTE_HOW_STARTAZA) { std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);
+			 this->setSimpleArray(ATTRIBUTE_HOW_STARTAZA,val);}
+		if(name == ATTRIBUTE_HOW_STOPAZA)  { std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZA);
+			 this->setSimpleArray(ATTRIBUTE_HOW_STOPAZA,val);}
+		if(name == ATTRIBUTE_HOW_STARTAZT) { std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZT);
+			this->setSimpleArray(ATTRIBUTE_HOW_STARTAZT,val);}
+		if(name == ATTRIBUTE_HOW_STOPAZT)  { 
+			std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZT);
+			 this->setSimpleArray(ATTRIBUTE_HOW_STOPAZT,val);}
+		if(name == ATTRIBUTE_HOW_AROTATION) { this->set( ATTRIBUTE_HOW_AROTATION,value->getArotation(ATTRIBUTE_HOW_AROTATION),1);} 
+      		if(name == ATTRIBUTE_HOW_ANGLES)  { this->set( ATTRIBUTE_HOW_ANGLES,value->getAngles(ATTRIBUTE_HOW_ANGLES),1);} 
+      		if(name == ATTRIBUTE_HOW_TXPOWER) { this->set( ATTRIBUTE_HOW_TXPOWER,value->getTXpower(ATTRIBUTE_HOW_TXPOWER),1);} 
+		if(name == ATTRIBUTE_HOW_ELANGLES) {}
+
+		if(name == ATTRIBUTE_WHERE_ANGLES) { this->set( ATTRIBUTE_WHERE_ANGLES,value->getAngles(ATTRIBUTE_WHERE_ANGLES),1);} 
+		if(name == ATTRIBUTE_WHAT_PRODPAR){ this->set( ATTRIBUTE_WHAT_PRODPAR,value->getVILHeights(ATTRIBUTE_WHAT_PRODPAR)); } 
+	  }
+	}
+//	HDF5Group::copyDatasets(value, this);
 }
 
 void MetadataGroup::import(MetadataGroup* value, const std::set<std::string>& names)
@@ -516,7 +552,34 @@ void MetadataGroup::import(MetadataGroup* value, const std::set<std::string>& na
 	H5::Group* dst = this->group;
 	H5::Group* src = value->getH5Object();
 	HDF5Group::copyAttributes(src, dst, names);
-	HDF5Group::copyDatasets(src, dst, names);
+	int count = src->getNumObjs();
+	for (int i=0; i<count; i++){
+	  if (src->getObjTypeByIdx(i) == H5G_DATASET )
+	  {
+	      std::string name = src->getObjnameByIdx(i);
+		if(name == ATTRIBUTE_HOW_STARTAZA) { std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);
+			 this->setSimpleArray(ATTRIBUTE_HOW_STARTAZA,val);}
+		if(name == ATTRIBUTE_HOW_STOPAZA)  { std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZA);
+			 this->setSimpleArray(ATTRIBUTE_HOW_STOPAZA,val);}
+		if(name == ATTRIBUTE_HOW_STARTAZT) { std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZT);
+			this->setSimpleArray(ATTRIBUTE_HOW_STARTAZT,val);}
+		if(name == ATTRIBUTE_HOW_STOPAZT)  { 
+			std::vector<double> val;
+			val =value->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZT);
+			 this->setSimpleArray(ATTRIBUTE_HOW_STOPAZT,val);}
+		if(name == ATTRIBUTE_HOW_AROTATION) { this->set( ATTRIBUTE_HOW_AROTATION,value->getArotation(ATTRIBUTE_HOW_AROTATION),1);} 
+      		if(name == ATTRIBUTE_HOW_ANGLES)  { this->set( ATTRIBUTE_HOW_ANGLES,value->getAngles(ATTRIBUTE_HOW_ANGLES),1);} 
+      		if(name == ATTRIBUTE_HOW_TXPOWER) { this->set( ATTRIBUTE_HOW_TXPOWER,value->getTXpower(ATTRIBUTE_HOW_TXPOWER),1);} 
+		if(name == ATTRIBUTE_HOW_ELANGLES) {}
+
+		if(name == ATTRIBUTE_WHERE_ANGLES) { this->set( ATTRIBUTE_WHERE_ANGLES,value->getAngles(ATTRIBUTE_WHERE_ANGLES),1);} 
+		if(name == ATTRIBUTE_WHAT_PRODPAR){ this->set( ATTRIBUTE_WHAT_PRODPAR,value->getVILHeights(ATTRIBUTE_WHAT_PRODPAR)); } 
+	  }
+	}
+	//HDF5Group::copyDatasets(src, dst, names);
 }
 
 /*===========================================================================*/

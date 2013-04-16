@@ -352,7 +352,8 @@ public:
 	 * \param dst				the HDF5 group to copy to
 	 * \throws OdimH5Exception		if an unexpected error occurs 
 	 */
-	static void		copyDatasets(H5::Group* src, H5::Group* dst);
+//	static void		copyDatasets(H5::Group* src, H5::Group* dst);
+//	static void  		copyDatasets(MetadataGroup* src, MetadataGroup* dst);
 	/*! 
 	 * \brief Copy all specified datasets from a HDF5 group to another
 	 *
@@ -362,7 +363,7 @@ public:
 	 * \param names				the datasets to copy
 	 * \throws OdimH5Exception		if an unexpected error occurs 
 	 */
-	static void		copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std::string>& names);
+//	static void		copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std::string>& names);
 };
 
 /*===========================================================================*/
