@@ -328,7 +328,7 @@ public:
 	/*! 
 	 * \brief Copy all attributes from a HDF5 group to another
 	 *
-	 * Copy all attributes from a HDF4 group to another
+	 * Copy all attributes from a HDF5 group to another
 	 * \param src				the HDF5 group to copy from
 	 * \param dst				the HDF5 group to copy to
 	 * \throws OdimH5Exception		if an unexpected error occurs 
@@ -337,13 +337,32 @@ public:
 	/*! 
 	 * \brief Copy all specified attributes from a HDF5 group to another
 	 *
-	 * Copy all attributes from a HDF4 group to another
+	 * Copy all attributes from a HDF5 group to another
 	 * \param src				the HDF5 group to copy from
 	 * \param dst				the HDF5 group to copy to
 	 * \param names				the attributes to copy
 	 * \throws OdimH5Exception		if an unexpected error occurs 
 	 */
 	static void		copyAttributes	(H5::Group* src, H5::Group* dst, const std::set<std::string>& names);
+	/*! 
+	 * \brief Copy all specified datasets from a HDF5 group to another
+	 *
+	 * Copy all datasets from a HDF5 group to another
+	 * \param src				the HDF5 group to copy from
+	 * \param dst				the HDF5 group to copy to
+	 * \throws OdimH5Exception		if an unexpected error occurs 
+	 */
+	static void		copyDatasets(H5::Group* src, H5::Group* dst);
+	/*! 
+	 * \brief Copy all specified datasets from a HDF5 group to another
+	 *
+	 * Copy all datasets from a HDF5 group to another
+	 * \param src				the HDF5 group to copy from
+	 * \param dst				the HDF5 group to copy to
+	 * \param names				the datasets to copy
+	 * \throws OdimH5Exception		if an unexpected error occurs 
+	 */
+	static void		copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std::string>& names);
 };
 
 /*===========================================================================*/

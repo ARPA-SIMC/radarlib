@@ -508,6 +508,7 @@ void MetadataGroup::import(MetadataGroup* value)
 	H5::Group* dst = this->group;
 	H5::Group* src = value->getH5Object();
 	HDF5Group::copyAttributes(src, dst);
+	HDF5Group::copyDatasets(src, dst);
 }
 
 void MetadataGroup::import(MetadataGroup* value, const std::set<std::string>& names)
@@ -515,6 +516,7 @@ void MetadataGroup::import(MetadataGroup* value, const std::set<std::string>& na
 	H5::Group* dst = this->group;
 	H5::Group* src = value->getH5Object();
 	HDF5Group::copyAttributes(src, dst, names);
+	HDF5Group::copyDatasets(src, dst, names);
 }
 
 /*===========================================================================*/

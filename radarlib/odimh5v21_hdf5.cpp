@@ -657,49 +657,6 @@ void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst)
 {	
 	std::set<std::string> names;
 	copyAttributes(src, dst, names);
-	//H5::Attribute*	srcAttr	= NULL;
-	//H5::Attribute*	dstAttr	= NULL;
-
-	//try
-	//{
-	//	std::vector<char> buff;
-
-	//	int count = src->getNumAttrs();
-	//	for (int i=0; i<count; i++)
-	//	{
-	//		srcAttr	= new H5::Attribute(src->openAttribute(i));
-
-	//		hsize_t storagesize = srcAttr->getStorageSize();
-
-	//		if (storagesize > buff.size())
-	//			buff.resize((size_t)storagesize);
-
-	//		srcAttr->read(srcAttr->getDataType(), &(buff[0]));
-	//		
-	//		std::string name = HDF5Attribute::getName(srcAttr);
-
-	//		HDF5Attribute::remove(dst, name.c_str());
-
-	//		dstAttr	= new H5::Attribute(dst->createAttribute(name.c_str(), srcAttr->getDataType(), srcAttr->getSpace()));
-
-	//		dstAttr->write(dstAttr->getDataType(), &(buff[0]));
-
-	//		delete srcAttr; srcAttr	= NULL;
-	//		delete dstAttr; dstAttr = NULL;
-	//	}
-	//}
-	//catch (H5::Exception& h5e)
-	//{
-	//	delete srcAttr;
-	//	delete dstAttr;
-	//	throw OdimH5HDF5LibException("Error coping attributes", h5e);
-	//}
-	//catch (...)
-	//{
-	//	delete srcAttr;
-	//	delete dstAttr;
-	//	throw;
-	//}
 }
 
 void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst, const std::set<std::string>& names)
@@ -743,13 +700,6 @@ void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst, const std::set<st
 			delete srcAttr; srcAttr	= NULL;
 			delete dstAttr; dstAttr = NULL;
 		}
-		// numero degli object: src->getNumObjs()
-		// verificare se l'i-esimo oggetto è un dataset: src->getObjTypeByIdx(i) == H5G_DATASET
-		// estraggo il dataset: srcDs = src->openDataset(src->getObjNameByIdx(i))
-		// creo un nuovo dataset a partire dal dataset in maniera analoga
-		// all'attribute:
-		// dstDs = new H5::Dataset(dst->createDataset(name.c_str(), srcDs->getDataType(), srcDs->getSpace()))
-		// e poi la write
 	}
 	catch (H5::Exception& h5e)
 	{
@@ -761,6 +711,69 @@ void HDF5Group::copyAttributes(H5::Group* src, H5::Group* dst, const std::set<st
 	{
 		delete srcAttr;
 		delete dstAttr;
+		throw;
+	}
+}
+
+void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst)
+{	
+	std::set<std::string> names;
+	copyDatasets(src, dst, names);
+}
+
+void HDF5Group::copyDatasets(H5::Group* src, H5::Group* dst, const std::set<std::string>& names)
+{	
+	H5::DataSet*	srcDS	= NULL;
+	H5::DataSet*	dstDS	= NULL;
+
+	try
+	{
+		// numero degli object: src->getNumObjs()
+		// verificare se l'i-esimo oggetto è un dataset: src->getObjTypeByIdx(i) == H5G_DATASET
+		// estraggo il dataset: srcDs = src->openDataset(src->getObjNameByIdx(i))
+		// creo un nuovo dataset a partire dal dataset in maniera analoga
+		// all'attribute:
+		// dstDs = new H5::Dataset(dst->createDataset(name.c_str(), srcDs->getDataType(), srcDs->getSpace()))
+		// e poi la write
+		std::vector<char> buff;
+
+		int count = src->getNumObjs();
+		for (int i=0; i<count; i++)
+		  if (src->getObjTypeByIdx(i) == H5G_DATASET )
+		  {
+			srcDS = new H5::DataSet(src->openDataSet(src->getObjnameByIdx(i)));
+			std::string name = src->getObjnameByIdx(i);
+std::cerr<<name<<"size buffer disponibile "<<buff.size()<<" devo metterci "<<srcDS->getStorageSize()<<std::endl;
+			hsize_t storagesize = srcDS->getStorageSize();
+
+			if (storagesize > buff.size())
+				buff.resize((size_t)storagesize);
+
+			srcDS->read(&(buff[0]),srcDS->getDataType());
+			
+
+//			HDF5DataSet::remove(dst, name.c_str());
+
+			dstDS	= new H5::DataSet(dst->createDataSet(name.c_str(), srcDS->getDataType(), srcDS->getSpace()));
+
+			dstDS->write(&(buff[0]), dstDS->getDataType());
+
+			delete srcDS; srcDS	= NULL;
+			delete dstDS; dstDS = NULL;
+			buff.clear();
+std::cerr<<" finita copia dataset "<<name<<std::endl;
+		}
+	}
+	catch (H5::Exception& h5e)
+	{
+		delete srcDS;
+		delete dstDS;
+		throw OdimH5HDF5LibException("Error coping attributes", h5e);
+	}
+	catch (...)
+	{
+		delete srcDS;
+		delete dstDS;
 		throw;
 	}
 }
