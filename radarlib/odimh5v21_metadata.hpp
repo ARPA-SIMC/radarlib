@@ -364,6 +364,27 @@ public:
 	 */
 	void	set	(const char* name, const std::vector<std::pair<std::string,std::string> >&	value);	
 
+	/* --- set di simple array --- */
+	/*! 
+	 * \brief Set or create a simple array attribute with the given 64 bit signed values
+	 *
+	 * Values are stored as a comma separated string
+	 * \param name					the attribute name
+	 * \param value					the values to write
+	 * \throws OdimH5Exception			if an unexpected error occurs
+	 */
+	void	setSimpleArray	(const char* name, std::vector<int64_t>&	value);
+	/*! 
+	 * \brief Set or create a simple array attribute with the given 64 bit floating point values
+	 *
+	 * Values are stored as a comma separated string
+	 * \param name					the attribute name
+	 * \param value					the values to write
+	 * \param precision				the precision to use while converting values to string
+	 * \throws OdimH5Exception			if an unexpected error occurs
+	 */
+	void	setSimpleArray	(const char* name, std::vector<double>&	value);
+
 	/* --- set di sequenze di valori odim --- */
 
 	/*! 
@@ -376,6 +397,15 @@ public:
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	void	set	(const char* name, const std::vector<AZTimes>&		value);
+	/*! 
+	 * \brief Set or create a pairs sequence attribute with the given azimuth times pairs
+	 *
+	 * \param name					the attribute name
+	 * \param value					the values to write
+	 * \param precision				the precision to use while converting value to strings
+	 * \throws OdimH5Exception			if an unexpected error occurs
+	 */
+	void	set	(const char* name, const std::vector<AZTimes>&		value, int precision);
 	/*! 
 	 * \brief Set or create a pairs sequence attribute with the given azimuth angles pairs
 	 *
@@ -447,6 +477,18 @@ public:
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	void	set	(const char* name, const std::vector<Arotation>&	value, int precision);
+  	/*! 
+	 * \brief Set or create a simple array with TX power
+	 *
+	 * Values are separated by ':'
+         * Pair values are stored with the given precision value.
+	 * \param name					the attribute name
+	 * \param value					the values to write
+	 * \param precision				the precision to use while converting value to strings
+	 * \throws OdimH5Exception			if an unexpected error occurs
+	 */
+	void	set	(const char* name, const std::vector<TXpower>&	value, int precision);
+
 	/*! 
 	 * \brief Set or create a sequence attribute with the given radar nodes
 	 *
@@ -793,12 +835,19 @@ public:
 	 */
 	std::vector<std::string>	getStrings	(const char* name, bool mandatory = false);		
 
+	/* --- get simple array --- */
 	/*!
 	 * \brief Get the value of the long simple array
+	 *	 
+	 * \param name			the attribute name
+	 * \param mandatory		throw exception if attribute is not found
 	 */
 	std::vector<int64_t> getSimpleArrayLong (const char* name, bool mandatory = false);
 	/*!
 	 * \brief Get the value of the float simple array
+	 *	 
+	 * \param name			the attribute name
+	 * \param mandatory		throw exception if attribute is not found
 	 */
 	std::vector<double> getSimpleArrayDouble (const char* name, bool mandatory = false);
 
@@ -914,6 +963,17 @@ public:
 	 * \throws OdimH5FormatException		if a conversion error occurred
 	 */
 	std::vector<Arotation>		getArotation	(const char* name);	
+
+
+	/*! 
+	 * \brief Get the value of a simple array to TX power 
+	 * 	 
+	 * \param name					the attribute to read
+	 * \throws OdimH5Exception			if an unexpected error occurs
+	 * \throws OdimH5MissingAttributeException	if mandatory is true and the attribue does not exists
+	 * \throws OdimH5FormatException		if a conversion error occurred
+	 */
+	std::vector<TXpower>		getTXpower	(const char* name);	
 
 	/*! 
 	 * \brief Get the value of a sequence attribute converting it to radar nodes
@@ -2640,7 +2700,7 @@ public:
 	/*! 
 	 * \brief Set the 'aroration' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
+	 * \param precision				precision to use 
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setArotation		(const std::vector<Arotation>& val)	= 0;

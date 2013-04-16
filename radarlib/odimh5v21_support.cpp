@@ -232,6 +232,17 @@ void AZAngles::parse(const std::string& str)	// throw(std::invalid_argument)
 	stop  = Radar::stringutils::parseDouble(str.substr(pos + 1));
 }
 
+std::vector<AZAngles> AZAngles::parseSimpleArrays(const std::vector <double> & first,const std::vector <double> & second) 	// throw(std::invalid_argument); 
+{
+	std::vector<AZAngles> result;
+	if (first.size() == second.size()){
+	  for (size_t i=0; i<first.size(); i++)
+		result.push_back(AZAngles(first[i],second[i]));
+	  return result;
+	}
+	throw  OdimH5FormatException("The two series don't have the same size ");
+}
+
 std::string AZAngles::toString() const
 {
 	std::ostringstream ss;
@@ -333,6 +344,16 @@ std::vector<AZTimes> AZTimes::parseSequence(const std::string& str)	// throw(std
 	return result;
 }
 
+std::vector<AZTimes> AZTimes::parseSimpleArrays(const std::vector <double> & first,const std::vector <double> & second) 	// throw(std::invalid_argument); 
+{
+	std::vector<AZTimes> result;
+	if (first.size() == second.size()){
+	  for (size_t i=0; i<first.size(); i++)
+		result.push_back(AZTimes(first[i],second[i]));
+	  return result;
+	}
+	throw  OdimH5FormatException("The two series don't have the same size ");
+}
 std::string AZTimes::toString(const std::vector<AZTimes>& value)
 {
 	std::ostringstream ss;
@@ -436,6 +457,13 @@ std::string Angles::toString(int precision) const
 	return ss.str();
 }
 
+std::vector<Angles> Angles::parseSimpleArray(const std::vector <double> & value)	// throw(std::invalid_argument); 
+{
+	std::vector<Angles> result;
+	for (size_t i=0; i<value.size(); i++)
+		result.push_back(Angles(value[i]));
+	return result;
+}
 std::vector<Angles> Angles::parseSequence(const std::string& str)	// throw(std::invalid_argument)
 {
 	std::vector<std::string> tokens;
@@ -523,6 +551,13 @@ std::vector<Arotation> Arotation::parseSequence(const std::string& str)	// throw
 	return result;
 }
 
+std::vector<Arotation> Arotation::parseSimpleArray(const std::vector <double> & value)	// throw(std::invalid_argument); 
+{
+	std::vector<Arotation> result;
+	for (size_t i=0; i<value.size(); i++)
+		result.push_back(Arotation(value[i]));
+	return result;
+}
 std::string Arotation::toString(const std::vector<Arotation>& value)
 {
 	std::ostringstream ss;
@@ -535,6 +570,90 @@ std::string Arotation::toString(const std::vector<Arotation>& value)
 }
 
 std::string Arotation::toString(const std::vector<Arotation>& value, int precision)
+{
+	std::ostringstream ss;
+	for (size_t i=0; i<value.size(); i++)
+	{
+		if (i) ss << ",";
+		ss << value[i].toString(precision);
+	}
+	return ss.str();
+}
+
+/*===========================================================================*/
+/* TXPOWER    */
+/*===========================================================================*/
+
+TXpower::TXpower()
+:value(0)
+{
+}
+
+TXpower::TXpower(double value)
+:value(value)
+{
+}
+
+TXpower::TXpower(const std::string& value)	// throw(std::invalid_argument)
+:value(0)
+{
+	parse(value);
+}
+
+void TXpower::set(double value) 	// throw(std::invalid_argument)
+{
+	this->value = value;
+}
+
+void TXpower::parse(const std::string& str)	// throw(std::invalid_argument)
+{
+	value = Radar::stringutils::parseDouble(str); 
+}
+
+std::string TXpower::toString() const
+{
+	std::ostringstream ss;
+	ss << value;	
+	return ss.str();
+}
+
+std::string TXpower::toString(int precision) const
+{
+	std::ostringstream ss;
+	ss.precision(precision);	
+	ss << std::fixed << value ;	
+	return ss.str();
+}
+
+std::vector<TXpower> TXpower::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+{
+	std::vector<std::string> tokens;
+	Radar::stringutils::split(str, tokens, ",");
+	std::vector<TXpower> result;
+	for (size_t i=0; i<tokens.size(); i++)
+		result.push_back(TXpower(tokens[i]));
+	return result;
+}
+
+std::vector<TXpower> TXpower::parseSimpleArray(const std::vector <double> & value)	// throw(std::invalid_argument); 
+{
+	std::vector<TXpower> result;
+	for (size_t i=0; i<value.size(); i++)
+		result.push_back(TXpower(value[i]));
+	return result;
+}
+std::string TXpower::toString(const std::vector<TXpower>& value)
+{
+	std::ostringstream ss;
+	for (size_t i=0; i<value.size(); i++)
+	{
+		if (i) ss << ",";
+		ss << value[i].toString();
+	}
+	return ss.str();
+}
+
+std::string TXpower::toString(const std::vector<TXpower>& value, int precision)
 {
 	std::ostringstream ss;
 	for (size_t i=0; i<value.size(); i++)

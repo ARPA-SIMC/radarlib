@@ -1130,8 +1130,8 @@ public:
 	virtual void			setAzimuthMethod	(const std::string& val); 
 	virtual std::string		getBinMethod		();			 
 	virtual void			setBinMethod		(const std::string& val); 
-//	virtual std::vector<AZAngles>	getAzimuthAngles	();				 
-//	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val, int precision = 10); 
+	virtual std::vector<AZAngles>	getAzimuthAngles	();				 
+	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val); 
 	virtual std::vector<double>	getElevationAngles	();				 
 	virtual void			setElevationAngles	(const std::vector<double>& val); 
 	virtual std::vector<double>	getStartAzimuthAngles	();				 
@@ -1142,8 +1142,8 @@ public:
 	virtual void			setStartAzimuthTimes	(const std::vector<double>& val); 
 	virtual std::vector<double>	getStopAzimuthTimes	();				 
 	virtual void			setStopAzimuthTimes	(const std::vector<double>& val); 
-//	virtual std::vector<AZTimes>	getAzimuthTimes		();				 
-//	virtual void			setAzimuthTimes		(const std::vector<AZTimes>& val); 
+	virtual std::vector<AZTimes>	getAzimuthTimes		();				 
+	virtual void			setAzimuthTimes		(const std::vector<AZTimes>& val); 
  
 	virtual double			getPointAccEl		();			 
 	virtual void			setPointAccEl		(double val);		 

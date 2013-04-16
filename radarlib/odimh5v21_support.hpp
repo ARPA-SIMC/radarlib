@@ -309,6 +309,14 @@ public:
 	static std::vector<AZAngles> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
 	/*!
 	 * \brief
+	 * Create a collection of azimuth angles importing two vector of double 
+	 * \param first				a vector of double 
+	 * \param second			a vector of double 
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	static std::vector<AZAngles> parseSimpleArrays(const std::vector<double>& first, const std::vector<double>& second);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
 	 * \param right				the values to convert
 	 * Convert a collection of azimuth angles to a string formated acording to OdimH5 specifications
 	 */	
@@ -397,6 +405,14 @@ public:
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */
 	static std::vector<AZTimes> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
+	 * Create a collection of azimuth times importing two vector of double 
+	 * \param first				a vector of double 
+	 * \param second			a vector of double 
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	static std::vector<AZTimes> parseSimpleArrays(const std::vector<double>& first, const std::vector<double>& second);	// throw(std::invalid_argument); 	
 	/*!
 	 * \brief
 	 * Convert a collection of azimuth timesto a string formated acording to OdimH5 specifications
@@ -754,6 +770,13 @@ public:
 	std::string toString(int precision) const;
 	/*!
 	 * \brief
+	 * Create a collection of angles importing a vector of double
+	 * \param value				a vector of double to be imported
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	static std::vector<Angles> parseSimpleArray(const std::vector <double> & value);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
 	 * Create a collection of angles decoding a string
 	 * \param str				a string formatted like "value,value,..."
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
@@ -844,17 +867,114 @@ public:
 	static std::vector<Arotation> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
 	/*!
 	 * \brief
+	 * Create a collection of antenna rotation speeds importing a vector of double
+	 * \param value				a vector of double to be imported
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	static std::vector<Arotation> parseSimpleArray(const std::vector <double> & value);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
 	 * \param right				the values to convert
 	 * Convert a collection of antenna rotation speeds to a string formated according to OdimH5 specifications
 	 */	
 	static std::string toString(const std::vector<Arotation>& right);
 	/*!
 	 * \brief
-	 * Convert a collection of antenna rotation speeds to a string formated acording to OdimH5 specifications
+	 * Convert a collection of antenna rotation speeds to a string formated according to OdimH5 specifications
 	 * \param right			the destination string 
 	 * \param precision		precision to use when converting double values to strings
 	 */	
 	static std::string toString(const std::vector<Arotation>& right, int precision);
+};
+
+/*===========================================================================*/
+/* TXPower 
+/*===========================================================================*/
+
+/*!
+ * \brief TXpower - TX Power
+ *
+ * This class represent the TX Power 
+ *
+ * \see Horizontal_Product_2D | TXpower
+ */
+class RADAR_API TXpower
+{
+public:
+	/*!
+	 * \brief TX Power
+	 */
+	double value;
+	/*!
+	 * \brief Create an object with values set to 0
+	 */
+	TXpower();
+	/*!
+	 * \brief Create an object set to the value passed
+	 * \param [in] value a double value for the TX Power
+	 */	
+	TXpower(double value);
+	/*!
+	 * \brief Create an object set to the value passed
+	 * \param [in] value a string value for the TX Power
+	 */	
+	TXpower(const std::string& value);	// throw(std::invalid_argument)
+	/*!
+	 * \brief
+	 * Set field 
+	 * 
+	 * \param value 			value for TX Power
+	 */		
+	void set(double value);
+	/*!
+	 * \brief
+	 * Set object fields decoding the indicated string
+	 * 
+	 * \param str				a string formatted like "value"
+	 *
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	void parse(const std::string& str);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
+	 * Convert TX Power to a string formated according to OdimH5 specifications
+	 */	
+	std::string toString() const;
+	/*!
+	 * \brief
+	 * Convert TX Power to a string formated according to OdimH5 specifications
+	 *
+	 * \param precision		precision to use when converting double values to strings
+	 *
+	 */	
+	std::string toString(int precision) const;
+	/*!
+	 * \brief
+	 * Create a collection of TX Powers decoding a string
+	 * \param str				a string formatted like "value,value,..."
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	static std::vector<TXpower> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
+	 * Create a collection of TX Powers importing a vector of double
+	 * \param value				a vector of double to be imported
+	 * \throws OdimH5FormatException	Throwed when string format is not valid
+	 */	
+	static std::vector<TXpower> parseSimpleArray(const std::vector <double> & value);	// throw(std::invalid_argument); 	
+	/*!
+	 * \brief
+	 * \param right				the values to convert
+	 * Convert a collection of TX Powers to a string formated according to OdimH5 specifications
+	 */	
+	static std::string toString(const std::vector<TXpower>& right);
+	/*!
+	 * \brief
+	 * Convert a collection of TX Powers to a string formated according to OdimH5 specifications
+	 * \param right			the destination string 
+	 * \param precision		precision to use when converting double values to strings
+	 */	
+	static std::string toString(const std::vector<TXpower>& right, int precision);
 };
 
 /*===========================================================================*/

@@ -1464,39 +1464,8 @@ void		PolarScan::setRadConstV		(double val)	     		{        getHow()->set		(ATTR
 double		PolarScan::getNomTXPower	()		     		{ return getHow()->getDouble	(ATTRIBUTE_HOW_NOMTXPOWER, 0);			}
 double		PolarScan::getNomTXPower	(double defaultValue)		{ return getHow()->getDouble	(ATTRIBUTE_HOW_NOMTXPOWER, defaultValue);	}
 void		PolarScan::setNomTXPower	(double val)	     		{        getHow()->set		(ATTRIBUTE_HOW_NOMTXPOWER, val);		}
-std::vector<double>	PolarScan::getTXPower		()		        
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-		
-std::vector<double>	PolarScan::getTXPower		(double defaultValue)
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
+std::vector<double>	PolarScan::getTXPower		(){return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }		        
+std::vector<double>	PolarScan::getTXPower		(double defaultValue)  {return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }
 void		PolarScan::setTXPower		(double val)	   {;}  
 // (const std::vector<double>& val, int precision)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, precision);	}
 
@@ -1514,96 +1483,24 @@ std::string		PolarScan::getAzimuthMethod	()					{ return getHow()->getStr	(ATTRI
 void			PolarScan::setAzimuthMethod	(const std::string& val)		{        getHow()->set		(ATTRIBUTE_HOW_AZMETHOD, val);	}
 std::string		PolarScan::getBinMethod		()					{ return getHow()->getStr	(ATTRIBUTE_HOW_BINMETHOD, "");	}
 void			PolarScan::setBinMethod		(const std::string& val)		{        getHow()->set		(ATTRIBUTE_HOW_BINMETHOD, val);	}
-std::vector<double>	PolarScan::getElevationAngles	() 					
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	= getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);		
-
-		/* se il numero di elementi corrisponde */
-		if (result.size() == numrays)	
-			return result;
-
-		double			elangle = this->getEAngle();
-
-		/* se l'attributo non aveva nessun valore */
-		if (result.size() == 0)
-		{	
-			result.resize(numrays);
-			for (int i=0; i<numrays; i++)
-				result[i] = elangle;
-			return result;
-		}	
-
-		/* se il numero di elementi non corrisponde c'e' qauclacosa che non va*/
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			PolarScan::setElevationAngles	(const std::vector<double>& val)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, 5);	}
-std::vector<double>	PolarScan::getStartAzimuthAngles	()				 
-{
-	return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);
-}
+std::vector<double>	PolarScan::getElevationAngles	() 	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_ELANGLES);  }
+void			PolarScan::setElevationAngles	(const std::vector<double>& val)	{   getHow()->set(ATTRIBUTE_HOW_ELANGLES, val, 5);	}
+std::vector<double>	PolarScan::getStartAzimuthAngles()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);  }
 void			PolarScan::setStartAzimuthAngles	(const std::vector<double>& val) {} 
-std::vector<double>	PolarScan::getStopAzimuthAngles	()				 
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			PolarScan::setStopAzimuthAngles	(const std::vector<double>& val) {}
-std::vector<double>	PolarScan::getStartAzimuthTimes	()				 
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			PolarScan::setStartAzimuthTimes	(const std::vector<double>& val) {}
-std::vector<double>	PolarScan::getStopAzimuthTimes	()				 
-{ 
-	try
-	{
-		int			numrays = this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			PolarScan::setStopAzimuthTimes	(const std::vector<double>& val) {}
 
+//std::vector<Arotation>	Horizontal_Product_2D::getArotation		()  { return getHow()->getArotation(ATTRIBUTE_HOW_AROTATION); }
+std::vector<AZAngles>	PolarScan::getAzimuthAngles () {return getHow()->getAZAngles("dummy");}
+void			PolarScan::setAzimuthAngles  (const std::vector<AZAngles>&val) {getHow()->set("dummy", val, 5);	}
+
+std::vector<double>	PolarScan::getStopAzimuthAngles	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZA);  }		
+void			PolarScan::setStopAzimuthAngles		(const std::vector<double>& val) {}
+std::vector<double>	PolarScan::getStartAzimuthTimes	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZT);  } 
+void			PolarScan::setStartAzimuthTimes		(const std::vector<double>& val) {}
+std::vector<double>	PolarScan::getStopAzimuthTimes	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZT);  }
+void			PolarScan::setStopAzimuthTimes		(const std::vector<double>& val) {}
+
+std::vector<AZTimes>	PolarScan::getAzimuthTimes () {return getHow()->getAZTimes("dummy");}
+void			PolarScan::setAzimuthTimes  (const std::vector<AZTimes>&val) {getHow()->set("dummy", val);	}
 
 
 double		PolarScan::getPointAccEl	()				{ return getHow()->getDouble	(ATTRIBUTE_HOW_POINTACCEL, 0);		}
@@ -2833,108 +2730,16 @@ void			Product_2D::setAzimuthMethod	(const std::string& val)		{        getHow()-
 std::string		Product_2D::getBinMethod		()					{ return getHow()->getStr	(ATTRIBUTE_HOW_BINMETHOD, "");	}
 void			Product_2D::setBinMethod		(const std::string& val)		{        getHow()->set		(ATTRIBUTE_HOW_BINMETHOD, val);	}
 
-
-std::vector<double>	Product_2D::getElevationAngles	() 					
-{ 
-	try
-	{
-		int			numrays = 1; //this->getNumRays();
-		std::vector<double>	result	= getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);		
-
-		/* se il numero di elementi corrisponde */
-		if (result.size() == numrays)	
-			return result;
-
-		double			elangle = 10;//this->getEAngle();
-
-		/* se l'attributo non aveva nessun valore */
-		if (result.size() == 0)
-		{	
-			result.resize(numrays);
-			for (int i=0; i<numrays; i++)
-				result[i] = elangle;
-			return result;
-		}	
-
-		/* se il numero di elementi non corrisponde c'e' qauclacosa che non va*/
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			Product_2D::setElevationAngles	(const std::vector<double>& val)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, 5);	}
-std::vector<double>	Product_2D::getStartAzimuthAngles	()				 
-{ 
-	try
-	{
-		int			numrays = 1;//= this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
+std::vector<double>	Product_2D::getElevationAngles	() 	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_ELANGLES);  }
+void			Product_2D::setElevationAngles	(const std::vector<double>& val)	{   ;	}
+std::vector<double>	Product_2D::getStartAzimuthAngles()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);  }
 void			Product_2D::setStartAzimuthAngles	(const std::vector<double>& val) {} 
-std::vector<double>	Product_2D::getStopAzimuthAngles	()				 
-{ 
-	try
-	{
-		int			numrays = 1;//this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			Product_2D::setStopAzimuthAngles	(const std::vector<double>& val) {}
-std::vector<double>	Product_2D::getStartAzimuthTimes	()				 
-{ 
-	try
-	{
-		int			numrays = 1;//this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			Product_2D::setStartAzimuthTimes	(const std::vector<double>& val) {}
-std::vector<double>	Product_2D::getStopAzimuthTimes	()				 
-{ 
-	try
-	{
-		int			numrays = 1;//this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-void			Product_2D::setStopAzimuthTimes	(const std::vector<double>& val) {}
+std::vector<double>	Product_2D::getStopAzimuthAngles	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZA);  }				 
+void			Product_2D::setStopAzimuthAngles		(const std::vector<double>& val) {}
+std::vector<double>	Product_2D::getStartAzimuthTimes	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZT);  }				 
+void			Product_2D::setStartAzimuthTimes		(const std::vector<double>& val) {}
+std::vector<double>	Product_2D::getStopAzimuthTimes	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZT);  }				 
+void			Product_2D::setStopAzimuthTimes		(const std::vector<double>& val) {}
 
 double		Product_2D::getPointAccEl	()				{ return getHow()->getDouble	(ATTRIBUTE_HOW_POINTACCEL, 0);		}
 void		Product_2D::setPointAccEl	(double val)			{        getHow()->set		(ATTRIBUTE_HOW_POINTACCEL, val);	}
@@ -3042,39 +2847,8 @@ void		Product_2D::setRadConstV		(double val)	     		{        getHow()->set		(ATT
 double		Product_2D::getNomTXPower	()		     		{ return getHow()->getDouble	(ATTRIBUTE_HOW_NOMTXPOWER, 0);			}
 double		Product_2D::getNomTXPower	(double defaultValue)		{ return getHow()->getDouble	(ATTRIBUTE_HOW_NOMTXPOWER, defaultValue);	}
 void		Product_2D::setNomTXPower	(double val)	     		{        getHow()->set		(ATTRIBUTE_HOW_NOMTXPOWER, val);		}
-std::vector<double>	Product_2D::getTXPower		()		        
-{ 
-	try
-	{
-		int			numrays = 1;//this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
-		
-std::vector<double>	Product_2D::getTXPower		(double defaultValue)
-{ 
-	try
-	{
-		int			numrays = 1;//this->getNumRays();
-		std::vector<double>	result	;  //  = getHow()->getDoubles(ATTRIBUTE_HOW_ELANGLES);	
-	        return result;
-		std::ostringstream ss;
-		ss << "elangles values ("<<result.size()<<") are not as many as numrays ("<<numrays<<")";
-		throw OdimH5FormatException(ss.str());
-	}
-	catch (std::exception& e)
-	{
-		throw OdimH5Exception(std::string("Error getting elangles: ") + e.what());
-	}
-}
+std::vector<double>	Product_2D::getTXPower		(){return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }		        
+std::vector<double>	Product_2D::getTXPower		(double defaultValue)  {return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }
 void		Product_2D::setTXPower		(double val)	   {;}  
 // (const std::vector<double>& val, int precision)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, precision);	}
 
@@ -3290,9 +3064,14 @@ void			Horizontal_Product_2D::setLR_Longitude		(double val){  getWhere()->set	(A
 double			Horizontal_Product_2D::getLR_Latitude		(){ return getWhere()->getDouble(ATTRIBUTE_WHERE_LR_LAT);	}		
 void			Horizontal_Product_2D::setLR_Latitude		(double val){  getWhere()->set	(ATTRIBUTE_WHERE_LR_LAT, val);  }			
 
+/*
+std::vector<double>	Product_2D::getElevationAngles	() 	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_ANGLES);  }
+void			Product_2D::setElevationAngles		(const std::vector<double>& val) {}
+std::vector<double>	Product_2D::getStartAzimuthAngles()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_AROTATION);  }
+void			Product_2D::setStartAzimuthAngles	(const std::vector<double>& val) {} 
+*/
 std::vector<Angles>	Horizontal_Product_2D::getAngles		()  { return getHow()->getAngles(ATTRIBUTE_HOW_ANGLES); }		
 void			Horizontal_Product_2D::setAngles		(const std::vector<Angles>& val) {getHow()->set(ATTRIBUTE_HOW_ANGLES, val, 5);	}
-
 std::vector<Arotation>	Horizontal_Product_2D::getArotation		()  { return getHow()->getArotation(ATTRIBUTE_HOW_AROTATION); }
 void			Horizontal_Product_2D::setArotation		(const std::vector<Arotation>& val) {getHow()->set(ATTRIBUTE_HOW_AROTATION, val, 5);	}
 

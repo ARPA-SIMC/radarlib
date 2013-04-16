@@ -31,7 +31,6 @@ void setUp()
 
 	/* creazione di un oggetto generico */
 	image		= factory->createImageObject(TESTFILE);
-
 	/* what */
 
 	image->setDateTime( Radar::timeutils::mktime(2000,1,2,3,4,5));
@@ -74,7 +73,7 @@ void setUp()
 	dataset->setProdPar(10.);
 	assert (dataset->getProduct()==PRODUCT_ETOP);
 	assert(dataset->getProdPar() ==10.);
-
+	dataset->setProdPar(VILHeights(100.,1000.));
 	Product_2D_Data* data = dataset->createQuantityData(PRODUCT_QUANTITY_HGHT);
 	data->setNodata(missing);
 	data->setUndetect(0.);
@@ -126,7 +125,7 @@ void setUp()
 	  arotations.push_back(Arotation(10+i));
 	  nodes.push_back(Nodes("'aaa'"));
         }
-//	dataset->setAngles(angles, 2);    non esiste in odimh5v21
+	dataset->setAngles(angles);    //non esiste in odimh5v21
 	dataset->setArotation(arotations);
 	dataset->setNodes(nodes);
 

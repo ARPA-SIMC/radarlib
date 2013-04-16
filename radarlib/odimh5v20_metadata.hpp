@@ -1948,7 +1948,7 @@ public:
 };
 
 /*! 
- * \brief Interface fot HOW dataset attributes methods for polar data
+ * \brief Interface for HOW dataset attributes methods for polar data
  */
 class RADAR_API HOWPolarMetadata : public HOWDatasetMetadata
 {

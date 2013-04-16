@@ -77,8 +77,8 @@ bool test_creazione_Pvol ()
 			/* creazione di un dataset generico */
 			PolarScan* scan =  volume->createScan();
 
-			const int NUMBINS = 1;
-			const int NUMRAYS = 1;
+			const int NUMBINS = 10;
+			const int NUMRAYS = 100;
 
 			/* set degli attributi, notare che i gruppi WHAT,WHERE,HOW non sono esplicitati, sono gestiti automaticamente nell'implementazione */
 
@@ -107,6 +107,13 @@ bool test_creazione_Pvol ()
 
 			scan->getWhat()->set("attributo intero inventato", (int)100);
 			scan->getWhat()->set("attributo stringa inventato", "valore stringa inventato");
+
+		
+			std::vector<AZAngles> azangles;
+
+			for (int i=0; i<NUMRAYS; i++)
+					azangles.push_back(AZAngles(360./(NUMRAYS-1.)*i,360./(NUMRAYS-1.)*(i+1)));
+			scan->setAzimuthAngles(azangles);
 
 			/* creiamo un gruppo per ogni quantita' standard */
 			for (std::set<std::string>::iterator i=quantities.begin(); i!=quantities.end(); i++)			

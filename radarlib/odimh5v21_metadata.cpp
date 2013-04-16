@@ -251,6 +251,9 @@ std::vector<time_t>		MetadataGroup::getTimes		(const char* name, bool mandatory)
 std::vector<float>		MetadataGroup::getFloats	(const char* name, bool mandatory) { std::vector<float>		result;	return getSeq_<float>		(group, name, mandatory, result, "float");	}		
 std::vector<double>		MetadataGroup::getDoubles	(const char* name, bool mandatory) { std::vector<double>	result;	return getSeq_<double>		(group, name, mandatory, result, "double");	}		
 std::vector<std::string>	MetadataGroup::getStrings	(const char* name, bool mandatory) { std::vector<std::string> result; return getStrSeq_			(group, name, mandatory, result);	}
+/*===========================================================================*/
+/* get simple array */
+/*===========================================================================*/
 
 std::vector<int64_t>	MetadataGroup::getSimpleArrayLong	(const char* name, bool mandatory) {
 	std::vector<int64_t>	result;
@@ -259,6 +262,74 @@ std::vector<int64_t>	MetadataGroup::getSimpleArrayLong	(const char* name, bool m
 std::vector<double>	MetadataGroup::getSimpleArrayDouble	(const char* name, bool mandatory) {
 	std::vector<double>	result;
 	return getSimpleArray<double>(group, name, mandatory, result);
+}
+/*===========================================================================*/
+/* set simple array */
+/*===========================================================================*/
+void	MetadataGroup::setSimpleArray	(const char* name,  std::vector<int64_t>&	value)  
+{  
+	H5::DataSet* dataset = NULL;
+	try
+	{		
+		if (HDF5Group::exists(group,name)) HDF5Group::removeChild(group, name);
+
+		const int RANK = 1;
+		hsize_t fdim[] = {value.size()}; // dim sizes of ds (on disk)
+		H5::DataSpace space(RANK, fdim);
+
+		H5::DSetCreatPropList ds_creatplist;  // create dataset creation prop list
+		ds_creatplist.setChunk( 1, fdim );  // then modify it for compression
+		ds_creatplist.setDeflate( 6 );
+
+		//dataset = new H5::DataSet(group->createDataSet(name, elemtype, space, ds_creatplist));			
+		dataset = new H5::DataSet(group->createDataSet(name, H5::PredType::NATIVE_LONG, space, ds_creatplist));			
+		dataset->write(&(value[0]), H5::PredType::NATIVE_LONG);	// mspace1, fspace );
+
+		delete dataset;
+	}
+	catch (H5::Exception& h5e)
+	{
+		delete dataset;		
+		throw OdimH5HDF5LibException("Unable to write odim data into HDF5 dataset", h5e);
+	}
+	catch (...)
+	{
+		delete dataset;
+		throw;
+	}
+
+}
+void	MetadataGroup::setSimpleArray	(const char* name, std::vector<double>&	value)  
+{  
+	H5::DataSet* dataset = NULL;
+	try
+	{		
+		if (HDF5Group::exists(group,name)) HDF5Group::removeChild(group, name);
+		const int RANK = 1;
+		hsize_t fdim[] = {value.size()}; // dim sizes of ds (on disk)
+		H5::DataSpace space(RANK, fdim);
+
+		H5::DSetCreatPropList ds_creatplist;  // create dataset creation prop list
+		ds_creatplist.setChunk( 1, fdim );  // then modify it for compression
+		ds_creatplist.setDeflate( 6 );
+
+		//dataset = new H5::DataSet(group->createDataSet(name, elemtype, space, ds_creatplist));			
+		dataset = new H5::DataSet(group->createDataSet(name, H5::PredType::NATIVE_DOUBLE, space, ds_creatplist));			
+		dataset->write(&(value[0]), H5::PredType::NATIVE_DOUBLE);	// mspace1, fspace );
+
+		delete dataset;
+	}
+	catch (H5::Exception& h5e)
+	{
+		delete dataset;		
+		throw OdimH5HDF5LibException("Unable to write odim data into HDF5 dataset", h5e);
+	}
+	catch (...)
+	{
+		delete dataset;
+		throw;
+	}
+
 }
 	
 /*===========================================================================*/
@@ -331,34 +402,62 @@ const std::vector<std::pair<std::string,std::string> >	MetadataGroup::getStrPair
 }
 
 /*===========================================================================*/
-/* set sequenze particolari */
+/* set SimpleArray */
 /*===========================================================================*/
 
 void	MetadataGroup::set	(const char* name, const std::vector<AZTimes>& value)		
 { 
-	set(name, AZTimes::toString(value));
+	std::vector<double> start;
+	std::vector<double> stop;
+	for (size_t i=0; i<value.size(); i++){
+		start.push_back(value[i].start);
+		stop.push_back(value[i].stop);
+	}
+
+	setSimpleArray	(ATTRIBUTE_HOW_STARTAZT, start)  ;
+	setSimpleArray	(ATTRIBUTE_HOW_STOPAZT, stop)  ;
+//	set(name, AZTimes::toString(value));
 }
 void	MetadataGroup::set	(const char* name, const std::vector<AZAngles>& value)		
 { 
-	set(name, AZAngles::toString(value, 30));	
+	std::vector<double> start;
+	std::vector<double> stop;
+	for (size_t i=0; i<value.size(); i++){
+		start.push_back(value[i].start);
+		stop.push_back(value[i].stop);
+	}
+
+	setSimpleArray	(ATTRIBUTE_HOW_STARTAZA, start)  ;
+	setSimpleArray	(ATTRIBUTE_HOW_STOPAZA, stop)  ;
 }
 void	MetadataGroup::set	(const char* name, const std::vector<AZAngles>& value, int precision)		
 { 
-	set(name, AZAngles::toString(value, precision));	
+	set(name, value);	
 }
+
 void	MetadataGroup::set	(const char* name, const VILHeights& value)	
 { 
-	set(name, value.toString());	
+	std::vector<double> result;
+	result.push_back(value.bottom);
+	result.push_back(value.top);
+	setSimpleArray	(name, result)  ;
+//	set(name, value.toString());	
 }
 
 void	MetadataGroup::set	(const char* name, const std::vector<Angles>& value, int precision)		
 { 
-	set(name, Angles::toString(value, precision));	
+	std::vector<double> result;
+	for (size_t i=0; i<value.size(); i++)
+		result.push_back(value[i].value);
+	setSimpleArray	(name, result)  ;
 }
 
 void	MetadataGroup::set	(const char* name, const std::vector<Arotation>& value, int precision)		
 { 
-	set(name, Arotation::toString(value, precision));	
+	std::vector<double> result;
+	for (size_t i=0; i<value.size(); i++)
+		result.push_back(value[i].value);
+	setSimpleArray	(name, result)  ;
 }
 
 void	MetadataGroup::set	(const char* name, const std::vector<Nodes>& value)		
@@ -373,27 +472,27 @@ void	MetadataGroup::set	(const char* name, const std::vector<Nodes>& value)
 
 std::vector<AZTimes>		MetadataGroup::getAZTimes	(const char* name)			
 { 
-	return AZTimes::parseSequence( getStr(name,"") );
+	return  AZTimes::parseSimpleArrays( getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZT),getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZT)  );	
+	//return AZTimes::parseSequence( getStr(name,"") );
 }
 std::vector<AZAngles>		MetadataGroup::getAZAngles	(const char* name)			
 { 
-	return AZAngles::parseSequence( getStr(name,"") );	
+	return AZAngles::parseSimpleArrays( getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA),getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZA)  );	
 }
 VILHeights			MetadataGroup::getVILHeights	(const char* name)			
 { 
-	std::string val = getStr(name, "");
-	if (val.empty())
+	std::vector <double> val = getSimpleArrayDouble(name);
+	if (val.size() == 0)
 		return VILHeights(0,0);
-	return VILHeights(val);
+	return VILHeights(val[0],val[1]);
+//	std::string val = getStr(name, "");
+//	if (val.empty())
+//		return VILHeights(0,0);
+//	return VILHeights(val);
 }
-std::vector<Angles>		MetadataGroup::getAngles	(const char* name)	
-{ 
-	return Angles::parseSequence( getStr(name,"") );
-}
-std::vector<Arotation>		MetadataGroup::getArotation	(const char* name)
-{ 
-	return Arotation::parseSequence( getStr(name,"") );
-}
+std::vector<TXpower>		MetadataGroup::getTXpower	(const char* name){ return TXpower::parseSimpleArray( getSimpleArrayDouble(name)); } 
+std::vector<Angles>		MetadataGroup::getAngles	(const char* name){ return Angles::parseSimpleArray( getSimpleArrayDouble(name)); }	
+std::vector<Arotation>		MetadataGroup::getArotation	(const char* name){ return Arotation::parseSimpleArray( getSimpleArrayDouble(name)); } 
 std::vector<Nodes>		MetadataGroup::getNodes	        (const char* name)
 { 
 	return Nodes::parseSequence( getStr(name,"") );
