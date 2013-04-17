@@ -6,6 +6,7 @@
  * \section SupportedODIMH5VersionsSection Supported versions
  *
  * - 2.0: namespace OdimH5v20
+ * - 2.1: namespace OdimH5v21
  *
  *
  * @example copy_polar_volume_attributes.cpp
