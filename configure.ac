@@ -1,8 +1,8 @@
-AC_INIT([RadarLib], [1.3.0], [guidobilli@gmail.com], [radarlib],
+AC_INIT([RadarLib], [1.4.0], [guidobilli@gmail.com], [radarlib],
         [http://www.smr.arpa.emr.it/software/radarlib])
 
 PACKAGE_SO_VERSION="$PACKAGE_VERSION"
-PACKAGE_LT_VERSION="4:0:3"
+PACKAGE_LT_VERSION="5:0:4"
 
 AC_PREREQ([2.59])
 AM_INIT_AUTOMAKE([1.10 foreign -Wall no-define subdir-objects nostdinc])
