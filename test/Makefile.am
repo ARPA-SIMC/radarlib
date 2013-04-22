@@ -14,7 +14,7 @@ TESTS = \
 	test-odimh5v21-create-PROD  \
 	test-odimh5v21-prod-splitter \
 	test-odimh5v21-visitor 
-
+            
 check_PROGRAMS = \
 		 test-support \
 		 test-polar-volume \
@@ -104,6 +104,11 @@ CLEANFILES = \
 	     ODIMH5V21_PPI-0.5_TH_200001020304.h5  \
 	     PVOL-ODIMH5V21.h5   \
 	     IMAGE-ODIMh5V21.h5  \
-	     ODIMH5V21_PPI-0.5_DBZH_200001020304.h5 \
-	     PROD-ODIMH5V21.h5
+	     ODIMH5V21_PPI-0.5_DBZH_200001020304.h5 \ 
+	     PROD-ODIMH5V21.h5 \
+	     ODIMH5V21_CAPPI-500_DBZH_200001020304.h5 \
+	     ODIMh5V21_HVMI_DBZH_200001020304.h5      \
+	     ODIMH5V21_PCAPPI-500_DBZH_200001020304.h5 \
+	     ODIMh5V21_RR_ACRR_200001020304.h5        \
+	     ODIMh5V21_VIL-10-100_DBZH_200001020304.h5
 

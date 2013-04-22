@@ -92,7 +92,7 @@ class Object2DSplitter {
 	std::string createProductFileName(std::string prodObject,OdimH5v21::VILHeights prodPar, std::string Quantity,time_t prodDateTime){
 	  std::string result;
 	  result=prodObject;
-	  result="ODIMh5V21_"+result + Radar::stringutils::toString(prodPar.bottom)+"-"+ Radar::stringutils::toString(prodPar.top)+"_"+Quantity + "_";
+	  result="ODIMh5V21_"+result + '-'+Radar::stringutils::toString(prodPar.bottom)+"-"+ Radar::stringutils::toString(prodPar.top)+"_"+Quantity + "_";
 	  std::string my_time(Radar::timeutils::absoluteToString(prodDateTime));   	// formato "YYYY-MM-DD hh:mm:ss"
 	  my_time.erase(16,3);   							// strippo ":ss"
 	  my_time.erase(13,1);								// strippo ":"
@@ -105,7 +105,7 @@ class Object2DSplitter {
 	std::string createProductFileName(std::string prodObject, std::string Quantity,time_t prodDateTime){
 	  std::string result;
 	  result=prodObject;
-	  result="ODIMh5V21_"+result +Quantity + "_";
+	  result="ODIMh5V21_"+result + "_"+Quantity + "_";
 	  std::string my_time(Radar::timeutils::absoluteToString(prodDateTime));   	// formato "YYYY-MM-DD hh:mm:ss"
 	  my_time.erase(16,3);   							// strippo ":ss"
 	  my_time.erase(13,1);								// strippo ":"
@@ -123,7 +123,7 @@ class Object2DSplitter {
 		assert( objtype != OdimH5v21::OBJECT_IMAGE || objtype != OdimH5v21::OBJECT_COMP );
 
 		OdimH5v21::HorizontalObject_2D& o = dynamic_cast<OdimH5v21::HorizontalObject_2D&>(*obj);
-		assert(o.getProductCount() == 2) ;
+//		assert(o.getProductCount() == 2) ;
 		for (int nprod = 0; nprod < o.getProductCount(); nprod++) {
 			OdimH5v21::Product_2D* prod = o.getProduct(nprod);
 			// Se è uno dei 3 prodotti che vanno insieme, gestisci a parte
