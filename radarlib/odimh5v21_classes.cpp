@@ -1490,7 +1490,7 @@ void			PolarScan::setStartAzimuthAngles	(const std::vector<double>& val) {}
 
 //std::vector<Arotation>	Horizontal_Product_2D::getArotation		()  { return getHow()->getArotation(ATTRIBUTE_HOW_AROTATION); }
 std::vector<AZAngles>	PolarScan::getAzimuthAngles () {return getHow()->getAZAngles("dummy");}
-void			PolarScan::setAzimuthAngles  (const std::vector<AZAngles>&val) {getHow()->set("dummy", val, 5);	}
+void			PolarScan::setAzimuthAngles  (const std::vector<AZAngles>&val, int precision) {getHow()->set("dummy", val, 5);	}
 
 std::vector<double>	PolarScan::getStopAzimuthAngles	()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STOPAZA);  }		
 void			PolarScan::setStopAzimuthAngles		(const std::vector<double>& val) {}
@@ -2181,6 +2181,27 @@ Product_LBM* Object_2D::createProductLBM()
 }
 
 
+Product_POH* Object_2D::createProductPOH() 
+{		
+	H5::Group* 		prodGroup	= NULL;
+	Product_POH* 		prod		= NULL;
+	try
+	{		
+		prodGroup	= createDatasetGroup();
+		prod = new Product_POH(this,prodGroup);
+		prodGroup	= NULL;
+		prod->setMandatoryInformations();
+		return prod;
+	}
+	catch (...)
+	{
+		delete prod;
+		delete prodGroup;
+		throw;
+	}	
+}
+
+
 Product_COMP* Object_2D::createProductCOMP() 
 {		
 	H5::Group* 		prodGroup	= NULL;
@@ -2296,6 +2317,7 @@ Product_2D* Object_2D::getProduct(int index)
 			if( type == PRODUCT_RR    )  return new Product_RR(this, h5group2);
 			if( type == PRODUCT_VIL   )  return new Product_VIL(this, h5group2);
 			if( type == PRODUCT_LBM_ARPA   )  return new Product_LBM(this, h5group2);
+			if( type == PRODUCT_POH_ARPA   )  return new Product_POH(this, h5group2);
 			if( type == PRODUCT_COMP  )  return new Product_COMP(this, h5group2);
 			if( type == PRODUCT_RHI   )  return new Product_RHI(this, h5group2);
 			if( type == PRODUCT_XSEC  )  return new Product_XSEC(this, h5group2);
@@ -3213,6 +3235,22 @@ Product_LBM::~Product_LBM()
 void Product_LBM::setMandatoryInformations()
 {		
 	setProduct(PRODUCT_LBM_ARPA);
+}
+/*===========================================================================*/
+/* POH PRODUCT Dataset  */
+/*===========================================================================*/
+Product_POH::Product_POH(Object_2D * object_2d, H5::Group* group)
+:Horizontal_Product_2D(object_2d,group)
+{			
+}
+
+Product_POH::~Product_POH()
+{		
+}
+
+void Product_POH::setMandatoryInformations()
+{		
+	setProduct(PRODUCT_POH_ARPA);
 }
 /*===========================================================================*/
 /* COMP PRODUCT Dataset  */

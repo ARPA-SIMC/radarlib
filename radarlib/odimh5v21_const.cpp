@@ -88,6 +88,7 @@ const char* PRODUCT_QUAL			= "QUAL";
 /* ADDITIONAL PRODUCT */
 /*===========================================================================*/
 const char* PRODUCT_LBM_ARPA= "NEW:LBM_ARPA";
+const char* PRODUCT_POH_ARPA= "NEW:POH_ARPA";
 
 const char* ATTRIBUTE_WHAT_PRODPAR		= "prodpar";
 const char* ATTRIBUTE_WHAT_QUANTITY		= "quantity";

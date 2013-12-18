@@ -67,6 +67,7 @@ class Product_MAX;
 class Product_RR;
 class Product_VIL;
 class Product_LBM;
+class Product_POH;
 class Product_COMP;
 class Vertical_Product_2D;
 class Product_Panel;
@@ -1131,7 +1132,7 @@ public:
 	virtual std::string		getBinMethod		();			 
 	virtual void			setBinMethod		(const std::string& val); 
 	virtual std::vector<AZAngles>	getAzimuthAngles	();				 
-	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val); 
+	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val,int precision=0); 
 	virtual std::vector<double>	getElevationAngles	();				 
 	virtual void			setElevationAngles	(const std::vector<double>& val); 
 	virtual std::vector<double>	getStartAzimuthAngles	();				 
@@ -1541,6 +1542,13 @@ public:
 	 */
 	virtual Product_LBM*	createProductLBM		();
 	/*!
+	 * \brief Create a new POH product in this volume
+	 * 
+	 * \throws OdimH5Exception	Throwed if an error occurs
+	 * \remarks			User is responsible for deleting the returned object 
+	 */
+	virtual Product_POH*	createProductPOH		();
+	/*!
 	 * \brief Create a new COMP product in this volume
 	 * 
 	 * \throws OdimH5Exception	Throwed if an error occurs
@@ -1893,8 +1901,6 @@ public:
 	virtual void			setAzimuthMethod	(const std::string& val); 
 	virtual std::string		getBinMethod		();			 
 	virtual void			setBinMethod		(const std::string& val); 
-//	virtual std::vector<AZAngles>	getAzimuthAngles	();				 
-//	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val, int precision = 10); 
 	virtual std::vector<double>	getElevationAngles	();				 
 	virtual void			setElevationAngles	(const std::vector<double>& val); 
 	virtual std::vector<double>	getStartAzimuthAngles	();				 
@@ -2046,6 +2052,11 @@ public:
 	virtual double			getVSamples		()		     ;
 	virtual double			getVSamples		(double defaultValue);
 	virtual void			setVSamples		(double val)	;
+/*----  Queste le devo inserire anche se non sono reali per un prodotto, perche' l'oggetto eredita da HowPolarMetadata   */
+/*----  PRIMA O POI BISOGNERA' SANARE LA SITUAZIONE PPA 2013-12-18*/
+	virtual std::vector<AZAngles>	getAzimuthAngles	()    {}				 
+	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val, int precision = 10)  {}
+/*---   FINE METODI VUOTI */
 
 /*-----
 
@@ -2430,6 +2441,33 @@ private:
 	friend class Horizontal_Product_2D ; 
 	friend class Object_2D;
 	Product_LBM(Object_2D * object_2d, H5::Group* group);
+};
+
+/*===========================================================================*/
+/* POH PRODUCT Dataset  */
+/*===========================================================================*/
+/*! 
+ * \brief OdimH5 v2.1 PPI Product Dataset
+ * 
+ * This class represents a specilised 2D-Horizonatl Product for POH. \n
+ * Product generic attributes can be manipulated using these methods. \n
+ *
+ * Generic data manipulations can be done using methods provided by the OdimDataset interface. \n
+ * \see Product_2D_Data
+ */
+class RADAR_API Product_POH : public Horizontal_Product_2D
+{
+public:
+	virtual ~Product_POH() ;
+
+        virtual void	setMandatoryInformations();
+
+private:
+
+	/* uses cannot directly create OdimH5 objects, only factories provide functions to do it */
+	friend class Horizontal_Product_2D ; 
+	friend class Object_2D;
+	Product_POH(Object_2D * object_2d, H5::Group* group);
 };
 
 /*===========================================================================*/

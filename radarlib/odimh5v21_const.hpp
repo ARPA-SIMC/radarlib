@@ -106,6 +106,7 @@ namespace OdimH5v21
 /* ADDITIONAL PRODUCT */
 /*===========================================================================*/
 	extern RADAR_API const char* PRODUCT_LBM_ARPA;
+	extern RADAR_API const char* PRODUCT_POH_ARPA;
 
 	extern RADAR_API const char* ATTRIBUTE_WHAT_PRODPAR;
 	extern RADAR_API const char* ATTRIBUTE_WHAT_QUANTITY;

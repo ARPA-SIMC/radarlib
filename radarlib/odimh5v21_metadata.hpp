@@ -2284,17 +2284,17 @@ public:
 	virtual void			setBinMethod		(const std::string& val) = 0;
 
 	/*! 
-	 * \brief Get the 'azangles' attribute values
+	 * \brief Get the 'startazA' and 'stopazA' attributes values (formerly azangles attribute in odimh5v2.0) - available only in a Polar Data 
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
-//	virtual std::vector<AZAngles>	getAzimuthAngles	() = 0;
+	virtual std::vector<AZAngles>	getAzimuthAngles	() = 0;
 	/*! 
-	 * \brief Set the 'azangles' attribute values
+	 * \brief Set the 'startazA' and 'stopazA' attributes values (formerly azangles attribute in odimh5v2.0) - available only in a Polar Data 
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
+	 * \param precision				precisio. This parameter is not used. It is leaved for compatibility with odimh5v2.0 
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
-//	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val, int precision = 0) = 0;
+	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val, int precision = 0) = 0;
 
 	/*! 
 	 * \brief Get the 'elangles' attribute values

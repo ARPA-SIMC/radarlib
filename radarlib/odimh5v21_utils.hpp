@@ -129,6 +129,8 @@ class OdimProduct2DVisitor {
 	virtual void visit(OdimH5v21::Product_VIL& prod) {}
 	/// Called when the visited Product_2D is a LBM product (noop)
 	virtual void visit(OdimH5v21::Product_LBM& prod) {}
+	/// Called when the visited Product_2D is a POH product (noop)
+	virtual void visit(OdimH5v21::Product_POH& prod) {}
 	/// Called when the visited Product_2D is a COMP product (noop)
 	virtual void visit(OdimH5v21::Product_COMP& prod) {}
 	/// Called when the visited Product_2D is a XSEC product (noop)
