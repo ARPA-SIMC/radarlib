@@ -1484,7 +1484,8 @@ void			PolarScan::setAzimuthMethod	(const std::string& val)		{        getHow()->
 std::string		PolarScan::getBinMethod		()					{ return getHow()->getStr	(ATTRIBUTE_HOW_BINMETHOD, "");	}
 void			PolarScan::setBinMethod		(const std::string& val)		{        getHow()->set		(ATTRIBUTE_HOW_BINMETHOD, val);	}
 std::vector<double>	PolarScan::getElevationAngles	() 	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_ELANGLES);  }
-void			PolarScan::setElevationAngles	(const std::vector<double>& val)	{   getHow()->set(ATTRIBUTE_HOW_ELANGLES, val, 5);	}
+//void			PolarScan::setElevationAngles	( std::vector<double>& val)	{   getHow()->setSimpleArray(ATTRIBUTE_HOW_ELANGLES, val);	}
+void			PolarScan::setElevationAngles	(const std::vector<double>& val)	{   getHow()->setSimpleArray(ATTRIBUTE_HOW_ELANGLES, val);	}
 std::vector<double>	PolarScan::getStartAzimuthAngles()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);  }
 void			PolarScan::setStartAzimuthAngles	(const std::vector<double>& val) {} 
 
@@ -2753,6 +2754,7 @@ std::string		Product_2D::getBinMethod		()					{ return getHow()->getStr	(ATTRIBU
 void			Product_2D::setBinMethod		(const std::string& val)		{        getHow()->set		(ATTRIBUTE_HOW_BINMETHOD, val);	}
 
 std::vector<double>	Product_2D::getElevationAngles	() 	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_ELANGLES);  }
+//void			Product_2D::setElevationAngles	( std::vector<double>& val)	{   ;	}
 void			Product_2D::setElevationAngles	(const std::vector<double>& val)	{   ;	}
 std::vector<double>	Product_2D::getStartAzimuthAngles()	{return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_STARTAZA);  }
 void			Product_2D::setStartAzimuthAngles	(const std::vector<double>& val) {} 

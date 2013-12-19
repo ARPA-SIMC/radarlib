@@ -115,6 +115,11 @@ bool test_creazione_Pvol ()
 					azangles.push_back(AZAngles(360./(NUMRAYS-1.)*i,360./(NUMRAYS-1.)*(i+1)));
 			scan->setAzimuthAngles(azangles);
 
+			std::vector<double> elangles;
+			for (int i=0; i<NUMRAYS; i++)
+					elangles.push_back(i);
+			scan->setElevationAngles(elangles);
+
 			/* creiamo un gruppo per ogni quantita' standard */
 			for (std::set<std::string>::iterator i=quantities.begin(); i!=quantities.end(); i++)			
 			{

@@ -90,7 +90,7 @@ void setUp()
 	  arotations.push_back(Arotation(10+i));
 	  nodes.push_back(Nodes("'aaa'"));
         }
-//	dataset->setAngles(angles, 2);  questo attributo non esiste in odimh5v21
+	dataset->setAngles(angles);  
 	dataset->setArotation(arotations);
 	dataset->setNodes(nodes);
 	

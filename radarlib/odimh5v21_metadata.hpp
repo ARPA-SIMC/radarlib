@@ -373,7 +373,7 @@ public:
 	 * \param value					the values to write
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
-	void	setSimpleArray	(const char* name, std::vector<int64_t>&	value);
+	void	setSimpleArray	(const char* name,const  std::vector<int64_t>&	value);
 	/*! 
 	 * \brief Set or create a simple array attribute with the given 64 bit floating point values
 	 *
@@ -383,7 +383,7 @@ public:
 	 * \param precision				the precision to use while converting values to string
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
-	void	setSimpleArray	(const char* name, std::vector<double>&	value);
+	void	setSimpleArray	(const char* name,const std::vector<double>&	value);
 
 	/* --- set di sequenze di valori odim --- */
 
@@ -2304,10 +2304,10 @@ public:
 	/*! 
 	 * \brief Set the 'elangles' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setElevationAngles	(const std::vector<double>& val) = 0;
+//	virtual void			setElevationAngles	( std::vector<double>& val) = 0;
 	/*! 
 	 * \brief Get the 'startazA' attribute values
 	 * \throws OdimH5Exception			if an unexpected error occurs
@@ -2356,18 +2356,6 @@ public:
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setStopAzimuthTimes	(const std::vector<double>& val) = 0;
-
-	/*! 
-	 * \brief Get the 'aztimes' attribute values
-	 * \throws OdimH5Exception			if an unexpected error occurs
-	 */
-//	virtual std::vector<AZTimes>	getAzimuthTimes		() = 0;
-	/*! 
-	 * \brief Set the 'aztimes' attribute values
-	 * \param val			the values to write
-	 * \throws OdimH5Exception			if an unexpected error occurs
-	 */
-//	virtual void			setAzimuthTimes		(const std::vector<AZTimes>& val) = 0;
 
 
 	/*! 
@@ -2426,17 +2414,6 @@ public:
 	 */
 	virtual void			setRadarHorizon		(double val)	= 0;
 
-	/*! 
-	 * \brief Get the 'MDS' attribute value
-	 * \throws OdimH5Exception			if an unexpected error occurs
-	 */
-//	virtual double			getMDS			()		= 0;
-	/*! 
-	 * \brief Set the 'MDS' attribute value
-	 * \param val			the value to write
-	 * \throws OdimH5Exception			if an unexpected error occurs
-	 */
-//	virtual void			setMDS			(double val)	= 0;
 
 	/*! 
 	 * \brief Get the 'NEZ' attribute value
