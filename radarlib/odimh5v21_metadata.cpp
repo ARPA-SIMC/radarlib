@@ -266,7 +266,7 @@ std::vector<double>	MetadataGroup::getSimpleArrayDouble	(const char* name, bool 
 /*===========================================================================*/
 /* set simple array */
 /*===========================================================================*/
-void	MetadataGroup::setSimpleArray	(const char* name,  std::vector<int64_t>&	value)  
+void	MetadataGroup::setSimpleArray	(const char* name, const std::vector<int64_t>&	value)  
 {  
 	H5::DataSet* dataset = NULL;
 	try
@@ -299,7 +299,7 @@ void	MetadataGroup::setSimpleArray	(const char* name,  std::vector<int64_t>&	val
 	}
 
 }
-void	MetadataGroup::setSimpleArray	(const char* name, std::vector<double>&	value)  
+void	MetadataGroup::setSimpleArray	(const char* name, const std::vector<double>&	value)  
 {  
 	H5::DataSet* dataset = NULL;
 	try
