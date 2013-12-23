@@ -1,4 +1,4 @@
-AC_INIT([RadarLib], [1.4.0], [guidobilli@gmail.com], [radarlib],
+AC_INIT([RadarLib], [1.4.1], [guidobilli@gmail.com], [radarlib],
         [http://www.smr.arpa.emr.it/software/radarlib])
 
 PACKAGE_SO_VERSION="$PACKAGE_VERSION"
