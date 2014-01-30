@@ -112,7 +112,7 @@ bool test_creazione_Pvol ()
 			std::vector<AZAngles> azangles;
 
 			for (int i=0; i<NUMRAYS; i++)
-					azangles.push_back(AZAngles(360./(NUMRAYS-1.)*i,360./(NUMRAYS-1.)*(i+1)));
+					azangles.push_back(AZAngles(360./(NUMRAYS)*i,360./(NUMRAYS)*(i+1)));
 			scan->setAzimuthAngles(azangles);
 
 			std::vector<double> elangles;
