@@ -289,6 +289,22 @@ std::string AZAngles::toString(const std::vector<AZAngles>& value, int precision
 	}
 	return ss.str();
 }
+double AZAngles::averagedAngle(int direction){
+	double first, second;
+	if (direction >= 0) {
+	   first=start;
+	   second=stop;
+        }else {
+	   first=stop;
+	   second=start;
+	}
+
+	if (first > second) {
+	   return fmod((first+second+360)*0.5,360);
+	}else{
+           return fmod((first+second)*0.5,360);
+	}
+}
 
 
 /*===========================================================================*/

@@ -323,12 +323,18 @@ public:
 	static std::string toString(const std::vector<AZAngles>& right);
 	/*!
 	 * \brief
-	 * Convert a collection of azimuth angles to a string formated acording to OdimH5 specifications
+	 * Convert a collection of azimuth angles to a string formated according to OdimH5 specifications
 	 * \param right				the destination string 
 	 * \param precision			the precision to use while converting values to string
 	 * \param precision		precision to use when converting double values to strings
 	 */	
 	static std::string toString(const std::vector<AZAngles>& right, int precision);
+	/*!
+	 * \brief
+	 * Compute the averarged angle between start and stop tacking into account direction of antenna movement. (if not passed it is sassumed CW)
+	 * \param direction		sign of antenna speed rotation
+	 */	
+	double averagedAngle(int direction = 0);
 };
 
 /*===========================================================================*/
