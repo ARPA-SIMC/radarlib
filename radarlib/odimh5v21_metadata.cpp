@@ -88,6 +88,22 @@ template <class T> static std::vector<T>& getSeq_(H5::Group* group, const char* 
 	return result;
 }
 
+namespace {
+    template<typename T>
+    const H5::DataType& infer_data_type()
+    {
+        throw std::runtime_error("asked H5 data type for unknown data type");
+    }
+    template<> const H5::DataType& infer_data_type<double>()
+    {
+        return H5::PredType::NATIVE_DOUBLE;
+    }
+    template<> const H5::DataType& infer_data_type<int64_t>()
+    {
+        return H5::PredType::NATIVE_INT64;
+    }
+}
+
 template<class T> static std::vector<T> getSimpleArray(H5::Group* group, const char* name, bool mandatory, std::vector<T>& result)
 {
 	H5::DataSet* dataset = HDF5Group::getDataset(group, name);
@@ -95,7 +111,7 @@ template<class T> static std::vector<T> getSimpleArray(H5::Group* group, const c
 	// TODO: dataset->getSpace().getSimpleExtentDims(sizes) == 1
 	hssize_t size = dataset->getSpace().getSimpleExtentNpoints();
 	result.resize(size);
-	dataset->read(&(result[0]), dataset->getDataType(), dataset->getSpace());
+	dataset->read(&(result[0]), infer_data_type<T>(), dataset->getSpace());
 
 	return result;;
 }
