@@ -1,7 +1,7 @@
 Summary:	libradar shared library
 Name: 		radarlib
 Version: 	1.4.1
-Release: 	34%{dist}
+Release: 	39%{dist}
 License: 	GPL
 Group: 		Applications/Meteo
 URL: 		http://arpa.emr.it/sim/
@@ -63,17 +63,20 @@ rm -rf %{buildroot}
 %doc %{_docdir}/%{name}
 
 %changelog
-* Thu Apr 18 2013 Daniele Branchini <dbranchini@carenza.metarpa> - 1.4.0-26%{dist}
-- namespace OdimH5v21 for ODIMH5v2.1 support
+* Wed Feb  5 2014 Daniele Branchini <dbranchini@arpa.emr.it> - 1.4.1-39%{dist}
+- Using target dataspace not source dataspace
 
-* Fri Mar 15 2013 Daniele Branchini <dbranchini@carenza.metarpa> - 1.2.0-2%{dist}
+* Thu Apr 18 2013 Daniele Branchini <dbranchini@arpa.emr.it> - 1.4.0-26%{dist}
+- Namespace OdimH5v21 for ODIMH5v2.1 support
+
+* Fri Mar 15 2013 Daniele Branchini <dbranchini@arpa.emr.it> - 1.2.0-2%{dist}
 - Reflecting upstream changes
 
-* Mon Jan 24 2011 Daniele Branchini <dbranchini@carenza.metarpa> - 1.0-499%{dist}
+* Mon Jan 24 2011 Daniele Branchini <dbranchini@arpa.emr.it> - 1.0-499%{dist}
 - Documentation included
 
-* Thu Oct 21 2010 Daniele Branchini <dbranchini@linus.metarpa> - 1.0-444%{dist}
+* Thu Oct 21 2010 Daniele Branchini <dbranchini@arpa.emr.it> - 1.0-444%{dist}
 - Upstream changes
 
-* Fri Oct 14 2010 Daniele Branchini <dbranchini@linus.metarpa> - 
+* Fri Oct 14 2010 Daniele Branchini <dbranchini@arpa.emr.it> - 
 - Initial build.
