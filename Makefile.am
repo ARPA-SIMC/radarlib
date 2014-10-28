@@ -46,12 +46,3 @@ pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = radarlib.pc
 
 SUBDIRS = radarlib test doc examples
-
-
-
-
-
-
-
-
-

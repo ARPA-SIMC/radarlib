@@ -19,17 +19,26 @@ AC_PROG_MAKE_SET
 
 AC_HEADER_STDC
 
-#look for HDF5 ANSI C header
-AC_CHECK_HEADER(hdf5.h,,AC_MSG_ERROR([required HDF5 header file missing]))
+PKG_CHECK_MODULES([HDF5], [hdf5], [have_hdf5=yes], [have_hdf5=no])
+if test $have_hdf5 = yes
+then
+        PKG_CHECK_MODULES([HDF5], [hdf5])
+	AC_SUBST(HDF5_CFLAGS)
+ 	HDF5_LIBS="$HDF5_LIBS -lhdf5_cpp"
+	AC_SUBST(HDF5_LIBS)
+else
+	#look for HDF5 ANSI C header
+	AC_CHECK_HEADER(hdf5.h,,AC_MSG_ERROR([required HDF5 header file missing]))
 
-#look for HDF5 ANSI C library
-AC_CHECK_LIB(hdf5, H5open)
+	#look for HDF5 ANSI C library
+	AC_CHECK_LIB(hdf5, H5open)
 
-#look for HDF5 C++ header
-AC_CHECK_HEADER(H5Cpp.h,,AC_MSG_ERROR([required HDF5 C++ header file missing]))
+	#look for HDF5 C++ header
+	AC_CHECK_HEADER(H5Cpp.h,,AC_MSG_ERROR([required HDF5 C++ header file missing]))
 
-#look for HDF5 C++ library
-AC_CHECK_LIB(hdf5_cpp, H5open)
+	#look for HDF5 C++ library
+	AC_CHECK_LIB(hdf5_cpp, H5open)
+fi
 
 AC_SUBST([PACKAGE_SO_VERSION])
 AC_SUBST([PACKAGE_LT_VERSION])

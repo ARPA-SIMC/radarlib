@@ -1,8 +1,7 @@
 lib_LTLIBRARIES = libradar.la
 
-libradar_la_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir)
-
-libradar_la_LDFLAGS = -version-info $(PACKAGE_LT_VERSION)
+AM_CPPFLAGS =  -I$(top_srcdir) -I$(top_builddir) $(HDF5_CFLAGS)
+AM_LDFLAGS = -version-info $(PACKAGE_LT_VERSION) $(HDF5_LIBS)
 
 libradar_la_SOURCES = \
 		      odimh5v20_arpav10_classes.cpp \
@@ -32,10 +31,6 @@ libradar_la_SOURCES = \
 		      time.cpp
 
 noinst_LTLIBRARIES = libradar_static.la
-
-libradar_static_la_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir)
-
-libradar_static_la_LDFLAGS = -version-info $(PACKAGE_LT_VERSION)
 
 libradar_static_la_SOURCES = \
 			     odimh5v20_arpav10_classes.cpp \

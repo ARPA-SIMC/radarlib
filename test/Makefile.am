@@ -1,4 +1,6 @@
-AM_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir) -DTESTDIR='"$(abs_srcdir)"'
+AM_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir) $(HDF5_CFLAGS) -DTESTDIR='"$(abs_srcdir)"'
+
+AM_LDFLAGS = $(HDF5_LIBS)
 
 TESTS = \
 	test-support \
@@ -15,8 +17,9 @@ TESTS = \
 	test-odimh5v21-create-IMAGE \
 	test-odimh5v21-create-PROD  \
 	test-odimh5v21-prod-splitter \
-	test-odimh5v21-visitor \
-	test-odimh5v21-azangle
+	test-odimh5v21-visitor
+
+#test-odimh5v21-azangle
 
 check_PROGRAMS = \
 		 test-support \
@@ -33,8 +36,9 @@ check_PROGRAMS = \
 		 test-odimh5v21-create-IMAGE \
 		 test-odimh5v21-create-PROD  \
 		 test-odimh5v21-prod-splitter \
-		 test-odimh5v21-visitor \
-		 test-odimh5v21-azangle
+		 test-odimh5v21-visitor 
+
+#test-odimh5v21-azangle
 
 test_support_SOURCES = test-support.cc
 test_support_LDADD = $(top_builddir)/radarlib/libradar_static.la
@@ -81,8 +85,8 @@ test_odimh5v21_prod_splitter_LDADD = $(top_builddir)/radarlib/libradar_static.la
 test_odimh5v21_visitor_SOURCES = test-odimh5v21-visitor.cc
 test_odimh5v21_visitor_LDADD = $(top_builddir)/radarlib/libradar_static.la
 
-test_odimh5v21_azangle_SOURCES = test-odimh5v21-azangle.cc
-test_odimh5v21_azangle_LDADD = $(top_builddir)/radarlib/libradar_static.la
+#test_odimh5v21_azangle_SOURCES = test-odimh5v21-azangle.cc
+#test_odimh5v21_azangle_LDADD = $(top_builddir)/radarlib/libradar_static.la
 
 CLEANFILES = \
 	     ETOP-10_HGHT_200001020304.h5 \
