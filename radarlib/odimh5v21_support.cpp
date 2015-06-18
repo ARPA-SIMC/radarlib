@@ -76,6 +76,7 @@ std::string ModelVersion::toString() const
 
 SourceInfo::SourceInfo()
 :WMO()
+,OperaRadarNode()
 ,OperaRadarSite()
 ,OriginatingCenter(0)
 ,Place()
@@ -87,6 +88,7 @@ SourceInfo::SourceInfo()
 SourceInfo::SourceInfo(const std::string& value)
 /* inizializziamo i campi visto che alcuni potrebbero non comparire nella stringa */
 :WMO()
+,OperaRadarNode()
 ,OperaRadarSite()
 ,OriginatingCenter(0)
 ,Place()
@@ -118,6 +120,10 @@ void SourceInfo::parse(const std::string value)
 		if (key == OdimH5v21::SOURCE_WMO)
 		{
 			WMO = val;
+		}
+		else if (key == OdimH5v21::SOURCE_NOD)
+		{
+			OperaRadarNode = val;
 		}
 		else if (key == OdimH5v21::SOURCE_RAD)
 		{
@@ -165,6 +171,11 @@ std::string SourceInfo::toString() const
 	if (WMO.length()) 
 	{
 		ss << OdimH5v21::SOURCE_WMO << ":" << WMO;		notEmpty = true;
+	}
+	if (OperaRadarNode.length())
+	{
+		if (notEmpty) ss << ",";
+		ss << OdimH5v21::SOURCE_NOD << ":" << OperaRadarNode;	notEmpty = true;
 	}
 	if (OperaRadarSite.length())
 	{

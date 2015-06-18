@@ -115,6 +115,10 @@ public:
 	 */
 	std::string	WMO;
 	/*!
+	 * \brief Radar node according to OPERA name table (see right column of Table 9 in OPERA v2.1 document)
+	 */
+	std::string	OperaRadarNode;
+	/*!
 	 * \brief Radar site as indexed in the OPERA database
 	 */
 	std::string	OperaRadarSite;
@@ -172,6 +176,15 @@ public:
 	inline SourceInfo& setWMO(const std::string& value)
 	{
 		WMO = value;
+		return *this;
+	}
+	/*!
+	 * \brief
+	 * Set OperaRadarNode value and return a reference to this object
+	 */
+	inline SourceInfo& setOperaRadarNode(const std::string& value)
+	{
+		OperaRadarNode = value;
 		return *this;
 	}
 	/*!

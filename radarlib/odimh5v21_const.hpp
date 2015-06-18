@@ -82,6 +82,7 @@ namespace OdimH5v21
 	extern RADAR_API const char* SOURCE_PLC;
 	extern RADAR_API const char* SOURCE_CTY;
 	extern RADAR_API const char* SOURCE_CMT;
+	extern RADAR_API const char* SOURCE_NOD;
 
 	extern RADAR_API const char* ATTRIBUTE_WHAT_PRODUCT;
 

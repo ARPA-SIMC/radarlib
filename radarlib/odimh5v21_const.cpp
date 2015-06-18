@@ -64,6 +64,7 @@ const char* SOURCE_ORG				= "ORG";
 const char* SOURCE_PLC				= "PLC";
 const char* SOURCE_CTY				= "CTY";
 const char* SOURCE_CMT				= "CMT";
+const char* SOURCE_NOD				= "NOD";
 
 const char* ATTRIBUTE_WHAT_PRODUCT		= "product";
 
