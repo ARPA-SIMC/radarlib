@@ -1120,6 +1120,7 @@ public:
 	virtual std::vector<double>	getTXPower		()		     ;
 	virtual std::vector<double>	getTXPower		(double defaultValue);
 	virtual void			setTXPower		(double val)	     ;
+	virtual void			setTXPower		(const std::vector<double>& val)	     ;
 	virtual double			getNI			()		     ;
 	virtual double			getNI			(double defaultValue);
 	virtual void			setNI			(double val)	     ;
@@ -2048,6 +2049,7 @@ public:
 	virtual std::vector<double>	getTXPower		()		     ;
 	virtual std::vector<double>	getTXPower		(double defaultValue);
 	virtual void			setTXPower		(double val)	     ;
+	virtual void			setTXPower		(const std::vector<double>& val)	     ;
 	virtual double			getNI			()		     ;
 	virtual double			getNI			(double defaultValue);
 	virtual void			setNI			(double val)	     ;

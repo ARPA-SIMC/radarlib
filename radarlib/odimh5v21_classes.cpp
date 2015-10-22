@@ -1466,7 +1466,8 @@ double		PolarScan::getNomTXPower	(double defaultValue)		{ return getHow()->getDo
 void		PolarScan::setNomTXPower	(double val)	     		{        getHow()->set		(ATTRIBUTE_HOW_NOMTXPOWER, val);		}
 std::vector<double>	PolarScan::getTXPower		(){return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }		        
 std::vector<double>	PolarScan::getTXPower		(double defaultValue)  {return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }
-void		PolarScan::setTXPower		(double val)	   {;}  
+void		PolarScan::setTXPower		(double val)	 {;}  
+void		PolarScan::setTXPower		(const std::vector<double>& val)	   {   getHow()->setSimpleArray(ATTRIBUTE_HOW_TXPOWER, val);	}  //{;}  
 // (const std::vector<double>& val, int precision)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, precision);	}
 
 double		PolarScan::getNI		()		     		{ return getHow()->getDouble	(ATTRIBUTE_HOW_NI, 0);			}
@@ -2874,6 +2875,7 @@ void		Product_2D::setNomTXPower	(double val)	     		{        getHow()->set		(ATT
 std::vector<double>	Product_2D::getTXPower		(){return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }		        
 std::vector<double>	Product_2D::getTXPower		(double defaultValue)  {return getHow()->getSimpleArrayDouble(ATTRIBUTE_HOW_TXPOWER);  }
 void		Product_2D::setTXPower		(double val)	   {;}  
+void		Product_2D::setTXPower		(const std::vector<double>& val)	   {   getHow()->setSimpleArray(ATTRIBUTE_HOW_TXPOWER, val);	}  //{;}  
 // (const std::vector<double>& val, int precision)	{        getHow()->set		(ATTRIBUTE_HOW_ELANGLES, val, precision);	}
 
 double		Product_2D::getNI		()		     		{ return getHow()->getDouble	(ATTRIBUTE_HOW_NI, 0);			}

@@ -2218,6 +2218,7 @@ public:
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setTXPower		(double val)		= 0;
+	virtual void			setTXPower		(const std::vector<double>&  val)		= 0;
 	/*! 
 	 * \brief Get the 'NI' attribute value
 	 * \throws OdimH5Exception			if an unexpected error occurs
