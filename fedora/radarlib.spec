@@ -1,13 +1,12 @@
 Summary:	libradar shared library
 Name: 		radarlib
-Version: 	1.4.1
-Release: 	39%{dist}
+Version: 	1.4.2
+Release: 	1%{dist}
 License: 	GPL
 Group: 		Applications/Meteo
 URL: 		http://arpa.emr.it/sim/
 Source0: 	%{name}-%{version}.tar.gz
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root
-Vendor: 	Guido Billi <guidobilli@gmail.com>
 Packager: 	Daniele Branchini <dbranchini@arpa.emr.it>
 BuildRequires:	gcc-c++, hdf5-devel, doxygen
 Requires:       hdf5
@@ -63,6 +62,9 @@ rm -rf %{buildroot}
 %doc %{_docdir}/%{name}
 
 %changelog
+* Thu Oct 22 2015 Daniele Branchini <dbranchini@arpa.emr.it> - 1.4.2-1%{dist}
+- new routine set TX power
+
 * Wed Feb  5 2014 Daniele Branchini <dbranchini@arpa.emr.it> - 1.4.1-39%{dist}
 - Using target dataspace not source dataspace
 
@@ -77,6 +79,3 @@ rm -rf %{buildroot}
 
 * Thu Oct 21 2010 Daniele Branchini <dbranchini@arpa.emr.it> - 1.0-444%{dist}
 - Upstream changes
-
-* Fri Oct 14 2010 Daniele Branchini <dbranchini@arpa.emr.it> - 
-- Initial build.
