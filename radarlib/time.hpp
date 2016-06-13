@@ -150,9 +150,9 @@ RADAR_API void	splitYMD	(double absolute, int& year, int& month, int& day);
  *
  * Extract day time informations from the given time_t value
  * \param absolute	the absolute time_t value 
- * \param year		a reference to a integer that will store the extracted hour number
- * \param month		a reference to a integer that will store the extracted minutes number
- * \param day		a reference to a integer that will store the extracted seconds number
+ * \param hour		a reference to a integer that will store the extracted hour number
+ * \param min  		a reference to a integer that will store the extracted minutes number
+ * \param sec		a reference to a integer that will store the extracted seconds number
  */
 RADAR_API void	splitHMS	(time_t absolute, int& hour, int& min, int& sec);
 /*!
@@ -279,7 +279,7 @@ RADAR_API double extractTime	(double absolute);
  * \brief Convert a day time to a string
  *
  * Convert a day time to string formated as 'HH:MM:SS'
- * \param absolute	the day time as a time_t value
+ * \param value		the day time as a time_t value
  * \returns		the formatted string
  */
 RADAR_API std::string dayTimeToStr(time_t value);
@@ -287,7 +287,7 @@ RADAR_API std::string dayTimeToStr(time_t value);
  * \brief Convert a day time with milliseconds to a string
  *
  * Convert a day time to string formated as 'HH:MM:SS.msec'
- * \param absolute	the day time as a double value
+ * \param value		the day time as a double value
  * \returns		the formatted string
  */
 RADAR_API std::string dayTimeToStr(double value);

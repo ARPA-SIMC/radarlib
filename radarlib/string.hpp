@@ -145,7 +145,7 @@ template<class T> std::string toString(const T& value)
  * \brief
  * Convert a boolean value to its string rapresentation (0/1).
  *
- * \param value			the value to convert
+ * \param val			the value to convert
  * \returns			the string representation of value
  */
 RADAR_API std::string toString(bool val);
@@ -153,7 +153,7 @@ RADAR_API std::string toString(bool val);
  * \brief
  * Convert a int value to its string rapresentation .
  *
- * \param value			the value to convert
+ * \param val			the value to convert
  * \returns			the string representation of value
  */
 RADAR_API std::string toString(int val);
@@ -161,7 +161,7 @@ RADAR_API std::string toString(int val);
  * \brief
  * Convert a long value to its string rapresentation.
  *
- * \param value			the value to convert
+ * \param val			the value to convert
  * \returns			the string representation of value
  */
 RADAR_API std::string toString(long val);
@@ -169,7 +169,7 @@ RADAR_API std::string toString(long val);
  * \brief
  * Convert a float value to its string rapresentation.
  *
- * \param value			the value to convert
+ * \param val			the value to convert
  * \returns			the string representation of value
  */
 RADAR_API std::string toString(float val);
@@ -177,7 +177,7 @@ RADAR_API std::string toString(float val);
  * \brief
  * Convert a double value to its string rapresentation.
  *
- * \param value			the value to convert
+ * \param val			the value to convert
  * \returns			the string representation of value
  */
 RADAR_API std::string toString(double val);
@@ -185,7 +185,7 @@ RADAR_API std::string toString(double val);
  * \brief
  * Convert a size_t value to its string rapresentation.
  *
- * \param value			the value to convert
+ * \param val			the value to convert
  * \returns			the string representation of value
  */
 RADAR_API std::string toString(size_t val);
@@ -275,7 +275,7 @@ RADAR_API std::string toString(const std::vector<double>& val, const char* sep =
  *
  * Convert a std::vector of pair values to a string, converting the pair values to their string representation.\n
  * If no separator is specified, the comma character will be used
- * \param val			a reference to the vector to convert
+ * \param value			a reference to the vector to convert
  * \param sep			the value separator to use
  * \returns			the new string
  */
@@ -324,7 +324,7 @@ template <class T> static T parse(const std::string& str, const std::string& typ
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API bool	 parseBool	(const std::string& s) throw(std::invalid_argument);
+RADAR_API bool	 parseBool	(const std::string& str) throw(std::invalid_argument);
 /*!
  * \brief Parse a std::string to an int value
  *
@@ -332,7 +332,7 @@ RADAR_API bool	 parseBool	(const std::string& s) throw(std::invalid_argument);
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API int	 parseInt	(const std::string& s) throw(std::invalid_argument);
+RADAR_API int	 parseInt	(const std::string& str) throw(std::invalid_argument);
 /*!
  * \brief Parse a std::string to a float value
  *
@@ -340,7 +340,7 @@ RADAR_API int	 parseInt	(const std::string& s) throw(std::invalid_argument);
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API float	 parseFloat	(const std::string& s) throw(std::invalid_argument);
+RADAR_API float	 parseFloat	(const std::string& str) throw(std::invalid_argument);
 /*!
  * \brief Parse a std::string to a double value
  *
@@ -348,7 +348,7 @@ RADAR_API float	 parseFloat	(const std::string& s) throw(std::invalid_argument);
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API double parseDouble	(const std::string& s) throw(std::invalid_argument);
+RADAR_API double parseDouble	(const std::string& str) throw(std::invalid_argument);
 
 /*!
  * \brief Parse a string sequence of boolean values to a std::vector
@@ -407,7 +407,7 @@ RADAR_API void	parseSeq	(const std::string& str, std::vector<std::string>& val, 
  * \param str			the string to check
  * \return			True if the string can be converted to a integer or floating point value, false otherwise
  */
-RADAR_API bool	isInt		(const std::string& s);
+RADAR_API bool	isInt		(const std::string& str);
 
 /*===========================================================================*/
 

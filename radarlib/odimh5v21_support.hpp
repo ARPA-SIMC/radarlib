@@ -726,7 +726,7 @@ public:
 };
 
 /*===========================================================================*/
-/* ELEVATION ANGLES
+/* ELEVATION ANGLES */
 /*===========================================================================*/
 
 /*!
@@ -817,7 +817,7 @@ public:
 };
 
 /*===========================================================================*/
-/* AROTATION
+/* AROTATION */
 /*===========================================================================*/
 
 /*!
@@ -907,7 +907,7 @@ public:
 };
 
 /*===========================================================================*/
-/* TXPower 
+/* TXPower */
 /*===========================================================================*/
 
 /*!
@@ -997,11 +997,11 @@ public:
 };
 
 /*===========================================================================*/
-/* NODES 
+/* NODES */
 /*===========================================================================*/
 
 /*!
- * \brief Nodes - Radar nodes which have crontributed data to composit\
+ * \brief Nodes - Radar nodes which have crontributed data to composit
  *
  * This class represent the Radar nodes
  *
@@ -1057,7 +1057,7 @@ public:
 	 * \param radars				the values to convert
 	 * Convert a collection of radar nodes to a string formated according to OdimH5 specifications
 	 */	
-	static std::string toString(const std::vector<Nodes>& right);
+	static std::string toString(const std::vector<Nodes>& radars);
 };
 
 

@@ -524,7 +524,7 @@ std::vector<Nodes>		MetadataGroup::getNodes	        (const char* name)
 
 
 /*===========================================================================*/
-/* ALTRE FUNZIONI
+/* ALTRE FUNZIONI */
 /*===========================================================================*/
 
 void MetadataGroup::import(MetadataGroup* value)

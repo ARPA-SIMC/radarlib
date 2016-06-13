@@ -380,7 +380,6 @@ public:
 	 * Values are stored as a comma separated string
 	 * \param name					the attribute name
 	 * \param value					the values to write
-	 * \param precision				the precision to use while converting values to string
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	void	setSimpleArray	(const char* name,const std::vector<double>&	value);
@@ -2317,7 +2316,6 @@ public:
 	/*! 
 	 * \brief Set the 'startazA' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setStartAzimuthAngles	(const std::vector<double>& val) = 0;
@@ -2329,7 +2327,6 @@ public:
 	/*! 
 	 * \brief Set the 'stopazA' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setStopAzimuthAngles	(const std::vector<double>& val) = 0;
@@ -2341,7 +2338,6 @@ public:
 	/*! 
 	 * \brief Set the 'startazT' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setStartAzimuthTimes	(const std::vector<double>& val) = 0;
@@ -2353,7 +2349,6 @@ public:
 	/*! 
 	 * \brief Set the 'stopazT' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setStopAzimuthTimes	(const std::vector<double>& val) = 0;
@@ -2666,7 +2661,6 @@ public:
 	/*! 
 	 * \brief Set the 'angles' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use when converting angle pairs to string pairs
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setAngles		(const std::vector<Angles>& val) = 0;
@@ -2678,7 +2672,6 @@ public:
 	/*! 
 	 * \brief Set the 'aroration' attribute values
 	 * \param val			the values to write
-	 * \param precision				precision to use 
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setArotation		(const std::vector<Arotation>& val)	= 0;
@@ -2746,17 +2739,6 @@ public:
 	 */
 	virtual void			setMaxRange		(double val)	= 0;
 
-	/*! 
-	 * \brief Get the 'NI' attribute value
-	 * \throws OdimH5Exception			if an unexpected error occurs
-	 */
-//	virtual double			getNI			()		= 0;
-	/*! 
-	 * \brief Set the 'NI' attribute value
-	 * \param val			the value to write	 
-	 * \throws OdimH5Exception			if an unexpected error occurs
-	 */
-//	virtual void			setNI			(double val)	= 0;
 
 	/*! 
 	 * \brief Get the 'dealiased' attribute value

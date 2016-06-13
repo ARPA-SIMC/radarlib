@@ -1525,7 +1525,7 @@ public:
 	 * \brief Get the 'X size' attribute value
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
-	virtual int			getXSize		()		= 0;
+ 	virtual int			getXSize		()		= 0;
 	/*! 
 	 * \brief set the 'X size' attribute value
 	 * \param val					the value to write
@@ -1636,6 +1636,7 @@ public:
 	/*! 
 	 * \brief set the 'Angles' attribute value
 	 * \param val					the value to write
+	 * \param precision 				precison used in conversion
 	 * \throws OdimH5Exception			if an unexpected error occurs
 	 */
 	virtual void			setAngles		(const std::vector<Angles>& val, int precision = 0) = 0;

@@ -154,7 +154,6 @@ public:
 	 * \brief
 	 * Remove the extension from a file or directory path
 	 * \param path		the original path
-	 * \param newext	the new extension
 	 */
 	static std::string removeExt(const std::string& path);
 

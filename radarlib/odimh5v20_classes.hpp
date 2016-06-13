@@ -1159,7 +1159,7 @@ public:
 	/*! 
 	 * \brief Create a new group for a quantity in the scan 
 	 *  
-	 * \param 			The quantity type to be created
+	 * \param name			The quantity type to be created
 	 * \returns			The number of quantities 
 	 * \throws OdimH5Exception	Throwed if an error occurs 
 	 */ 
@@ -1523,24 +1523,6 @@ public:
 	 * \remarks			User is responsible for deleting the returned object 
 	 */
 	virtual Product_HSP*	createProductHSP		();
-	/*!
-	 * \brief Create a new 2D-horizontal product in this volume
-	 * 
-	 * \param type 			The type of the product to be created
-	 * \throws OdimH5Exception	Throwed if an error occurs
-	 * \remarks			User is responsible for deleting the returned object 
-	 */
-//	virtual Horizontal_Product_2D*	createHorizontal_Product_2D		(const char*  type); 
-//	virtual Horizontal_Product_2D*	createHorizontal_Product_2D		(const std::string&  type); 
-	/*!
-	 * \brief Create a new 2D-Vertival product in this volume
-	 * 
-	 * \param type 			The type of the product to be created
-	 * \throws OdimH5Exception	Throwed if an error occurs
-	 * \remarks			User is responsible for deleting the returned object 
-	 */
-//	virtual Vertical_Product_2D*	createVertical_Product_2D		(const char*  type); 
-//	virtual Vertical_Product_2D*	createVertical_Product_2D		(const std::string&  type); 
 	/*!
 	 * \brief Get a pointer to a generic 2D product of the volume
 	 * 
@@ -1970,7 +1952,7 @@ public:
 	/*! 
 	 * \brief Create a new group for a quantity in the product 
 	 *  
-	 * \param 			The quantity type to be created
+	 * \param name			The quantity type to be created
 	 * \returns			The number of quantities 
 	 * \throws OdimH5Exception	Throwed if an error occurs 
 	 */ 
@@ -2668,7 +2650,7 @@ public:
 	 * \brief Get the data associated to a quality 
 	 *  
 	 * Get the data associated to a quality using its index. \n 
-	 * \param 			The index in the 'data' group
+	 * \param index			The index in the 'data' group
 	 * \returns			The object associated to the quality 
 	 * \throws OdimH5Exception	Throwed if an error occurs 
 	 * \remarks			User is responsible for deleting the returned object  
@@ -2678,7 +2660,7 @@ public:
 	 * \brief Delete the data associated to a quality 
 	 *  
 	 * Delete the data associated to the quality using its index . \n 
-	 * \param 			The index in the 'data' group
+	 * \param index			The index in the 'data' group
 	 * \throws OdimH5Exception	Throwed if an error occurs 
 	 */ 
 	virtual void		removeQualityData	(int index);  

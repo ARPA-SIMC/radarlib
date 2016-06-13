@@ -28,9 +28,7 @@
 #define __RADAR_ODIMH5V21_HDF5_HPP__
 
 /*===========================================================================*/
-/*
-/* INTERNAL HEADER FILE USED INSIDE THE LIRARY
-/* 
+/* INTERNAL HEADER FILE USED INSIDE THE LIBRARY  */
 /*===========================================================================*/
 
 #include <radarlib/defs.h>
