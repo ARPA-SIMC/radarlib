@@ -1,13 +1,13 @@
 Summary:	libradar shared library
 Name: 		radarlib
-Version: 	1.4.2
+Version: 	1.4.3
 Release: 	1%{dist}
 License: 	GPL
 Group: 		Applications/Meteo
-URL: 		http://arpa.emr.it/sim/
-Source0: 	%{name}-%{version}.tar.gz
+URL:            https://github.com/arpa-simc/%{name}
+Source0: 	https://github.com/arpa-simc/%{name}/archive/v%{version}-%{release}.tar.gz#/%{name}-%{version}-%{release}.tar.gz
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root
-Packager: 	Daniele Branchini <dbranchini@arpa.emr.it>
+Packager: 	Daniele Branchini <dbranchini@arpae.it>
 BuildRequires:	gcc-c++, hdf5-devel, doxygen
 Requires:       hdf5
 
@@ -62,6 +62,10 @@ rm -rf %{buildroot}
 %doc %{_docdir}/%{name}
 
 %changelog
+* Wed Jun 22 2016 Daniele Branchini <dbranchini@arpae.it> - 1.4.3-1
+- Added Quality at dataset level
+- Created two quality groups in each dataset
+
 * Thu Oct 22 2015 Daniele Branchini <dbranchini@arpa.emr.it> - 1.4.2-1%{dist}
 - new routine set TX power
 
