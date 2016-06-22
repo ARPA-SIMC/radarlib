@@ -349,6 +349,39 @@ public:
 	 */ 
 	virtual void		removeData(int index); 
  
+	/*!  
+	 * \brief Get the number of 'quality' groups inside this dataset group 
+	 * 
+	 * \returns				the number of 'quality' groups 
+	 * \throws OdimH5Exception		if an unexpected error occurs 
+	 */ 
+	virtual int		getQualityCount();	 
+	/*!  
+	 * \brief Create a new group 'Quality' inside this dataset 
+	 * 
+	 * \returns				the object associated to the new 'quality' group 
+	 * \throws OdimH5Exception		if an unexpected error occurs 
+	 * \remarks				User is responsible for deleting the returned object  
+	 */ 
+	virtual OdimQuality*	createQuality();	 
+	/*!  
+	 * \brief Get an existing Quality group using the given index 
+	 * 
+	 * Get an existing dataset using the given index 
+	 * \param index				the quality index from 0 to n-1 
+	 * \returns				the OdimQuality object associated to the HDF5 group or NULL if the group does not exist 
+	 * \throws OdimH5Exception		if an unexpected error occurs 
+	 * \remarks				User is responsible for deleting the returned object  
+	 */ 
+	virtual OdimQuality*	getQuality(int index); 
+	/*!  
+	 * \brief Remove a 'quality' group from this dataset 
+	 * 
+	 * Remove a 'quality' group from this dataset 
+	 * \param index				the dataset index from 0 to n-1 
+	 * \throws OdimH5Exception		if an unexpected error occurs 
+	 */ 
+	virtual void		removeQuality(int index); 
 protected: 
 	H5::Group*	group;	 
 	MetadataGroup*	meta_what; 
@@ -361,6 +394,8 @@ protected:
  
 	virtual H5::Group*	createDataGroup();	 
 	virtual H5::Group*	getDataGroup(int num);	 
+	virtual H5::Group*	createQualityGroup();	 
+	virtual H5::Group*	getQualityGroup(int num);	 
 }; 
  
 /*===========================================================================*/ 
@@ -823,6 +858,7 @@ protected:
 	MetadataGroup*	meta_how; 
  
 	/* uses cannot directly create OdimH5 objects, only factories provide functions to do it */ 
+	friend class OdimDataset; 
 	friend class OdimData; 
 	friend class Product_2D_Data; 
 	OdimQuality(H5::Group* group); 

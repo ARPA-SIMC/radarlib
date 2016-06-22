@@ -430,6 +430,71 @@ H5::Group* OdimDataset::getDataGroup(int index)
 	return HDF5Group::getChild(this->group, name.c_str());				
 }
 
+int OdimDataset::getQualityCount()	
+{ 	
+	return HDF5Group::getChildCount(this->group, GROUP_QUALITY);
+}
+
+OdimQuality* OdimDataset::createQuality()		
+{ 
+	H5::Group* group = createQualityGroup();
+	try 
+	{
+		return new OdimQuality(group);		
+	} 
+	catch (...) 
+	{
+		delete group;
+		throw;
+	}
+}
+
+OdimQuality* OdimDataset::getQuality(int index)	
+{ 
+	//std::string name = P_DATA + Radar::stringutils::toString(index + 1);
+	H5::Group* h5group = getQualityGroup(index);
+	try
+	{
+		if (h5group)	
+			return new OdimQuality(h5group);	
+		return NULL;
+	}
+	catch (...) 
+	{
+		delete h5group;
+		throw;
+	}
+}
+
+void OdimDataset::removeQuality(int index)	
+{
+	try
+	{
+		std::string name = GROUP_QUALITY + Radar::stringutils::toString(index + 1);
+		int childrenCount = getQualityCount();
+		HDF5Group::removeChild(this->group, name.c_str());					
+		renameChildren(this->group, index, childrenCount, GROUP_QUALITY);
+	}
+	catch (std::exception& e)
+	{
+		std::ostringstream ss; ss << "Cannot remove quality group! " << e.what();
+		throw OdimH5Exception(ss.str());			
+	}
+}
+
+H5::Group* OdimDataset::createQualityGroup()
+{
+	int		num	= getQualityCount();
+	std::string	name	= GROUP_QUALITY + Radar::stringutils::toString(num + 1);
+	return new H5::Group( this->group->createGroup(name.c_str()));		
+}
+
+H5::Group* OdimDataset::getQualityGroup(int index)
+{
+	std::string name = GROUP_QUALITY + Radar::stringutils::toString(index + 1);
+	return HDF5Group::getChild(this->group, name.c_str());				
+}
+
 /*===========================================================================*/
 /* ODIM DATA */
 /*===========================================================================*/
