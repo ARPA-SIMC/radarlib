@@ -1,7 +1,7 @@
 Summary:	libradar shared library
 Name: 		radarlib
 Version: 	1.4.3
-Release: 	1%{dist}
+Release: 	1
 License: 	GPL
 Group: 		Applications/Meteo
 URL:            https://github.com/arpa-simc/%{name}
