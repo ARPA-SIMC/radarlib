@@ -8,7 +8,7 @@
 #include <iostream>
 #include <assert.h>
 
-#include <radarlib/radar.hpp>
+#include "radarlib/radar.hpp"
 using namespace OdimH5v21;
 
 bool test_creazione_Pvol ()
@@ -77,7 +77,7 @@ bool test_creazione_Pvol ()
 			/* creazione di un dataset generico */
 			PolarScan* scan =  volume->createScan();
 
-			const int NUMBINS = 10;
+			const int NUMBINS = 256;
 			const int NUMRAYS = 100;
 
 			/* set degli attributi, notare che i gruppi WHAT,WHERE,HOW non sono esplicitati, sono gestiti automaticamente nell'implementazione */
@@ -179,8 +179,31 @@ bool test_creazione_Pvol ()
 				data2->writeAndTranslate(matrixV, (float)offset, (float)gain, H5::PredType::NATIVE_UINT8);
 
 				delete data2;
-			}
 
+
+			}
+	if (1){
+			/* creazione di un dataset che contiene la qualità a livello globale di scan*/
+			OdimQuality * quality =scan->createQuality();
+			quality->getWhat()->set(ATTRIBUTE_WHAT_OFFSET,		0.);
+                        quality->getWhat()->set(ATTRIBUTE_WHAT_GAIN,		0.01);
+			quality->getHow() ->set(ATTRIBUTE_HOW_TASK,	"Anna Fornasiero");
+			OdimH5v21::DataMatrix <unsigned char> Qfield (NUMRAYS,NUMBINS,255);
+			for (unsigned y = 0; y < NUMRAYS; ++y)
+                            for (unsigned x = 0; x < NUMBINS; ++x)
+			        Qfield.elem(y,x) = (y*NUMBINS+x)%256;
+                        quality->writeQuality(Qfield);
+			delete quality;
+
+			/* Aggiungo un secondo gruppo*/
+			OdimQuality * quality_2 =scan->createQuality();
+			quality_2->getWhat()->set(ATTRIBUTE_WHAT_OFFSET,		0.);
+                        quality_2->getWhat()->set(ATTRIBUTE_WHAT_GAIN,		0.01);
+			quality_2->getHow() ->set(ATTRIBUTE_HOW_TASK,	"Anna Fornasiero");
+                        quality_2->writeQuality(Qfield);
+			delete quality_2;
+			std::cout<<"Questo scan contiene "<<scan->getQualityCount()<<" gruppi qualità"<<'\n';
+	}
 			delete scan;
 		}
 
