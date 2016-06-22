@@ -6,7 +6,7 @@ License: 	GPL
 Group: 		Applications/Meteo
 URL:            https://github.com/arpa-simc/%{name}
 Source0: 	https://github.com/arpa-simc/%{name}/archive/v%{version}-%{release}.tar.gz#/%{name}-%{version}-%{release}.tar.gz
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Packager: 	Daniele Branchini <dbranchini@arpae.it>
 BuildRequires:	gcc-c++, hdf5-devel, doxygen
 Requires:       hdf5
@@ -31,19 +31,20 @@ Group: Libraries/Meteo
 libradar library documentation
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{release}
+sh autogen.sh
 
 %build
-
 %configure
 make
+make check
 
 %install
-rm -rf %{buildroot}
+[ "%{buildroot}" != / ] && rm -rf %{buildroot}
 %makeinstall
 
 %clean
-rm -rf %{buildroot}
+[ "%{buildroot}" != / ] && rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
