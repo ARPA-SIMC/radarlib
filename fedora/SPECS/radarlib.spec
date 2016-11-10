@@ -1,6 +1,6 @@
 Summary:	libradar shared library
 Name: 		radarlib
-Version: 	1.4.3
+Version: 	1.4.4
 Release: 	1
 License: 	GPL
 Group: 		Applications/Meteo
@@ -63,6 +63,9 @@ make check
 %doc %{_docdir}/%{name}
 
 %changelog
+* Thu Nov 10 2016 Daniele Branchini <dbranchini@arpae.it> - 1.4.4-1
+- Fixed bug if a generic product is used
+
 * Wed Jun 22 2016 Daniele Branchini <dbranchini@arpae.it> - 1.4.3-1
 - Added Quality at dataset level
 - Created two quality groups in each dataset
