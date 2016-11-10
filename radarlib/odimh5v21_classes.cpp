@@ -2390,8 +2390,10 @@ Product_2D* Object_2D::getProduct(int index)
 			if( type == PRODUCT_XSEC  )  return new Product_XSEC(this, h5group2);
 			if( type == PRODUCT_VSP   )  return new Product_VSP(this, h5group2);
 			if( type == PRODUCT_HSP   )  return new Product_HSP(this, h5group2);
-			delete h5group2;
-			return NULL;
+// None of the defined product is present return a generic object for product2D
+			return new Product_2D (this, h5group2);
+			//delete h5group2;
+			//return NULL;
                 } else {
 			delete h5group1;
 			return NULL;	
@@ -2420,8 +2422,7 @@ std::vector<std::string> Object_2D::getProductsType()
 		for (size_t i=0; i<nprod; i++)
 		{
     			prod = this->getProduct(i);
-			std::string type  = prod->getProduct();
-			result.push_back(type);
+			result.push_back(prod->getProduct());
 
 			delete prod;		
 		}

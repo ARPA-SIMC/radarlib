@@ -17,6 +17,7 @@ TESTS = \
 	test-odimh5v21-create-IMAGE \
 	test-odimh5v21-create-PROD  \
 	test-odimh5v21-prod-splitter \
+	test-odimh5v21-read-product \
 	test-odimh5v21-visitor
 
 #test-odimh5v21-azangle
@@ -36,6 +37,7 @@ check_PROGRAMS = \
 		 test-odimh5v21-create-IMAGE \
 		 test-odimh5v21-create-PROD  \
 		 test-odimh5v21-prod-splitter \
+		 test-odimh5v21-read-product \
 		 test-odimh5v21-visitor 
 
 #test-odimh5v21-azangle
@@ -81,6 +83,9 @@ test_odimh5v21_create_ETOP_LDADD = $(top_builddir)/radarlib/libradar_static.la
 
 test_odimh5v21_prod_splitter_SOURCES = test-odimh5v21-prod-splitter.cc
 test_odimh5v21_prod_splitter_LDADD = $(top_builddir)/radarlib/libradar_static.la
+
+test_odimh5v21_read_product_SOURCES = test-odimh5v21-read-product.cc
+test_odimh5v21_read_product_LDADD = $(top_builddir)/radarlib/libradar_static.la
 
 test_odimh5v21_visitor_SOURCES = test-odimh5v21-visitor.cc
 test_odimh5v21_visitor_LDADD = $(top_builddir)/radarlib/libradar_static.la
