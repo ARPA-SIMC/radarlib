@@ -360,7 +360,7 @@ std::string attrGetStr(H5::H5Object* obj, const char* name)
 		attr->read(STRTYPE, buf[0]);		//attr->read(StrType(PredType::C_S1, H5T_VARIABLE), buf);
 		result = buf[0];
 
-		free(buf[0]);	buf[0]=NULL;
+		delete[] buf[0];	buf[0]=NULL;
 		delete attr;
 
 		return result;
