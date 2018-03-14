@@ -1,7 +1,7 @@
 Summary:	libradar shared library
 Name: 		radarlib
 Version: 	1.4.4
-Release: 	1
+Release: 	2
 License: 	GPL
 Group: 		Applications/Meteo
 URL:            https://github.com/arpa-simc/%{name}
@@ -63,6 +63,9 @@ make check
 %doc %{_docdir}/%{name}
 
 %changelog
+* Wed Mar 14 2018 Daniele Branchini <dbranchini@arpae.it> - 1.4.4-2
+- Cleanup for travis integration
+
 * Thu Nov 10 2016 Daniele Branchini <dbranchini@arpae.it> - 1.4.4-1
 - Fixed bug if a generic product is used
 
