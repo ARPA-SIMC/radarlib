@@ -7,6 +7,7 @@ Radarlib
 [![Build Status](https://badges.herokuapp.com/travis/ARPA-SIMC/radarlib?branch=master&env=DOCKER_IMAGE=fedora:29&label=fedora29)](https://travis-ci.org/ARPA-SIMC/radarlib)
 [![Build Status](https://badges.herokuapp.com/travis/ARPA-SIMC/radarlib?branch=master&env=DOCKER_IMAGE=fedora:rawhide&label=fedorarawhide)](https://travis-ci.org/ARPA-SIMC/radarlib)
 
+[![Build Status](https://copr.fedorainfracloud.org/coprs/simc/stable/package/radarlib/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/simc/stable/package/radarlib/)
 
 Radarlib is a library to manage radar volumes and products 
 written in ODIMH5 format (v2.0) as defined by OPERA (EUMETNET 
