@@ -35,7 +35,7 @@ libradar library documentation
 sh autogen.sh
 
 %build
-%configure
+%configure --disable-static
 make
 make check
 
@@ -54,8 +54,7 @@ make check
 %files devel
 %defattr(-,root,root,-)
 %{_includedir}/%{name}/*
-%{_libdir}/libradar.a
-%{_libdir}/libradar.la
+%exclude %{_libdir}/libradar.la
 %{_libdir}/pkgconfig/%{name}.pc
 
 %files doc
