@@ -13,7 +13,7 @@ Radarlib is a library to manage radar volumes and products
 written in ODIMH5 format (v2.0) as defined by OPERA (EUMETNET 
 project).
 
-http://www.arpa.emr.it/dettaglio_documento.asp?id=2914&idlivello=64
+https://www.arpae.it/dettaglio_documento.asp?id=2914&idlivello=64
 
 Documentation
 -------------
