@@ -65,7 +65,7 @@ RADAR_API time_t	getUTC	();
  * \return		The time_t value representing the date specified
  * \throws std::invalid_argument	If the date is not a valid date
  */
-RADAR_API time_t	mktime	(int year, int month, int day) throw (std::invalid_argument);
+RADAR_API time_t	mktime	(int year, int month, int day);
 /*!
  * \brief Create a time from a date
  *
@@ -79,7 +79,7 @@ RADAR_API time_t	mktime	(int year, int month, int day) throw (std::invalid_argum
  * \return		The time_t value representing the date specified
  * \throws std::invalid_argument	If the values are out of range
  */
-RADAR_API time_t	mktime	(int year, int month, int day, int hour, int min, int sec) throw (std::invalid_argument);
+RADAR_API time_t	mktime	(int year, int month, int day, int hour, int min, int sec);
 /*!
  * \brief Create a time from a date
  *
@@ -94,7 +94,7 @@ RADAR_API time_t	mktime	(int year, int month, int day, int hour, int min, int se
  * \return		The time_t value representing the date specified
  * \throws std::invalid_argument	If the values are out of range
  */
-RADAR_API double	mktime	(int year, int month, int day, int hour, int min, int sec, int msec) throw (std::invalid_argument);
+RADAR_API double	mktime	(int year, int month, int day, int hour, int min, int sec, int msec);
 
 /*===========================================================================*/
 /* FUNZIONI DI CHECK */
