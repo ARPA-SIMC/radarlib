@@ -324,7 +324,7 @@ template <class T> static T parse(const std::string& str, const std::string& typ
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API bool	 parseBool	(const std::string& str) throw(std::invalid_argument);
+RADAR_API bool	 parseBool	(const std::string& str);
 /*!
  * \brief Parse a std::string to an int value
  *
@@ -332,7 +332,7 @@ RADAR_API bool	 parseBool	(const std::string& str) throw(std::invalid_argument);
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API int	 parseInt	(const std::string& str) throw(std::invalid_argument);
+RADAR_API int	 parseInt	(const std::string& str);
 /*!
  * \brief Parse a std::string to a float value
  *
@@ -340,7 +340,7 @@ RADAR_API int	 parseInt	(const std::string& str) throw(std::invalid_argument);
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API float	 parseFloat	(const std::string& str) throw(std::invalid_argument);
+RADAR_API float	 parseFloat	(const std::string& str);
 /*!
  * \brief Parse a std::string to a double value
  *
@@ -348,7 +348,7 @@ RADAR_API float	 parseFloat	(const std::string& str) throw(std::invalid_argument
  * \returns			the parsed value
  * \throw std::invalid_argument	if the string cannot be converted to the given type
  */
-RADAR_API double parseDouble	(const std::string& str) throw(std::invalid_argument);
+RADAR_API double parseDouble	(const std::string& str);
 
 /*!
  * \brief Parse a string sequence of boolean values to a std::vector

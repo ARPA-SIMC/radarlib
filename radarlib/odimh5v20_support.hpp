@@ -73,7 +73,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	ModelVersion(const std::string& value);	//	throw(std::invalid_argument);
+	ModelVersion(const std::string& value);
 	/*!
 	 * \brief
 	 * Set object fields parsing an input string
@@ -82,7 +82,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	void parse(const std::string& val);	//	throw(std::invalid_argument);
+	void parse(const std::string& val);
 
 	/*!
 	 * \brief
@@ -148,7 +148,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */
-	SourceInfo(const std::string& value);	//	throw(std::invalid_argument);;
+	SourceInfo(const std::string& value);
 	/*!
 	 * \brief
 	 * Set object fields decoding the indicated string
@@ -157,7 +157,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	void parse(const std::string value);	//	throw(std::invalid_argument);;
+	void parse(const std::string value);
 	/*!
 	 * \brief
 	 * Convert fields into a string formated acording to OdimH5 specifications
@@ -269,7 +269,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	AZAngles(const std::string& value);	// throw(std::invalid_argument);
+	AZAngles(const std::string& value);
 	/*!
 	 * \brief
 	 * Set fields 
@@ -286,7 +286,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	void parse(const std::string& str);	// throw(std::invalid_argument); 	
+	void parse(const std::string& str);
 	/*!
 	 * \brief
 	 * Convert angles to a string formated acording to OdimH5 specifications
@@ -306,7 +306,7 @@ public:
 	 * \param str				a string formatted like "value:value,value:value,..."
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	static std::vector<AZAngles> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	static std::vector<AZAngles> parseSequence(const std::string& str);
 	/*!
 	 * \brief
 	 * \param right				the values to convert
@@ -384,7 +384,7 @@ public:
 	 * \param str				the string to parse		
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	void parse(const std::string& str);	// throw(std::invalid_argument); 	
+	void parse(const std::string& str);
 	/*!
 	 * \brief
 	 * Convert times to a string formated acording to OdimH5 specifications
@@ -396,7 +396,7 @@ public:
 	 * \param str				a string formatted like "value:value,value:value,..."
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */
-	static std::vector<AZTimes> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	static std::vector<AZTimes> parseSequence(const std::string& str);
 	/*!
 	 * \brief
 	 * Convert a collection of azimuth timesto a string formated acording to OdimH5 specifications
@@ -447,7 +447,7 @@ public:
 	/*!
 	 * \brief Set pair values parsing the given string
 	 */
-	void parse(const std::string& str);	// throw(std::invalid_argument); 	
+	void parse(const std::string& str);
 	/*!
 	 * \brief Convert the pair to a string according to OdimH5 specifications
 	 */
@@ -722,7 +722,7 @@ public:
 	 * \brief Create an object set to the value passed
 	 * \param [in] value a string value for the elevation angle
 	 */	
-	Angles(const std::string& value);	// throw(std::invalid_argument)
+	Angles(const std::string& value);
 	/*!
 	 * \brief
 	 * Set field 
@@ -738,7 +738,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	void parse(const std::string& str);	// throw(std::invalid_argument); 	
+	void parse(const std::string& str);
 	/*!
 	 * \brief
 	 * Convert angle to a string formated according to OdimH5 specifications
@@ -758,7 +758,7 @@ public:
 	 * \param str				a string formatted like "value,value,..."
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	static std::vector<Angles> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	static std::vector<Angles> parseSequence(const std::string& str);
 	/*!
 	 * \brief
 	 * \param right				the values to convert
@@ -805,7 +805,7 @@ public:
 	 * \brief Create an object set to the value passed
 	 * \param [in] value a string value for the antenna rotation speed
 	 */	
-	Arotation(const std::string& value);	// throw(std::invalid_argument)
+	Arotation(const std::string& value);
 	/*!
 	 * \brief
 	 * Set field 
@@ -821,7 +821,7 @@ public:
 	 *
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	void parse(const std::string& str);	// throw(std::invalid_argument); 	
+	void parse(const std::string& str);
 	/*!
 	 * \brief
 	 * Convert antenna rotation speed to a string formated according to OdimH5 specifications
@@ -841,7 +841,7 @@ public:
 	 * \param str				a string formatted like "value,value,..."
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	static std::vector<Arotation> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	static std::vector<Arotation> parseSequence(const std::string& str);
 	/*!
 	 * \brief
 	 * \param right				the values to convert
@@ -912,7 +912,7 @@ public:
 	 * \param str				a string formatted like "'value','value',..."
 	 * \throws OdimH5FormatException	Throwed when string format is not valid
 	 */	
-	static std::vector<Nodes> parseSequence(const std::string& str);	// throw(std::invalid_argument); 	
+	static std::vector<Nodes> parseSequence(const std::string& str);
 	/*!
 	 * \brief
 	 * \param radars				the values to convert

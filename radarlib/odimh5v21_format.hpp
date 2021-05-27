@@ -154,7 +154,7 @@ public:
 	 * \param value				the string to convert
 	 * \throws OdimH5FormatException	if the string is not well formated
 	 */	
-	static time_t YYYYMMDDToTime(const std::string& value) throw(OdimH5FormatException)
+	static time_t YYYYMMDDToTime(const std::string& value)
 	{
 		try
 		{
@@ -175,7 +175,7 @@ public:
 	 * \param value				the string to convert
 	 * \throws OdimH5FormatException	if the string is not well formated
 	 */
-	static time_t HHMMSSToTime(const std::string& value) throw(OdimH5FormatException)
+	static time_t HHMMSSToTime(const std::string& value)
 	{
 		try
 		{
@@ -196,7 +196,7 @@ public:
 	 * \param value				the string to convert
 	 * \throws OdimH5FormatException	if the string is not well formated
 	 */
-	static double HHMMSSsssToTime(const std::string& value) throw(OdimH5FormatException)
+	static double HHMMSSsssToTime(const std::string& value)
 	{		
 		double dvalue;	
 		if (sscanf(value.c_str(), "%lf", &dvalue) != 1)

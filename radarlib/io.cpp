@@ -94,7 +94,7 @@ static std::string normalizePath(const std::string& path)
 	return ss.str();
 }
 
-bool FileSystem::fileExists(const std::string& path) throw(std::runtime_error)
+bool FileSystem::fileExists(const std::string& path)
 {
 	std::string path2 = normalizePath(path);
 	DWORD res = GetFileAttributes(path2.c_str());
@@ -108,7 +108,7 @@ bool FileSystem::fileExists(const std::string& path) throw(std::runtime_error)
 	return (res & FILE_ATTRIBUTE_DIRECTORY) == 0;
 }
 
-bool FileSystem::dirExists(const std::string& path) throw(std::runtime_error)
+bool FileSystem::dirExists(const std::string& path)
 {
 	std::string path2 = normalizePath(path);
 	DWORD res = GetFileAttributes(path2.c_str());
@@ -122,14 +122,14 @@ bool FileSystem::dirExists(const std::string& path) throw(std::runtime_error)
 	return (res & FILE_ATTRIBUTE_DIRECTORY) != 0;
 }
 
-void FileSystem::changeDir(const std::string& path) throw(std::runtime_error)
+void FileSystem::changeDir(const std::string& path)
 {	
 	std::string path2 = normalizePath(path) + "\\";
 	if (SetCurrentDirectory(path2.c_str()) == 0) 
 		throw std::runtime_error("Cannot change to directory " + path + ": " + GetLastErrorStr());		
 }
 
-std::string FileSystem::getCurrentDir() throw(std::runtime_error)
+std::string FileSystem::getCurrentDir()
 {
 	char	buf[FILEUTILS_PATH_MAX_LEN+1];
 	DWORD	sizeaux = FILEUTILS_PATH_MAX_LEN;
@@ -138,7 +138,7 @@ std::string FileSystem::getCurrentDir() throw(std::runtime_error)
 	return buf;
 }
 
-void FileSystem::mkDirTree(const std::string& path) throw(std::runtime_error)
+void FileSystem::mkDirTree(const std::string& path)
 {
 	std::string path2 = normalizePath(path)+ "\\";
 
@@ -149,7 +149,7 @@ void FileSystem::mkDirTree(const std::string& path) throw(std::runtime_error)
 	throw std::runtime_error("Cannot create directory " + path + ": " + GetLastErrorStr());		
 }
 
-void FileSystem::rmDirTree(const std::string& path) throw(std::runtime_error)
+void FileSystem::rmDirTree(const std::string& path)
 {
 	std::string path2 = normalizePath(path)+ "\\";
 
@@ -160,7 +160,7 @@ void FileSystem::rmDirTree(const std::string& path) throw(std::runtime_error)
 		throw std::runtime_error("Cannot remove directory " + path + ": " + GetLastErrorStr());		
 }
 
-void FileSystem::listFiles(std::vector<std::string>& result, const std::string& path, bool completePath) throw(std::runtime_error)
+void FileSystem::listFiles(std::vector<std::string>& result, const std::string& path, bool completePath)
 {
 	std::string path2 = normalizePath(path);
 
@@ -202,7 +202,7 @@ err:
 	throw std::runtime_error(msg);		
 }
 
-void FileSystem::listDirs(std::vector<std::string>& result, const std::string& path, bool completePath) throw(std::runtime_error)
+void FileSystem::listDirs(std::vector<std::string>& result, const std::string& path, bool completePath)
 {
 	std::string path2 = normalizePath(path);
 

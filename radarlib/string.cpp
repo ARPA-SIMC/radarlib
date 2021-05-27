@@ -132,7 +132,7 @@ bool isInt(const std::string& s)
 	return (ss >> temp) ? true : false;
 }
 
-bool   parseBool	(const std::string& s) throw(std::invalid_argument)
+bool   parseBool	(const std::string& s)
 {
 	if ((s == "1") || (s == "true")) 	return true;
 	if ((s == "0") || (s == "false"))	return false;
@@ -151,9 +151,9 @@ template <class T> static T parset(const std::string& s, const std::string& type
 	throw std::invalid_argument("'" + s + "' is not a valid " + typestr + " value");
 }
 
-int    parseInt		(const std::string& s) throw(std::invalid_argument) { return parset<int>(s, "integer"); }
-float  parseFloat	(const std::string& s) throw(std::invalid_argument) { return parset<float>(s, "float"); }
-double parseDouble	(const std::string& s) throw(std::invalid_argument) { return parset<double>(s, "double"); }
+int    parseInt		(const std::string& s) { return parset<int>(s, "integer"); }
+float  parseFloat	(const std::string& s) { return parset<float>(s, "float"); }
+double parseDouble	(const std::string& s) { return parset<double>(s, "double"); }
 
 void	parseSeq(const std::string& s, std::vector<bool>& val, const char* sep, const bool allowEmptyStr)
 {
