@@ -107,12 +107,12 @@ static time_t mktime_(int year, int month /*[0,11]*/, int day /*[0,30]*/, int ho
 	return  result;
 }
 
-time_t mktime(int year, int month, int day) throw (std::invalid_argument)
+time_t mktime(int year, int month, int day)
 {
 	return mktime(year, month, day, 0, 0, 0);
 }
 
-time_t mktime(int year, int month, int day, int hour, int min, int sec) throw (std::invalid_argument)
+time_t mktime(int year, int month, int day, int hour, int min, int sec)
 {
 	if (year && month && day)
 	{
@@ -131,7 +131,7 @@ time_t mktime(int year, int month, int day, int hour, int min, int sec) throw (s
 	return mktime_(year, month-1, day-1, hour, min, sec);
 }
 
-double mktime(int year, int month, int day, int hour, int min, int sec, int msec) throw (std::invalid_argument)
+double mktime(int year, int month, int day, int hour, int min, int sec, int msec)
 
 {
 	if (msec > 1000) {
@@ -214,7 +214,7 @@ void splitHMS(double absolute, int& hour, int& min, int& sec, int& msec)
 }
 
 /* funzione dii supporto */
-static struct tm gmtime_(time_t absolute, const char* funcname) throw (std::invalid_argument)
+static struct tm gmtime_(time_t absolute, const char* funcname)
 {
 	//TODO mutex
 	struct tm* ctm = gmtime(&absolute);
