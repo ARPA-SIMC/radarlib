@@ -61,7 +61,7 @@ public:
 	:std::logic_error(msg)
 	{
 	}
-	virtual ~OdimH5Exception() noexcept
+	virtual ~OdimH5Exception() throw()
 	{
 	}
 };
@@ -87,7 +87,7 @@ public:
 	:OdimH5Exception("Unsupported operation error: " + msg)
 	{
 	}
-	virtual ~OdimH5UnsupportedException() noexcept
+	virtual ~OdimH5UnsupportedException() throw()
 	{
 	}
 };
@@ -112,7 +112,7 @@ public:
 	:OdimH5Exception(msg)
 	{
 	}
-	virtual ~OdimH5FormatException() noexcept
+	virtual ~OdimH5FormatException() throw()
 	{
 	}
 };
@@ -138,7 +138,7 @@ public:
 	:OdimH5FormatException(msg)
 	{
 	}
-	virtual ~OdimH5UnknownFormatException() noexcept
+	virtual ~OdimH5UnknownFormatException() throw()
 	{
 	}
 };
@@ -163,7 +163,7 @@ public:
 	:OdimH5FormatException("Attribute " + name + " not found")
 	{
 	}
-	virtual ~OdimH5MissingAttributeException() noexcept
+	virtual ~OdimH5MissingAttributeException() throw()
 	{
 	}
 };
@@ -188,7 +188,7 @@ public:
 	:OdimH5FormatException("Attribute " + name + " has a invalid value")
 	{
 	}
-	virtual ~OdimH5InvalidAttributeValueException() noexcept
+	virtual ~OdimH5InvalidAttributeValueException() throw()
 	{
 	}
 };
@@ -213,7 +213,7 @@ public:
 	:OdimH5FormatException("HDF5 Group " + name + " not found")
 	{
 	}
-	virtual ~OdimH5MissingGroupException() noexcept
+	virtual ~OdimH5MissingGroupException() throw()
 	{
 	}
 };
@@ -238,7 +238,7 @@ public:
 	:OdimH5FormatException("HDF5 dataset " + name + " not found")
 	{
 	}
-	virtual ~OdimH5MissingDatasetException() noexcept
+	virtual ~OdimH5MissingDatasetException() throw()
 	{
 	}
 };
@@ -292,7 +292,7 @@ public:
 	:OdimH5Exception(msg + ": " + (h5e.getCDetailMsg() ? std::string(h5e.getCDetailMsg()) : "HDF5 internal error"))
 	{
 	}
-	virtual ~OdimH5HDF5LibException() noexcept
+	virtual ~OdimH5HDF5LibException() throw()
 	{
 	}
 };
