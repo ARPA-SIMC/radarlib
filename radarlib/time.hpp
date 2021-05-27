@@ -225,7 +225,7 @@ RADAR_API std::string absoluteToString(double value, bool allowNAN);
  * \throws std::invalid_argument	If the string cannot be converted
  * \remarks This function will try to parse the given string with diffrent type of char separator (-,:, spaces etc.)
  */
-RADAR_API time_t parseYYYYMMDDHHMMSS(const std::string& str) throw(std::invalid_argument);
+RADAR_API time_t parseYYYYMMDDHHMMSS(const std::string& str);
 /*!
  * \brief Reduce a float value to a time_t value, truncating the milliseconds
  */
@@ -304,7 +304,7 @@ RADAR_API std::string dayTimeToStr(double value);
  * \param day				a reference to an integer that will store the day number (from 1 to 31)
  * \throws std::invalid_argument	if the year or yday values are not valid
  */
-RADAR_API void   convertYday(int year, int yday, int& month, int& day) throw(std::invalid_argument);
+RADAR_API void   convertYday(int year, int yday, int& month, int& day);
 /*!
  * \brief Convert a year day to the corresponding time_t value
  *
@@ -313,7 +313,7 @@ RADAR_API void   convertYday(int year, int yday, int& month, int& day) throw(std
  * \param yday				the year day to use (from 1 to 365/366)
  * \throws std::invalid_argument	if the year or yday values are not valid
  */
-RADAR_API time_t convertYday(int year, int yday) throw(std::invalid_argument);
+RADAR_API time_t convertYday(int year, int yday);
 /*!
  * \brief Calculate the year day from a date
  *
@@ -323,7 +323,7 @@ RADAR_API time_t convertYday(int year, int yday) throw(std::invalid_argument);
  * \param day				the day day (from 1 to 365/366)
  * \throws std::invalid_argument	if the year or yday values are not valid
  */
-RADAR_API int    mkYday(int year, int month, int day) throw(std::invalid_argument);
+RADAR_API int    mkYday(int year, int month, int day);
 
 /*===========================================================================*/
 
