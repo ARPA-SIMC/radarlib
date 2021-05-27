@@ -288,7 +288,7 @@ std::string absoluteToString(double value, bool allowNAN)
 	}
 }
 
-time_t parseYYYYMMDDHHMMSS(const std::string& str) throw(std::invalid_argument)
+time_t parseYYYYMMDDHHMMSS(const std::string& str)
 {
 	//#define BASE_YEAR 1970
 
@@ -401,7 +401,7 @@ std::string dayTimeToStr(double value)
 const int leapdays[] = { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 const int days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-void convertYday(int year, int yday, int& month, int& day) throw(std::invalid_argument)
+void convertYday(int year, int yday, int& month, int& day)
 {
 	if (isLeap(year))
 	{
@@ -431,14 +431,14 @@ void convertYday(int year, int yday, int& month, int& day) throw(std::invalid_ar
 	}
 }
 
-time_t convertYday(int year, int yday) throw(std::invalid_argument)
+time_t convertYday(int year, int yday)
 {
 	int month, day;
 	convertYday(year, yday, month, day);
 	return mktime(year, month, day, 0, 0, 0);
 }
 
-int mkYday(int year, int month, int day) throw(std::invalid_argument)
+int mkYday(int year, int month, int day)
 {
 	if (isValidDate(year, month, day))
 		return (isLeap(year) ? leapyearydays[month-1] : yeardays[month-1]) + day;

@@ -49,14 +49,14 @@ ModelVersion::ModelVersion(int maj, int min)
 {
 }
 
-ModelVersion::ModelVersion(const std::string& value)	// throw(std::invalid_argument)
+ModelVersion::ModelVersion(const std::string& value)
 :Major(0)
 ,Minor(0)
 {
 	parse(value);
 }
 
-void ModelVersion::parse(const std::string& value)	// throw(std::invalid_argument)
+void ModelVersion::parse(const std::string& value)
 {
 	if (sscanf(value.c_str(), ATTRIBUTE_WHAT_VERSION_FORMAT, &Major, &Minor) != 2)
 		throw OdimH5FormatException("'" + value + "' is not a valid OdimH5 model version");		
@@ -221,20 +221,20 @@ AZAngles::AZAngles(double start, double stop)
 {
 }
 
-AZAngles::AZAngles(const std::string& value)	// throw(std::invalid_argument)
+AZAngles::AZAngles(const std::string& value)
 :start(0)
 ,stop(0)
 {
 	parse(value);
 }
 
-void AZAngles::set(double start, double stop)	// throw(std::invalid_argument)
+void AZAngles::set(double start, double stop)
 {
 	this->start = start;
 	this->stop = stop;
 }
 
-void AZAngles::parse(const std::string& str)	// throw(std::invalid_argument)
+void AZAngles::parse(const std::string& str)
 {
 	std::string::size_type pos = str.find(':');
 	if (pos == std::string::npos)
@@ -243,7 +243,7 @@ void AZAngles::parse(const std::string& str)	// throw(std::invalid_argument)
 	stop  = Radar::stringutils::parseDouble(str.substr(pos + 1));
 }
 
-std::vector<AZAngles> AZAngles::parseSimpleArrays(const std::vector <double> & first,const std::vector <double> & second) 	// throw(std::invalid_argument); 
+std::vector<AZAngles> AZAngles::parseSimpleArrays(const std::vector <double> & first,const std::vector <double> & second)
 {
 	std::vector<AZAngles> result;
 	if (first.size() == second.size()){
@@ -269,7 +269,7 @@ std::string AZAngles::toString(int precision) const
 	return ss.str();
 }
 
-std::vector<AZAngles> AZAngles::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+std::vector<AZAngles> AZAngles::parseSequence(const std::string& str)
 {
 	std::vector<std::string> tokens;
 	Radar::stringutils::split(str, tokens, ",");
@@ -334,20 +334,20 @@ AZTimes::AZTimes(double start, double stop)
 {
 }
 
-AZTimes::AZTimes(const std::string& value)	// throw(std::invalid_argument)
+AZTimes::AZTimes(const std::string& value)
 :start(0)
 ,stop(0)
 {
 	parse(value);
 }
 
-void AZTimes::set(double start, double stop)	// throw(std::invalid_argument)
+void AZTimes::set(double start, double stop)
 {
 	this->start = start;
 	this->stop = stop;
 }
 
-void AZTimes::parse(const std::string& str)	// throw(std::invalid_argument)
+void AZTimes::parse(const std::string& str)
 {
 	std::string::size_type pos = str.find(':');
 	if (pos == std::string::npos)
@@ -361,7 +361,7 @@ std::string AZTimes::toString() const
 	return Format::timeToHHMMSSsss(start) + ":" + Format::timeToHHMMSSsss(stop);
 }
 
-std::vector<AZTimes> AZTimes::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+std::vector<AZTimes> AZTimes::parseSequence(const std::string& str)
 {
 	std::vector<std::string> tokens;
 	Radar::stringutils::split(str, tokens, ",");
@@ -371,7 +371,7 @@ std::vector<AZTimes> AZTimes::parseSequence(const std::string& str)	// throw(std
 	return result;
 }
 
-std::vector<AZTimes> AZTimes::parseSimpleArrays(const std::vector <double> & first,const std::vector <double> & second) 	// throw(std::invalid_argument); 
+std::vector<AZTimes> AZTimes::parseSimpleArrays(const std::vector <double> & first,const std::vector <double> & second)
 {
 	std::vector<AZTimes> result;
 	if (first.size() == second.size()){
@@ -409,20 +409,20 @@ VILHeights::VILHeights(double bottom, double top)
 {
 }
 
-VILHeights::VILHeights(const std::string& value)	// throw(std::invalid_argument)
+VILHeights::VILHeights(const std::string& value)
 :bottom(0)
 ,top(0)
 {
 	parse(value);
 }
 
-void VILHeights::set(double bottom, double top)	// throw(std::invalid_argument)
+void VILHeights::set(double bottom, double top)
 {
 	this->bottom = bottom;
 	this->top = top;
 }
 
-void VILHeights::parse(const std::string& str)	// throw(std::invalid_argument)
+void VILHeights::parse(const std::string& str)
 {
 	std::string::size_type pos = str.find(',');
 	if (pos == std::string::npos)
@@ -453,18 +453,18 @@ Angles::Angles(double value)
 {
 }
 
-Angles::Angles(const std::string& value)	// throw(std::invalid_argument)
+Angles::Angles(const std::string& value)
 :value(0)
 {
 	parse(value);
 }
 
-void Angles::set(double value) 	// throw(std::invalid_argument)
+void Angles::set(double value)
 {
 	this->value = value;
 }
 
-void Angles::parse(const std::string& str)	// throw(std::invalid_argument)
+void Angles::parse(const std::string& str)
 {
 	value = Radar::stringutils::parseDouble(str); 
 }
@@ -484,14 +484,14 @@ std::string Angles::toString(int precision) const
 	return ss.str();
 }
 
-std::vector<Angles> Angles::parseSimpleArray(const std::vector <double> & value)	// throw(std::invalid_argument); 
+std::vector<Angles> Angles::parseSimpleArray(const std::vector <double> & value)
 {
 	std::vector<Angles> result;
 	for (size_t i=0; i<value.size(); i++)
 		result.push_back(Angles(value[i]));
 	return result;
 }
-std::vector<Angles> Angles::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+std::vector<Angles> Angles::parseSequence(const std::string& str)
 {
 	std::vector<std::string> tokens;
 	Radar::stringutils::split(str, tokens, ",");
@@ -537,18 +537,18 @@ Arotation::Arotation(double value)
 {
 }
 
-Arotation::Arotation(const std::string& value)	// throw(std::invalid_argument)
+Arotation::Arotation(const std::string& value)
 :value(0)
 {
 	parse(value);
 }
 
-void Arotation::set(double value) 	// throw(std::invalid_argument)
+void Arotation::set(double value)
 {
 	this->value = value;
 }
 
-void Arotation::parse(const std::string& str)	// throw(std::invalid_argument)
+void Arotation::parse(const std::string& str)
 {
 	value = Radar::stringutils::parseDouble(str); 
 }
@@ -568,7 +568,7 @@ std::string Arotation::toString(int precision) const
 	return ss.str();
 }
 
-std::vector<Arotation> Arotation::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+std::vector<Arotation> Arotation::parseSequence(const std::string& str)
 {
 	std::vector<std::string> tokens;
 	Radar::stringutils::split(str, tokens, ",");
@@ -578,7 +578,7 @@ std::vector<Arotation> Arotation::parseSequence(const std::string& str)	// throw
 	return result;
 }
 
-std::vector<Arotation> Arotation::parseSimpleArray(const std::vector <double> & value)	// throw(std::invalid_argument); 
+std::vector<Arotation> Arotation::parseSimpleArray(const std::vector <double> & value)
 {
 	std::vector<Arotation> result;
 	for (size_t i=0; i<value.size(); i++)
@@ -621,18 +621,18 @@ TXpower::TXpower(double value)
 {
 }
 
-TXpower::TXpower(const std::string& value)	// throw(std::invalid_argument)
+TXpower::TXpower(const std::string& value)
 :value(0)
 {
 	parse(value);
 }
 
-void TXpower::set(double value) 	// throw(std::invalid_argument)
+void TXpower::set(double value)
 {
 	this->value = value;
 }
 
-void TXpower::parse(const std::string& str)	// throw(std::invalid_argument)
+void TXpower::parse(const std::string& str)
 {
 	value = Radar::stringutils::parseDouble(str); 
 }
@@ -652,7 +652,7 @@ std::string TXpower::toString(int precision) const
 	return ss.str();
 }
 
-std::vector<TXpower> TXpower::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+std::vector<TXpower> TXpower::parseSequence(const std::string& str)
 {
 	std::vector<std::string> tokens;
 	Radar::stringutils::split(str, tokens, ",");
@@ -662,7 +662,7 @@ std::vector<TXpower> TXpower::parseSequence(const std::string& str)	// throw(std
 	return result;
 }
 
-std::vector<TXpower> TXpower::parseSimpleArray(const std::vector <double> & value)	// throw(std::invalid_argument); 
+std::vector<TXpower> TXpower::parseSimpleArray(const std::vector <double> & value)
 {
 	std::vector<TXpower> result;
 	for (size_t i=0; i<value.size(); i++)
@@ -700,13 +700,13 @@ Nodes::Nodes()
 {
 }
 
-Nodes::Nodes(const std::string& radar)	// throw(std::invalid_argument)
+Nodes::Nodes(const std::string& radar)
 :radar("")
 {
 	set(radar);	
 }
 
-Nodes::Nodes(const char * radar)	// throw(std::invalid_argument)
+Nodes::Nodes(const char * radar)
 :radar("")
 {
 	set(radar);
@@ -715,7 +715,7 @@ std::string Nodes::get() const {
 	return this->radar;
 }
 
-void Nodes::set(const std::string& radar) 	// throw(std::invalid_argument)
+void Nodes::set(const std::string& radar)
 {
 	if (radar.empty())
 		throw std::logic_error("empty node is not a valid value");
@@ -730,12 +730,12 @@ void Nodes::set(const std::string& radar) 	// throw(std::invalid_argument)
 	}
 }
 
-void Nodes::set(const char * radar) 	// throw(std::invalid_argument)
+void Nodes::set(const char * radar)
 {
 	set(std::string(radar));
 }
 
-std::vector<Nodes> Nodes::parseSequence(const std::string& str)	// throw(std::invalid_argument)
+std::vector<Nodes> Nodes::parseSequence(const std::string& str)
 {
 	std::vector<std::string> tokens;
 	Radar::stringutils::split(str, tokens, ",");
