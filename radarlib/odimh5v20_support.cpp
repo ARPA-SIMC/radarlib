@@ -610,3 +610,5 @@ std::string Nodes::toString(const std::vector<Nodes>& value)
 	}
 	return ss.str();
 }
+
+}
