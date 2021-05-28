@@ -117,6 +117,16 @@ OdimObject::OdimObject(H5::H5File* file)
 {	
 }
 
+static void checkVersion(OdimObject* obj) {
+    std::string version = obj->getVersion();
+
+    char* skip_check_version_var = std::getenv("RADARLIB_SKIP_CHECK_VERSION");
+    bool skip_check_version = (skip_check_version_var != NULL && std::strcmp(skip_check_version_var, "yes") == 0);
+
+    if (not skip_check_version && version != ModelVersion(2,1).toString())
+        throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());
+}
+
 OdimObject::~OdimObject()
 {
 	try
@@ -1123,6 +1133,7 @@ void	PolarVolume::setMandatoryInformations()
 void	PolarVolume::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
+    checkVersion(this);
 
 	std::string object = this->getObject();
 	if (object != OdimH5v21::OBJECT_PVOL)
@@ -2045,6 +2056,7 @@ void	Object_2D::setMandatoryInformations()
 void	Object_2D::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
+    checkVersion(this);
 
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
@@ -2515,6 +2527,7 @@ void	HorizontalObject_2D::setMandatoryInformations()
 void	HorizontalObject_2D::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
+    checkVersion(this);
 
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
@@ -2581,6 +2594,7 @@ void	ImageObject::setMandatoryInformations()
 void	ImageObject::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
+    checkVersion(this);
 
 	std::string object = this->getObject();
 	if (object != OdimH5v21::OBJECT_IMAGE)
@@ -2621,6 +2635,7 @@ void	CompObject::setMandatoryInformations()
 void	CompObject::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
+    checkVersion(this);
 
 	std::string object = this->getObject();
 	if (object != OdimH5v21::OBJECT_COMP)
@@ -2662,6 +2677,7 @@ void	XsecObject::setMandatoryInformations()
 void	XsecObject::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
+    checkVersion(this);
 
 	std::string object = this->getObject();
 	if (object != OdimH5v21::OBJECT_XSEC)
