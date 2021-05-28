@@ -77,6 +77,7 @@ namespace OdimH5v21 {
 					 * Get a OdimH5 object from an existing file
 					 * 
 					 * \param path				the file path where the object will is stored
+					 * \param SkipCheckConventions		check file Odim version consistent with lib version
 					 * 
 					 * \returns
 					 * Returns the OdimObject stored in the file
@@ -90,7 +91,7 @@ namespace OdimH5v21 {
 					 * 
 					 * \see openPolarVolume
 					 */
-					virtual OdimObject*		open(const std::string& path);
+					virtual OdimObject*		open(const std::string& path, bool SkipCheckConventions=false);
 					
 					/*!
 					 * \brief
@@ -98,6 +99,7 @@ namespace OdimH5v21 {
 					 * 
 					 * \param path				the file path where the object will is stored
 					 * \param h5flags			the HDF5 I/O flags used to open the file
+					 * \param SkipCheckConventions		skip check file Odim version consistent with lib version
 					 * 
 					 * \returns
 					 * Returns the OdimObject stored in the file
@@ -112,7 +114,7 @@ namespace OdimH5v21 {
 					 * 
 					 * \see openPolarVolume | openImageObject | openCompObject | openXsecObject  
 					 */
-					virtual OdimObject*		open(const std::string& path, int h5flags);
+					virtual OdimObject*		open(const std::string& path, int h5flags, bool SkipCheckConventions=false);
 					
 					/*!
 					 * \brief
@@ -368,7 +370,7 @@ namespace OdimH5v21 {
 					virtual OdimObjectDumper*	getDumper();
 					
 			protected:
-				  virtual H5::H5File* openOdimFile(const std::string& path, int h5flags, std::string& objtype);	
+				  virtual H5::H5File* openOdimFile(const std::string& path, int h5flags, std::string& objtype, bool SkipCheckConventions=false);	
 					  virtual PolarVolume* createPolarVolume(H5::H5File* file);
 					  virtual ImageObject* createImageObject(H5::H5File* file);
 					  virtual CompObject*  createCompObject (H5::H5File* file);

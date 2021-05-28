@@ -65,7 +65,7 @@ OdimObject* OdimFactory::create(const std::string& path)
 	}	
 }
 
-H5::H5File* OdimFactory::openOdimFile(const std::string& path, int h5flags, std::string& objtype)
+H5::H5File* OdimFactory::openOdimFile(const std::string& path, int h5flags, std::string& objtype, bool SkipCheckConventions)
 {
 	H5::H5File*		file		= NULL;
 	H5::Group*		root		= NULL;
@@ -78,8 +78,8 @@ H5::H5File* OdimFactory::openOdimFile(const std::string& path, int h5flags, std:
 		root	= HDF5File::getRoot(file);
 		
 		std::string conventions = MetadataGroup::getConventions(root);
-
-		if (conventions != CONVENTIONS_ODIM_H5_V2_1)
+		
+		if (!SkipCheckConventions && conventions != CONVENTIONS_ODIM_H5_V2_1)
 			throw OdimH5UnknownFormatException("Cannot open file! File use unknown convertions: " + conventions);
 
 		what = HDF5Group::getChild(root, GROUP_WHAT);
@@ -109,17 +109,18 @@ H5::H5File* OdimFactory::openOdimFile(const std::string& path, int h5flags, std:
 	}
 }
 
-OdimObject* OdimFactory::open(const std::string& path)
+OdimObject* OdimFactory::open(const std::string& path, bool CheckVersion)
 {
-	return open(path, H5F_ACC_RDWR);
+	return open(path, H5F_ACC_RDWR,CheckVersion);
 }
 
-OdimObject* OdimFactory::open(const std::string& path, int h5flags) 
+OdimObject* OdimFactory::open(const std::string& path, int h5flags, bool CheckVersion) 
 {
 	H5::H5File*	file		= NULL;
 	OdimObject*	object		= NULL;
 	std::string	objecttype;
-
+	std::cout<<" sono qui e passo CheckVersion "<<std::endl;
+	
 	try
 	{
 		file = openOdimFile(path, h5flags, objecttype);
