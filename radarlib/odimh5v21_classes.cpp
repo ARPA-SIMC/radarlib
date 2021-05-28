@@ -25,6 +25,7 @@
 #include <iomanip>
 #include <ctime>
 #include <cstdio>
+#include <cstdlib>
 
 #include <radarlib/debug.hpp>
 #include <radarlib/string.hpp>

@@ -22,6 +22,7 @@
 
 #include <radarlib/odimh5v21_factory.hpp>
 
+#include <cstdlib>
 #include <cstring>
 
 #include <radarlib/debug.hpp>
