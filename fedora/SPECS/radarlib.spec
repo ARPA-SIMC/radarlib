@@ -5,7 +5,7 @@
 
 Summary:	libradar shared library
 Name: 		radarlib
-Version: 	1.4.5
+Version: 	1.4.6
 Release: 	%{releaseno}
 License: 	GPL
 Group: 		Applications/Meteo
@@ -68,6 +68,9 @@ make check
 %doc %{_docdir}/%{name}
 
 %changelog
+* Fri May 28 2021 Emanuele Di Giadcomo <edigiacomo@arpae.it> - 1.4.6-1
+- RADARLIB_SKIP_CHECK_VERSION environment variable
+
 * Thu May 27 2021 Daniele Branchini <dbranchini@arpae.it> - 1.4.5-1
 - Fix C++17 errors (#3)
 
