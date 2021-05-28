@@ -138,10 +138,14 @@ OdimObject::~OdimObject()
 
 void OdimObject::checkMandatoryInformations()
 {
-	std::string conventions = this->getConventions();
-	if (conventions != OdimH5v21::CONVENTIONS_ODIM_H5_V2_1)
-		throw OdimH5FormatException("Object conventions " + conventions + " unknown");	
+    std::string conventions = this->getConventions();
+    char* skip_check_version_var = std::getenv("RADARLIB_SKIP_CHECK_VERSION");
+    bool skip_check_version = (skip_check_version_var != NULL && std::strcmp(skip_check_version_var, "yes") == 0);
+
+	if (not skip_check_version && conventions != OdimH5v21::CONVENTIONS_ODIM_H5_V2_1)
+		throw OdimH5FormatException("Object conventions " + conventions + " unknown");
 }
+
 
 void OdimObject::setMandatoryInformations()
 {
@@ -1124,10 +1128,6 @@ void	PolarVolume::checkMandatoryInformations()
 	if (object != OdimH5v21::OBJECT_PVOL)
 		throw OdimH5FormatException(std::string("OdimH5 object is not ") + OdimH5v21::OBJECT_PVOL);	
 
-	std::string version = this->getVersion();
-	if (version != ModelVersion(2,1).toString())
-		throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());	
-
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
 		throw OdimH5FormatException("OdimH5 object date/time is not set");	
@@ -2046,11 +2046,6 @@ void	Object_2D::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
 
-
-	std::string version = this->getVersion();
-	if (version != ModelVersion(2,1).toString())
-		throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());	
-
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
 		throw OdimH5FormatException("OdimH5 object date/time is not set");	
@@ -2521,10 +2516,6 @@ void	HorizontalObject_2D::checkMandatoryInformations()
 {
 	OdimObject::checkMandatoryInformations();
 
-	std::string version = this->getVersion();
-	if (version != ModelVersion(2,1).toString())
-		throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());	
-
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
 		throw OdimH5FormatException("OdimH5 object date/time is not set");	
@@ -2595,10 +2586,6 @@ void	ImageObject::checkMandatoryInformations()
 	if (object != OdimH5v21::OBJECT_IMAGE)
 		throw OdimH5FormatException(std::string("OdimH5 object is not ") + OdimH5v21::OBJECT_IMAGE);	
 
-	std::string version = this->getVersion();
-	if (version != ModelVersion(2,1).toString())
-		throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());	
-
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
 		throw OdimH5FormatException("OdimH5 object date/time is not set");	
@@ -2638,10 +2625,6 @@ void	CompObject::checkMandatoryInformations()
 	std::string object = this->getObject();
 	if (object != OdimH5v21::OBJECT_COMP)
 		throw OdimH5FormatException(std::string("OdimH5 object is not ") + OdimH5v21::OBJECT_COMP);	
-
-	std::string version = this->getVersion();
-	if (version != ModelVersion(2,1).toString())
-		throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());	
 
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)
@@ -2683,10 +2666,6 @@ void	XsecObject::checkMandatoryInformations()
 	std::string object = this->getObject();
 	if (object != OdimH5v21::OBJECT_XSEC)
 		throw OdimH5FormatException(std::string("OdimH5 object is not ") + OdimH5v21::OBJECT_XSEC);	
-
-	std::string version = this->getVersion();
-	if (version != ModelVersion(2,1).toString())
-		throw OdimH5FormatException("OdimH5 object version is not " + ModelVersion(2,1).toString());	
 
 	time_t datetime = this->getDateTime();
 	if (datetime == (time_t)-1)

@@ -43,6 +43,8 @@ namespace OdimH5v21 {
 		 * \n OdimH5 objects should not be directly created with "new" operator.
 		 * \n OdimH5 objects should be created using the a factory.
 		 * \n This factory allow users to create generic OdimH5 object or PVOL objects (PolarVolume::) conformed to OdimH5 v2.1 specifications.
+         * \n Note: if the environment variable RADARLIB_SKIP_CHECK_VERSION is
+         * equals to "yes", then this class ignores the version of the ODIM file.
 		 * 
 		 * \see OdimObject | PolarVolume
 		 */

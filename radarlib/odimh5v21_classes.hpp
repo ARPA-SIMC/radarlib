@@ -237,7 +237,6 @@ protected:
  
 	virtual void		setMandatoryInformations	(); 
 	virtual void		checkMandatoryInformations	(); 
- 
 }; 
  
 /*===========================================================================*/ 

@@ -22,6 +22,8 @@
 
 #include <radarlib/odimh5v21_factory.hpp>
 
+#include <cstring>
+
 #include <radarlib/debug.hpp>
 
 namespace OdimH5v21 {
@@ -79,7 +81,10 @@ H5::H5File* OdimFactory::openOdimFile(const std::string& path, int h5flags, std:
 		
 		std::string conventions = MetadataGroup::getConventions(root);
 
-		if (conventions != CONVENTIONS_ODIM_H5_V2_1)
+        char* skip_check_version_var = std::getenv("RADARLIB_SKIP_CHECK_VERSION");
+        bool skip_check_version = (skip_check_version_var != NULL && std::strcmp(skip_check_version_var, "yes") == 0);
+
+		if (not skip_check_version && conventions != CONVENTIONS_ODIM_H5_V2_1)
 			throw OdimH5UnknownFormatException("Cannot open file! File use unknown convertions: " + conventions);
 
 		what = HDF5Group::getChild(root, GROUP_WHAT);
