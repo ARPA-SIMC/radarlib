@@ -1,7 +1,7 @@
 [![Build Status](https://simc.arpae.it/moncic-ci/radarlib/centos7.png)](https://simc.arpae.it/moncic-ci/radarlib/)
 [![Build Status](https://simc.arpae.it/moncic-ci/radarlib/centos8.png)](https://simc.arpae.it/moncic-ci/radarlib/)
-[![Build Status](https://simc.arpae.it/moncic-ci/radarlib/fedora32.png)](https://simc.arpae.it/moncic-ci/radarlib/)
 [![Build Status](https://simc.arpae.it/moncic-ci/radarlib/fedora34.png)](https://simc.arpae.it/moncic-ci/radarlib/)
+[![Build Status](https://simc.arpae.it/moncic-ci/radarlib/fedora36.png)](https://simc.arpae.it/moncic-ci/radarlib/)
 [![Build Status](https://copr.fedorainfracloud.org/coprs/simc/stable/package/radarlib/status_image/last_build.png)](https://copr.fedorainfracloud.org/coprs/simc/stable/package/radarlib/)
 
 Radarlib
