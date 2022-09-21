@@ -1,3 +1,5 @@
+ACLOCAL_AMFLAGS = -I m4
+
 dist_noinst_SCRIPTS = autogen.sh
 
 libradar_includedir      = $(includedir)
