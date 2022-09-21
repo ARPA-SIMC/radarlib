@@ -84,7 +84,7 @@ void OdimObjectDumper::dump(OdimObject* object, std::ostream* out)
 
 		prefix(1) << "+ DATASETS " << i << std::endl;
 
-		std::auto_ptr<OdimDataset> dataset( datasetptr );		
+		std::unique_ptr<OdimDataset> dataset( datasetptr );
 
 		dumpMetadata(2, dataset->getWhat(),  GROUP_WHAT);
 		dumpMetadata(2, dataset->getWhere(), GROUP_WHERE);
@@ -103,7 +103,7 @@ void OdimObjectDumper::dump(OdimObject* object, std::ostream* out)
 
 			prefix(2) << "+ DATA " << i << std::endl;
 
-			std::auto_ptr<OdimData> data(dataptr); 
+			std::unique_ptr<OdimData> data(dataptr);
 			dumpMetadata(3, data->getWhat(),  GROUP_WHAT);
 			dumpMetadata(3, data->getWhere(), GROUP_WHERE);
 			dumpMetadata(3, data->getHow(),   GROUP_HOW);

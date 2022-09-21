@@ -42,7 +42,7 @@ class MyObjectVisitor : public OdimH5v20::utils::OdimObjectVisitor {
 		foundImageObject = true;
 
 		for (int i = 0; i < obj.getProductCount(); ++i) {
-			std::auto_ptr<OdimH5v20::Product_2D> prod(obj.getProduct(i));
+			std::unique_ptr<OdimH5v20::Product_2D> prod(obj.getProduct(i));
 			pvisitor.visitProduct2D(*prod);
 		}
 	}

@@ -2079,7 +2079,7 @@ public:
 	virtual void			setVSamples		(double val)	;
 /*----  Queste le devo inserire anche se non sono reali per un prodotto, perche' l'oggetto eredita da HowPolarMetadata   */
 /*----  PRIMA O POI BISOGNERA' SANARE LA SITUAZIONE PPA 2013-12-18*/
-	virtual std::vector<AZAngles>	getAzimuthAngles	()    {}				 
+	virtual std::vector<AZAngles>	getAzimuthAngles	()    { throw std::runtime_error("getAzimuthAngles not implemented"); }
 	virtual void			setAzimuthAngles	(const std::vector<AZAngles>& val, int precision = 10)  {}
 /*---   FINE METODI VUOTI */
 
