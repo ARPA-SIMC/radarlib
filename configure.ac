@@ -6,6 +6,7 @@ PACKAGE_LT_VERSION="5:0:4"
 
 AC_PREREQ([2.59])
 AM_INIT_AUTOMAKE([1.10 foreign -Wall no-define subdir-objects nostdinc])
+AC_CONFIG_MACRO_DIR([m4])
 
 AM_PROG_LIBTOOL
 
