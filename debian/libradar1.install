@@ -1,1 +1,1 @@
-usr/lib/libradar.so.*
+usr/lib/*/libradar.so.*
