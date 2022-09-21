@@ -7,4 +7,5 @@ include /usr/share/dpkg/buildflags.mk
 	dh $@
 
 override_dh_auto_test:
+	# The test suite aborts if it is run in parallel
 	make check
