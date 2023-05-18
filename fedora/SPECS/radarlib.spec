@@ -3,19 +3,20 @@
 # Note: define _srcarchivename in CI build only.
 %{!?srcarchivename: %global srcarchivename %{name}-%{version}-%{releaseno}}
 
-Summary:	libradar shared library
-Name: 		radarlib
-Version: 	1.4.6
-Release: 	%{releaseno}
-License: 	GPL
-Group: 		Applications/Meteo
-URL:            https://github.com/arpa-simc/%{name}
-Source0:        https://github.com/arpa-simc/%{name}/archive/v%{version}-%{releaseno}.tar.gz#/%{srcarchivename}.tar.gz
+Summary:    libradar shared library
+Name:       radarlib
+Version:    1.4.6
+Release:    %{releaseno}
+License:    GPL
+Group:      Applications/Meteo
+URL:        https://github.com/arpa-simc/%{name}
+Source0:    https://github.com/arpa-simc/%{name}/archive/v%{version}-%{releaseno}.tar.gz#/%{srcarchivename}.tar.gz
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Packager: 	Daniele Branchini <dbranchini@arpae.it>
-BuildRequires:	libtool, gcc-c++, hdf5-devel, doxygen
-Requires:       hdf5
+BuildRequires:  autoconf
+BuildRequires:  libtool
+BuildRequires:  gcc-c++
+BuildRequires:  hdf5-devel
+BuildRequires:  doxygen
 
 
 %description
