@@ -13,6 +13,7 @@ URL:        https://github.com/arpa-simc/%{name}
 Source0:    https://github.com/arpa-simc/%{name}/archive/v%{version}-%{releaseno}.tar.gz#/%{srcarchivename}.tar.gz
 
 BuildRequires:  autoconf
+BuildRequires:  autoconf-archive
 BuildRequires:  libtool
 BuildRequires:  gcc-c++
 BuildRequires:  hdf5-devel
